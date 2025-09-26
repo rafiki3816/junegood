@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journals Admin - junegood</title>
+    <link rel="stylesheet" type="text/css" href="css/journals-admin.css">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <script src="js/journals-auth.js"></script>
+    <script>
+        // Protect this page - redirect to login if not authenticated
+        window.JournalsAuth.protectPage();
+    </script>
+</head>
+<body>
+    <div id="wrap">
+        <header>
+            <div id="title"><a href="index.html">Junegood Admin</a></div>
+            <nav class="admin-nav">
+                <button id="newPostBtn" class="btn btn-primary">+ New Post</button>
+                <a href="sub4.html" class="btn btn-secondary">View Journals</a>
+                <button id="logoutBtn" class="btn btn-danger" onclick="window.JournalsAuth.logout()">Logout</button>
+            </nav>
+        </header>
+
+        <main class="admin-container">
+            <!-- Post List -->
+            <section class="posts-list" id="postsList">
+                <h2>All Posts</h2>
+                <div class="posts-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Category</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="postsTableBody">
+                            <!-- Posts will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Post Editor -->
+            <section class="post-editor" id="postEditor" style="display: none;">
+                <h2 id="editorTitle">New Post</h2>
+                <form id="postForm">
+                    <input type="hidden" id="postId" value="">
+
+                    <div class="form-group">
+                        <label for="postTitle">Title</label>
+                        <input type="text" id="postTitle" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="postCategory">Category</label>
+                            <select id="postCategory" required>
+                                <option value="">Select Category</option>
+                                <option value="travel">Travel</option>
+                                <option value="life">Life</option>
+                                <option value="work">Work</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="postDate">Date</label>
+                            <input type="date" id="postDate" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="postStatus">Status</label>
+                            <select id="postStatus">
+                                <option value="draft">Draft</option>
+                                <option value="published">Published</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="postExcerpt">Excerpt</label>
+                        <textarea id="postExcerpt" rows="3" placeholder="Short description for preview..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="postContent">Content</label>
+                        <div class="editor-toolbar">
+                            <button type="button" data-format="bold" title="Bold">B</button>
+                            <button type="button" data-format="italic" title="Italic">I</button>
+                            <button type="button" data-format="heading2" title="Heading 2">H2</button>
+                            <button type="button" data-format="heading3" title="Heading 3">H3</button>
+                            <button type="button" data-format="link" title="Link">🔗</button>
+                            <button type="button" data-format="image" title="Image">🖼️</button>
+                            <button type="button" data-format="quote" title="Quote">❝</button>
+                            <button type="button" data-format="list" title="List">•</button>
+                        </div>
+                        <textarea id="postContent" rows="20" placeholder="Write your story in Markdown..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="postTags">Tags (comma separated)</label>
+                        <input type="text" id="postTags" placeholder="travel, barcelona, architecture">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="postImage">Featured Image</label>
+                        <div class="image-upload-container">
+                            <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+                            <button type="button" id="uploadBtn" class="btn btn-secondary">Choose Image</button>
+                            <span id="fileName" class="file-name">No file selected</span>
+                        </div>
+                        <input type="hidden" id="postImage" value="">
+                        <div id="imagePreview" class="image-preview"></div>
+                        <button type="button" id="removeImageBtn" class="btn btn-sm btn-danger" style="display: none; margin-top: 10px;">Remove Image</button>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" id="cancelBtn" class="btn btn-secondary">Cancel</button>
+                        <button type="button" id="saveBtn" class="btn btn-primary">Save</button>
+                        <button type="button" id="publishBtn" class="btn btn-success">Publish</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Preview Modal -->
+            <div class="preview-modal" id="previewModal" style="display: none;">
+                <div class="preview-content">
+                    <button class="close-preview">&times;</button>
+                    <h2>Preview</h2>
+                    <div id="previewContent"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/journals-admin-vanilla.js"></script>
+</body>
+</html>

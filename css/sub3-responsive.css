@@ -1,0 +1,186 @@
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap');
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+ol, li {
+	list-style: none;
+	font-family: Raleway;
+}
+
+a {
+	text-decoration: none;
+	color: #000;
+}
+
+html, body {
+	width: 100%;
+	min-height: 100vh;
+}
+
+#wrap {
+	width: 100%;
+	min-height: 100vh;
+	padding: 20px;
+}
+
+header {
+	width: 100%;
+	margin-bottom: 30px;
+}
+
+#title {
+	font-family: Sacramento;
+	width: 100px;
+	height: 100px;
+	line-height: 100px;
+	font-weight: normal;
+	font-size: 28px;
+	border-radius: 50%;
+	background-color: rgba(0, 0, 0, 0.3);
+	text-align: center;
+	border: solid 1.3px blue;
+	margin: 0 auto;
+}
+
+#title > a {
+	color: #fff;
+	display: block;
+}
+
+#title:hover a {
+	color: blue;
+}
+
+#title:hover {
+	background-color: rgba(0, 0, 0, 0.3);
+	border: 1px solid #000;
+}
+
+.copy {
+	font-size: 13px;
+	color: rgba(0, 0, 0, 0.7);
+	text-align: center;
+	margin-bottom: 20px;
+	padding: 0 20px;
+}
+
+.thumb {
+	width: 100%;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: 20px;
+	padding: 0 10px;
+	max-width: 1400px;
+	margin: 0 auto;
+}
+
+.thumb li {
+	width: 100%;
+	background: rgba(255, 255, 255, 0.5);
+	border-radius: 10px;
+	overflow: hidden;
+	transition: transform 0.3s ease;
+}
+
+.thumb li:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.thumb li a {
+	display: block;
+	width: 100%;
+}
+
+.thumb li img {
+	width: 100%;
+	height: auto;
+	display: block;
+}
+
+.thumb li a p {
+	font-family: Raleway;
+	color: #000;
+	padding: 5px 15px;
+	font-size: 14px;
+}
+
+.thumb li a p:first-of-type {
+	font-weight: 600;
+}
+
+@media screen and (min-width: 768px) {
+	#wrap {
+		padding: 40px;
+	}
+
+	header {
+		position: relative;
+		margin-bottom: 50px;
+	}
+
+	#title {
+		width: 120px;
+		height: 120px;
+		line-height: 120px;
+		font-size: 32px;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+
+	.copy {
+		font-size: 14px;
+		text-align: left;
+		margin-top: 180px;
+		margin-bottom: 30px;
+		padding-left: 20px;
+	}
+
+	.thumb {
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 25px;
+		padding: 0 20px;
+	}
+}
+
+@media screen and (min-width: 1024px) {
+	#title {
+		width: 145px;
+		height: 145px;
+		line-height: 145px;
+		font-size: 39px;
+		left: 100px;
+		top: 30px;
+	}
+
+	.copy {
+		font-size: 15px;
+		margin-top: 200px;
+		padding-left: 100px;
+	}
+
+	.thumb {
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 30px;
+		padding: 0 80px;
+	}
+
+	.thumb li a p {
+		font-size: 15px;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.thumb {
+		grid-template-columns: 1fr;
+	}
+}

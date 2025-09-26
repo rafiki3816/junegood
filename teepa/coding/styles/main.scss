@@ -1,0 +1,1150 @@
+$color-bg-default: #333333;
+
+* {
+
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
+
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+
+  -webkit-user-drag: none;
+  -moz-user-drag: none;
+  -ms-user-drag: none;
+  user-drag: none;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+body {  
+
+    background: $color-bg-default;
+}
+
+button { 
+  cursor:pointer; 
+  padding: 0;
+  margin: 0;
+  border: 0;
+  outline: 0;
+  background: none; 
+  -webkit-appearance:none;
+}
+
+ul, ol { 
+
+  list-style:none;
+  margin: 0px;
+  padding: 0px;
+}
+
+.clear-fix {
+
+  clear: both;
+}
+
+.button-style-none {
+
+  border:0 none;
+  background-color:transparent;
+  cursor:pointer;
+  display: block;
+}
+
+#map{
+  overflow: hidden;
+  width:1280px; 
+  height:720px;  
+}
+
+#map-container{
+  position: relative; 
+
+  & > img{
+    position: absolute;
+  }
+
+  &-stage1{
+    visibility: hidden;
+  }
+
+  &-stage2{
+    visibility: hidden;
+  }
+
+  &-stage3{
+    visibility: hidden;
+  }
+}
+
+.wrapper{
+  position: absolute;  
+  width:1280px; 
+  height:720px;
+  overflow: hidden;
+}
+
+.container{
+  position: absolute;  
+  width:1280px; 
+  height:720px;
+}
+
+.gameView{  
+  position: absolute;
+}
+
+.gameObjectStarEffect{
+  display:block;
+  background-image:url('../images/star-effect.png');
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+}
+
+.basicButton{  
+  position: relative;
+  display:block;
+  width: 182px;
+  height: 113px;
+  overfolw: hidden;
+
+  & > img{
+
+    display:block;
+    width: 182px;
+    height: 113px;
+  }
+
+  &-active{   
+
+    position: absolute;
+    top: 0px;
+    visibility: hidden;
+  }
+}
+
+.allviewButton{
+  position: relative;
+  display:block;
+  width: 109px;
+  height: 34px;
+  overfolw: hidden;
+
+  & > img{
+
+    display:block;
+    width: 109px;
+    height: 34px;
+  }
+
+  &-active{   
+
+    position: absolute;
+    top: 0px;
+    visibility: hidden;
+  }
+}
+
+#buttonAllView{
+  top:20px;
+  right:20px;
+}
+
+.gameActionButton{
+  position: relative;
+  display:block;
+  width: 80px;
+  height: 79px;
+  overfolw: hidden;
+
+   & > img{   
+    display:block;
+    width: 80px;
+    height: 79px;
+  }
+
+  &-active{   
+    position: absolute; 
+    top: 0px;
+    visibility: hidden;
+  }
+
+  &-icon{   
+    position: absolute;
+    top: 0px;
+  }
+}
+
+.gameDeleteButton{
+
+  position: relative;
+  display:block;
+  width: 30px;
+  height: 30px;
+  overfolw: hidden;
+
+  & > img{   
+    display:block;
+    width: 30px;
+    height: 39px;
+  }
+
+  &-active{   
+    position: absolute; 
+    top: 0px;
+    visibility: hidden;
+  }
+}
+
+.startButton{  
+
+  position: relative;
+  display:block;
+  width: 332px;
+  height: 168px;
+  overfolw: hidden;  
+  top: -37px;
+
+  & > img{
+
+    display:block;
+    width: 332px;
+    height: 168px;
+  }
+
+  &-active{   
+
+    position: absolute;
+    top: 0px;   
+    visibility: hidden;
+  }
+}
+
+.gameStartButton{  
+  position: absolute;
+  display:block;
+  width: 86px;
+  height: 91px;
+  left: -50px;
+  top: -14px;
+
+  & > img{
+
+    display:block;
+    width: 86px;
+    height: 91px;
+  }
+
+  &-active{   
+
+    position: absolute;
+    top: 0px;   
+    visibility: hidden;
+  }
+}
+
+.chooseIconDelButton{
+  position: absolute;
+  display:block;
+  width: 30px;
+  height: 30px;
+  overfolw: hidden;
+  top: -12px;  
+  left: 40px;
+
+  & > img{
+    position: absolute;
+    display:block;
+    width: 30px;
+    height: 30px;    
+    top: 0px;   
+    left:0px;
+  }
+
+  &-active{    
+    visibility: hidden;
+  }
+}
+
+.gameChooseIcon{
+  position: relative;
+  display:block;
+  width: 70px;
+  height: 73px;
+  overflow: hidden;  
+
+  & > img{
+    display:block;   
+  }
+
+  &-default{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 70px;
+    height: 73px; 
+  }   
+
+  &-active{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 70px;
+    height: 73px; 
+    visibility: hidden;
+  }   
+
+  &-num{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 23px;
+    height: 33px; 
+    top: 12px;
+    left: 20px;
+  }   
+}
+
+.game-map-listItem{  
+
+  position: relative;
+  display:block;
+  width: 350px;
+  height: 285px;
+  overfolw: hidden; 
+
+  & > img{
+
+    display:block;
+    width: 332px;
+    height: 285px;
+  }
+
+  &-active{   
+
+    position: absolute;
+    top: 0px;   
+    visibility: hidden;
+  } 
+}
+
+.popupButton{
+  position: relative;
+  display:block;
+  width: 225px;
+  height: 139px;
+  overfolw: hidden;  
+
+   & > img{
+
+    display:block;
+    width: 225px;
+    height: 139px;
+  }
+
+  &-active{   
+
+    position: absolute;
+    top: 0px;   
+    visibility: hidden;
+  }
+}
+
+.hls-video{
+
+  width: 950px;
+  height: 570px
+}
+
+.fullcover-black{ 
+  z-index: 0;
+  position: absolute;
+  width:100%;
+  height:100%;  
+  background: rgba(0, 0, 0, 0.8);
+  opacity:0.8;
+  -moz-opacity:0.8;  
+  filter:alpha(opacity=80);
+}
+
+#main{
+
+  width: 100%;
+  height: 100%;
+
+  &-title{
+
+    position: relative;
+    margin-top: 10%;
+    margin-left: auto;
+    margin-right: auto;
+    background-image:url('../images/main-title-bg.png');
+    width:455px;
+    height:322px;    
+
+    & img{
+
+      position: absolute;
+    } 
+
+    &-hoony{
+
+      top:-66px;
+      left:186px;
+    }
+
+    &-text0{
+
+      top:5px;
+      left:6px;
+    }
+
+    &-text1{
+
+      top:148px;
+      left:67px;
+    }
+
+    &-icon0{
+
+      top:-3px;
+      left: 485px;
+    }
+
+    &-icon1{
+
+      top:-16px;
+      left: 450px;
+    }
+  }
+
+  &-ui{
+
+    text-align: center;
+
+    & ul{
+
+      position: relative;
+      margin-top: 55px;
+      display: inline-block;
+    }
+
+    & li{        
+
+      position: relative;
+      float: left;
+      padding: auto;
+      margin: auto 50px auto 50px;
+    }
+  }
+}
+
+#game{
+
+  display: block;
+  width: 100%;
+  height: 100%;  
+  visibility: hidden;
+  
+
+  & > div{
+    position:absolute;
+  }
+
+  &-cover{
+    visibility: hidden;
+  }
+
+  &-popupFailed{
+    display:block;    
+    background-image: url('../images/game-popup-bg.png');
+    width: 592px;
+    height: 237px;
+    top:40%;
+    left:50%;
+    margin:-218px 0 0 -290px;
+    visibility: hidden;
+
+    &-ui{
+      text-align: center;
+
+      & > ul{
+        position: relative;
+        display: inline-block;
+
+        & > li{       
+           
+          position: relative;
+          float: left;
+          top: 50px;
+          margin: auto 20px auto 20px;
+        }
+      }     
+    }
+  }
+
+  &-popupDoNotStart{
+    display:block;    
+    background-image: url('../images/game-popup-bg2.png');
+    width: 678px;
+    height: 436px;
+    top:50%;
+    left:50%;
+    margin:-218px 0 0 -369px;
+    visibility: hidden;
+    text-align: center;
+
+    & > div{
+      position: relative;
+      top: 230px;
+      left: 260px;
+    }
+  }
+
+  &-map{
+    display:block;
+    width: 790px;
+    height: 600px;
+    top:50%;
+    left:50%;
+    margin:-300px 0 0 -370px;
+    visibility: hidden;
+
+    &-list{
+      text-align: center;      
+
+      & > ul{
+        position: relative;
+        display: inline-block;
+
+        & > li{
+          position: relative;
+          float: left;          
+          margin: 10px 20px 10px 20px;
+        }
+      }     
+    }
+
+    &-closeBtn{
+      display : block;
+      position : absolute;  
+      left : 770px;    
+      top : -40px;
+    }
+  }
+
+  &-butterfly{
+    position: absolute;
+    top: 360px;    
+
+    &-move{    
+
+      visibility: hidden;
+
+      &-vertical{
+        display: block;
+        overflow: hidden;
+        background-image: url('../images/ani-butterfly.png');
+        width: 50px;
+        height: 50px;
+      }
+    }
+  }
+
+  &-ui  {    
+    display:block;
+    width: 100%;
+    height: 100%;    
+
+    &-guideText{
+      position: absolute;
+      right: 17px;
+      top: 150px;
+      visibility: hidden;
+    }
+
+    &-guideButton{
+      position: absolute;
+      right: 70px;
+      top: 175px;
+      visibility: hidden;
+    }
+
+    &-map-button{
+      position: absolute;
+      top : 75px;
+      left : 25px;
+
+      & > img{   
+        display:block;
+        width:65px;
+        height:68px;
+      }
+
+      &-active{
+        top: 0px;
+        left:0px;
+        position: absolute;  
+        visibility: hidden;
+      }
+    }
+
+    &-action{      
+      position: relative;
+      top:50%;
+      margin-top: -20%;
+      float: right;      
+      left: -40px;
+      width: 48px;
+      height: 511px;
+      background-image: url('../images/game-ui-select-bg.png');
+
+      &-button{
+        position: relative;
+        left: -7px;
+      }
+
+      &-icon{
+        position: relative;
+        left: 0px;
+        display:block;
+        width:65px;
+        height:70px;
+      }
+
+      & > ul{
+        position: relative;
+        left: -14px;
+
+        & > li{
+          margin: 3px auto 10px auto;
+        }
+      }
+    }
+
+    &-choose{      
+      position: absolute;         
+      width: 1280px;
+      height: 65px;
+      bottom: 15px;      
+      
+      &-container{
+        position: relative;
+        display: block;
+        width: 1280px;
+        height: 65px;
+        overflow: hidden;
+
+        &-bg{
+          position: relative;
+          display: block;
+          width: 1280px;
+          height: 65px;
+          background-repeat: no-repeat;
+          background-image: url('../images/game-ui-choose-bg.png');
+        }
+      }     
+
+      & > ul{
+        position: absolute;
+        display: inline-block;   
+        width: 400px; 
+        left: 35px;  
+        top: -8px;  
+
+        & > li{
+           
+          position: relative;
+          float: left;
+          margin: auto 5px auto 5px;
+        }
+      } 
+    }
+  }
+
+  &-object{
+
+    display: block;
+    width:100%;
+    height:100%;
+
+    &-stage1{
+
+      left: 240px;
+      visibility: hidden;
+
+      & > div{
+        display: block;
+        position:absolute;
+      }
+
+      &-line{
+        top: 180px;
+        & > img{
+          margin-right: 173px;
+        }
+      }
+
+      &-star{
+        top: 30px;
+        & > img{
+          position: relative;
+          margin-left: 66px;
+          margin-right: 63px;        
+        } 
+
+        &-icon2{
+          top: -80px;
+        }
+      }
+
+      &-starEffect{        
+        top: -50px;
+        left: -15px;
+        & > div{
+          position: relative;
+          display: inline-block;
+          margin-right: -22px;     
+        } 
+
+        &-icon2{
+          top: -80px;
+        }
+      }
+
+      &-obj{
+        
+        & > img{
+          position: absolute;
+        }
+
+        &-0{
+          top: 133px;
+          left: 390px;
+        }
+      }
+    }
+
+    &-stage2{
+
+      left: 80px;
+      visibility: hidden;
+
+      & > div{
+        display: block;
+        position:absolute;
+      }
+
+      &-line{
+        top: 180px;
+        & > img{
+          margin-right: 173px;
+        }
+      }
+
+      &-star{
+        top: 30px;
+        & > img{
+          position: relative;
+          margin-left: 66px;
+          margin-right: 63px;        
+        } 
+
+        &-icon1{
+          top: -80px;
+        }
+
+        &-icon3{
+          top: -50px;
+        }
+      }
+
+      &-starEffect{        
+        top: -50px;
+        left: -15px;
+        & > div{
+          position: relative;
+          display: inline-block;
+          margin-right: -22px;     
+        } 
+
+        &-icon1{
+          top: -80px;
+        }
+
+        &-icon3{
+          top: -50px;
+        }
+      }
+
+      &-obj{
+        
+        & > img{
+          position: absolute;
+        }
+
+        &-0{
+          top: 135px;
+          left: 205px;
+        }
+
+        &-1{
+          top: 195px;
+          left: 550px;
+        }
+      }
+    }
+
+    &-stage3{
+
+      left: 170px;
+      visibility: hidden;
+
+      & > div{
+        display: block;
+        position:absolute;
+      }
+
+      &-line{
+        top: 180px;
+        & > img{
+          margin-right: 128px;
+        }
+      }
+
+      &-star{
+        top: 30px;
+        & > img{
+          position: relative;
+          margin-left: 44px;
+          margin-right: 40px;        
+        } 
+
+        &-icon1{
+          top: -80px;
+        }
+
+        &-icon2{          
+          top: -80px;
+        }
+
+        &-icon4{
+          top: -50px;
+        }
+      }
+
+      &-starEffect{        
+        top: -50px;
+        left: -35px;
+        & > div{
+          position: relative;
+          display: inline-block;
+          margin-right: -68px;     
+        } 
+
+        &-icon1{
+          top: -80px;
+        }
+
+        &-icon2{          
+          top: -80px;
+        }
+
+        &-icon4{
+          top: -50px;
+        }
+      }
+
+      &-obj{
+        
+        & > img{
+          position: absolute;
+        }
+
+        &-0{
+          top: 135px;
+          left: 140px;
+        }
+
+        &-1{
+          top: 135px;
+          left: 270px;
+        }
+
+        &-2{
+          top: 150px;
+          left: 540px;
+        }
+      }
+    }
+
+    &-stage4{
+
+      left: 110px;      
+
+      & > div{
+        display: block;
+        position:absolute;
+      }
+
+      &-line{
+        top: 180px;
+        & > img{
+          margin-right: 128px;
+        }
+      }
+
+      &-star{
+        top: 30px;
+        & > img{
+          position: relative;
+          margin-left: 44px;
+          margin-right: 40px;        
+        } 
+
+        &-icon1{
+          top: -50px;
+        }
+
+        &-icon3{
+          top: -80px;
+        }
+
+        &-icon4{
+          top: -120px;
+        }
+
+        &-icon6{
+          top: -50px;
+        }
+      }
+
+      &-starEffect{        
+        top: -50px;
+        left: -35px;
+
+        & > div{
+          position: relative;
+          display: inline-block;
+          margin-right: -68px;     
+        } 
+
+        &-icon1{
+          top: -50px;
+        }
+
+        &-icon3{
+          top: -80px;
+        }
+
+        &-icon4{
+          top: -120px;
+        }
+
+        &-icon6{
+          top: -50px;
+        }
+      }
+
+      &-obj{
+        
+        & > img{
+          position: absolute;
+        }
+
+        &-0{
+          top: 185px;
+          left: 140px;
+        }
+
+        &-1{
+          top: 135px;
+          left: 415px;
+        }
+
+        &-2{
+          top: 90px;
+          left: 545px;
+        }
+
+        &-3{
+          top: 145px;
+          left: 815px;
+        }
+      }      
+    }
+
+  }
+
+  &-play{
+
+    display: block;
+    width:100%;
+    height:100%;
+  }
+
+}
+
+#gameVideo{
+
+  display: block;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+
+  &-player { 
+    position:absolute;
+    top:50%;
+    left:50%;
+    width: 950px;
+    height: 572px;   
+    text-align: right;
+    margin:-262px 0 0 -475px;
+  }
+
+  &-closeBtn{
+
+    position: absolute;    
+    top: -36px;
+    right: -40px;
+  }
+}
+
+#gameInfo{
+  display: block;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+
+  &-content{
+    position:absolute;
+    top:50%;
+    left:50%;
+    width: 818px;
+    height: 622px;   
+    text-align: right;
+    margin:-311px 0 0 -414px;
+    background-repeat: no-repeat;
+    background-image: url('../images/game-info-bg.png');
+
+    &-container{
+      position:absolute;
+      width: 818px;
+      height: 622px;   
+      overflow:hidden;
+
+      &-ul{
+        position:relative;
+        top: 100px;
+        display: inline-bolck;
+        width: 3272px;
+        
+        & > li{
+          float: left;
+          display: inline-bolck;
+        }
+      }
+    }
+    
+    &-closeBtn{
+      display:block;
+      width: 80px;
+      height: 74px;
+      right: -20px;
+    }
+
+    &-leftBtn{
+      top:300px;
+      width: 79px;
+      height: 91px;
+      left:-11px;
+    }
+
+    &-rightBtn{
+      top:300px; 
+      width: 79px;
+      height: 91px;
+      right: -17px;
+    }
+  } 
+}
+
+.gameInfo-button{
+  display: block; 
+  position:absolute; 
+
+  & > img{
+    top:0px;
+    left:0px;
+    display: block;
+    position:absolute; 
+  }   
+}
+
+.gameObjectStage{
+  display: block;
+  position: absolute;
+  width: 1280px;
+  height:360px;
+  bottom: 0px;
+
+  & > div{
+  }
+}
+
+#hoony{
+    position: absolute;
+    display:block;
+    width: 250px;
+    height: 250px;
+    overflow: hidden;    
+    bottom: 110px;
+
+    & > div{
+      position: absolute;
+      display:block;
+      width: 250px;
+      height: 250px;
+      overflow: hidden; 
+    }
+
+    &-walk{      
+      background-image: url('../images/hoony-walk-default.png'); 
+    }
+
+    &-walk-init{      
+      background-image: url('../images/hoony-walk.png');      
+    }   
+
+    &-jump{
+      background-image: url('../images/hoony-jump.png');
+    }   
+
+    &-doh{
+      background-image: url('../images/hoony-doh.png');
+    }   
+
+    &-catch{
+      background-image: url('../images/hoony-catch.png');
+    }   
+
+     &-catch-after{
+      background-image: url('../images/hoony-catch-after.png');
+    }   
+
+
+    &-catchFail{
+      background-image: url('../images/hoony-catchFail.png');
+    }   
+    
+}
+
+#gameLogo{
+  margin: 15px 0 0 15px;
+}

@@ -1,0 +1,119 @@
+*{margin:0;}
+body{padding: 20px;}
+h1,h2,h3,h4,p{font-weight: normal; margin: 5px 0;}
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap');
+
+
+header>p>a{
+	display: block;
+	width: 90px;
+	height: 90px;
+	border-radius: 90px;
+	line-height: 90px;
+	border: 1px solid blue;
+	background-color: rgba(0,0,0,0.1); 
+	color: #fff;
+	text-align: center;
+	text-decoration: none;
+	font-family: Raleway;
+	font-size: 25px;
+}
+
+header>p>a:hover{
+	background-color: rgba(250,250,250,0.5); 
+	color: #000;
+}
+
+.thumb{cursor: pointer;}
+
+#lightbox.active{
+	position: absolute;
+	overflow: hidden;
+	background: rgb(250,250,250,0.7);
+	width: 100%;
+	height: auto;
+	/*left: 50%; margin-left: -400px;
+	top: 50%; margin-top: -250px;*/
+	top: 0;
+	left: 0;
+	box-sizing: border-box;
+	padding: 30px;
+	z-index: 99;
+	display: block;
+}
+
+#lightbox{display: none;}
+#lightbox h1, #lightbox p{
+	color: white;
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+/*이미지 박스 */
+figure{
+	width: 95%; height: 95%;
+	position: relative;
+	margin: 10px auto;
+	overflow: hidden;
+}
+
+figure img{
+	display: none;
+	/*position: absolute;*/
+	width: 70%;
+	height: auto;
+	margin: 0 auto;
+}
+figure img.active{
+	display: block;
+}
+
+/*창 닫기 버튼 */
+.btn-close{
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	padding: 20px;
+	color: white;
+	font-size: 30px;
+}
+
+.btn-close:hover{background-color: #666;}
+
+/*라이트 배경 처리*/
+
+#block{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: #111;
+	opacity: 0.5;
+	z-index: 9;
+	display: none;
+}
+#block.active{display: block;}
+
+/*인디케이터 네비게이션*/
+/*.indicator{
+	text-align: center;
+}
+.indicator button{
+	background: #666;
+	color: white;
+	font-size: 12px;
+	border:none;
+	padding: 2px 5px;
+	
+}
+.indicator button:focus{background:#38f;}*/
+.copy{
+	font-size: 13px;
+	padding: 10px 0;
+}

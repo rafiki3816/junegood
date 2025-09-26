@@ -1,0 +1,337 @@
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap');
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	padding: 20px;
+	min-height: 100vh;
+	background: #f5f5f5;
+}
+
+h1, h2, h3, h4, p {
+	font-weight: normal;
+	margin: 5px 0;
+}
+
+/* Header styles */
+header > p > a {
+	display: inline-block;
+	width: 90px;
+	height: 90px;
+	border-radius: 50%;
+	line-height: 90px;
+	border: 1px solid blue;
+	background-color: rgba(0, 0, 0, 0.1);
+	color: #333;
+	text-align: center;
+	text-decoration: none;
+	font-family: Raleway;
+	font-size: 25px;
+	transition: all 0.3s ease;
+}
+
+header > p > a:hover {
+	background-color: rgba(250, 250, 250, 0.9);
+	color: blue;
+	transform: scale(1.05);
+}
+
+.copy {
+	font-size: 13px;
+	padding: 10px 0 20px;
+	color: #666;
+}
+
+/* Thumbnail grid */
+.thumb-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+	gap: 15px;
+	padding: 20px 0;
+}
+
+.thumb {
+	width: 100%;
+	height: 150px;
+	object-fit: cover;
+	cursor: pointer;
+	border-radius: 8px;
+	transition: all 0.3s ease;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.thumb:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Lightbox overlay */
+#block {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background: rgba(0, 0, 0, 0.9);
+	z-index: 998;
+	display: none;
+	animation: fadeIn 0.3s ease;
+}
+
+#block.active {
+	display: block;
+}
+
+/* Lightbox container */
+#lightbox {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	z-index: 999;
+	display: none;
+	overflow: hidden;
+}
+
+#lightbox.active {
+	display: flex;
+	flex-direction: column;
+	animation: slideIn 0.3s ease;
+}
+
+/* Lightbox header */
+.lightbox-header {
+	background: rgba(0, 0, 0, 0.8);
+	padding: 15px 20px;
+	text-align: center;
+	position: relative;
+	z-index: 1001;
+}
+
+.lightbox-header h1 {
+	color: white;
+	font-family: Raleway;
+	font-size: 24px;
+	margin-bottom: 5px;
+}
+
+.lightbox-header p {
+	color: rgba(255, 255, 255, 0.8);
+	font-family: Raleway;
+	font-size: 14px;
+}
+
+.photo-counter {
+	color: rgba(255, 255, 255, 0.6);
+	font-family: Raleway;
+	font-size: 12px;
+	margin-top: 5px;
+}
+
+/* Lightbox content */
+.lightbox-content {
+	flex: 1;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+}
+
+/* Image container */
+figure {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+figure img {
+	display: none;
+	max-width: 90%;
+	max-height: 90%;
+	object-fit: contain;
+	animation: fadeIn 0.5s ease;
+}
+
+figure img.active {
+	display: block;
+}
+
+/* Navigation buttons */
+.nav-btn {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	background: rgba(0, 0, 0, 0.5);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	color: white;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.3s ease;
+	z-index: 1002;
+}
+
+.nav-btn:hover {
+	background: rgba(0, 0, 0, 0.7);
+	border-color: rgba(255, 255, 255, 0.5);
+}
+
+.nav-btn.prev {
+	left: 20px;
+}
+
+.nav-btn.next {
+	right: 20px;
+}
+
+/* Close button */
+.btn-close {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	width: 40px;
+	height: 40px;
+	color: white;
+	font-size: 30px;
+	cursor: pointer;
+	z-index: 1003;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: rgba(0, 0, 0, 0.5);
+	border-radius: 50%;
+	transition: all 0.3s ease;
+}
+
+.btn-close:hover {
+	background: rgba(255, 255, 255, 0.2);
+	transform: rotate(90deg);
+}
+
+/* Animations */
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes slideIn {
+	from {
+		opacity: 0;
+		transform: translateY(-20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* Mobile responsive */
+@media screen and (max-width: 768px) {
+	body {
+		padding: 10px;
+	}
+
+	header > p > a {
+		width: 70px;
+		height: 70px;
+		line-height: 70px;
+		font-size: 20px;
+	}
+
+	.thumb-grid {
+		grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+		gap: 10px;
+	}
+
+	.thumb {
+		height: 100px;
+		border-radius: 5px;
+	}
+
+	.lightbox-header {
+		padding: 10px 15px;
+	}
+
+	.lightbox-header h1 {
+		font-size: 20px;
+	}
+
+	.lightbox-header p {
+		font-size: 12px;
+	}
+
+	.nav-btn {
+		width: 40px;
+		height: 40px;
+	}
+
+	.nav-btn.prev {
+		left: 10px;
+	}
+
+	.nav-btn.next {
+		right: 10px;
+	}
+
+	figure img {
+		max-width: 95%;
+		max-height: 80%;
+	}
+
+	.btn-close {
+		width: 35px;
+		height: 35px;
+		font-size: 24px;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.thumb-grid {
+		grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+		gap: 8px;
+	}
+
+	.thumb {
+		height: 80px;
+	}
+}
+
+/* Landscape mode optimization */
+@media screen and (orientation: landscape) and (max-height: 500px) {
+	.lightbox-header {
+		padding: 8px 15px;
+	}
+
+	.lightbox-header h1 {
+		font-size: 18px;
+		margin-bottom: 2px;
+	}
+
+	.lightbox-header p {
+		display: none;
+	}
+
+	figure img {
+		max-height: 85vh;
+	}
+}

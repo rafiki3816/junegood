@@ -1,0 +1,262 @@
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap');
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+ol, li {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+}
+
+html, body {
+	width: 100%;
+	height: 100%;
+}
+
+#wrap {
+	width: 100%;
+	min-height: 100vh;
+	background-image: url('../images/bg.png');
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 20px;
+	position: relative;
+}
+
+#title {
+	font-family: Sacramento;
+	width: 120px;
+	height: 120px;
+	line-height: 120px;
+	font-weight: lighter;
+	font-size: 32px;
+	border-radius: 50%;
+	background-color: rgba(0, 0, 0, 0.1);
+	text-align: center;
+	border: solid 1px black;
+	margin: 20px auto;
+	transition: all 0.3s ease;
+	position: relative;
+}
+
+#title > a {
+	color: blue;
+	display: block;
+}
+
+#title:hover a {
+	color: black;
+}
+
+#title:hover {
+	background-color: rgba(255, 250, 205, 0.3);
+	border: solid 1px blue;
+}
+
+.band {
+	width: 100%;
+	margin-top: 40px;
+}
+
+.nav {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	width: 100%;
+	max-width: 300px;
+	margin: 0 auto;
+}
+
+.nav li {
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	background-color: rgba(0, 0, 0, 0.3);
+	text-align: center;
+	font-family: Raleway;
+	font-size: 18px;
+	border-top: 1px solid rgba(200, 200, 200, 0.7);
+	border-bottom: 1px solid blue;
+	border-radius: 5px;
+	transition: background-color 0.3s ease;
+}
+
+.nav li a {
+	color: #fff;
+	display: block;
+	padding: 0 20px;
+}
+
+.nav li:hover {
+	background-color: rgba(200, 200, 200, 0.5);
+}
+
+.nav li:hover > a {
+	color: blue;
+}
+
+.mobile-menu-toggle {
+	display: none;
+	width: 40px;
+	height: 40px;
+	background: none;
+	border: none;
+	cursor: pointer;
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	z-index: 1000;
+}
+
+.mobile-menu-toggle span {
+	display: block;
+	width: 30px;
+	height: 3px;
+	background-color: #333;
+	margin: 6px auto;
+	transition: all 0.3s ease;
+}
+
+@media screen and (min-width: 768px) {
+	#wrap {
+		padding: 40px;
+	}
+
+	#title {
+		width: 145px;
+		height: 145px;
+		line-height: 145px;
+		font-size: 39px;
+		position: absolute;
+		top: 30px;
+		left: 60px;
+	}
+
+	.band {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: auto;
+		height: 45px;
+		margin-top: 0;
+	}
+
+	.nav {
+		flex-direction: row;
+		justify-content: center;
+		gap: 0;
+		max-width: none;
+		width: auto;
+	}
+
+	.nav li {
+		width: 150px;
+		height: 45px;
+		line-height: 45px;
+		border-radius: 0;
+		font-size: 21px;
+	}
+
+	.nav li:first-child {
+		border-radius: 5px 0 0 5px;
+	}
+
+	.nav li:last-child {
+		border-radius: 0 5px 5px 0;
+	}
+}
+
+@media screen and (min-width: 1024px) {
+	#title {
+		left: 100px;
+	}
+
+	.nav {
+		width: 605px;
+	}
+}
+
+@media screen and (min-width: 1440px) {
+	#wrap {
+		padding: 60px;
+	}
+}
+
+@media screen and (max-width: 767px) {
+	#title {
+		margin: 40px auto 20px;
+	}
+
+	.band {
+		display: none;
+		position: fixed;
+		top: 0;
+		right: 0;
+		width: 80%;
+		max-width: 300px;
+		height: 100vh;
+		background-color: rgba(255, 255, 255, 0.95);
+		box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+		z-index: 999;
+		transform: translateX(100%);
+		transition: transform 0.3s ease;
+		padding-top: 80px;
+		margin-top: 0;
+	}
+
+	.band.active {
+		display: block;
+		transform: translateX(0);
+	}
+
+	.mobile-menu-toggle {
+		display: block;
+	}
+
+	.mobile-menu-toggle.active span:nth-child(1) {
+		transform: rotate(45deg) translate(6px, 6px);
+	}
+
+	.mobile-menu-toggle.active span:nth-child(2) {
+		opacity: 0;
+	}
+
+	.mobile-menu-toggle.active span:nth-child(3) {
+		transform: rotate(-45deg) translate(7px, -6px);
+	}
+
+	.nav li {
+		background-color: transparent;
+		border: none;
+		border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	}
+
+	.nav li a {
+		color: #333;
+	}
+
+	.nav li:hover {
+		background-color: rgba(0, 0, 0, 0.05);
+	}
+
+	.nav li:hover > a {
+		color: blue;
+	}
+}

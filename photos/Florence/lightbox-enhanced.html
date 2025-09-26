@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>travels - Florence, Italy</title>
+	<link rel="stylesheet" type="text/css" href="../css/lightbox-common.css">
+	<script src="../js/jquery-3.5.1.min.js"></script>
+</head>
+
+<body>
+	<header>
+		<p><a href="../../sub3.html">travels</a></p>
+		<p class="copy">All copyrights of photos reserved by Dongjune KIM</p>
+		<div class="thumb-grid">
+			<img class="thumb" src="img/1.jpeg" onclick="lightbox_open(1)" alt="Florence, Italy 1">
+			<img class="thumb" src="img/2.jpeg" onclick="lightbox_open(2)" alt="Florence, Italy 2">
+			<img class="thumb" src="img/3.jpeg" onclick="lightbox_open(3)" alt="Florence, Italy 3">
+			<img class="thumb" src="img/4.jpeg" onclick="lightbox_open(4)" alt="Florence, Italy 4">
+			<img class="thumb" src="img/5.jpeg" onclick="lightbox_open(5)" alt="Florence, Italy 5">
+			<img class="thumb" src="img/6.jpeg" onclick="lightbox_open(6)" alt="Florence, Italy 6">
+			<img class="thumb" src="img/7.jpeg" onclick="lightbox_open(7)" alt="Florence, Italy 7">
+			<img class="thumb" src="img/8.jpeg" onclick="lightbox_open(8)" alt="Florence, Italy 8">
+			<img class="thumb" src="img/9.jpeg" onclick="lightbox_open(9)" alt="Florence, Italy 9">
+			<img class="thumb" src="img/10.jpeg" onclick="lightbox_open(10)" alt="Florence, Italy 10">
+			<img class="thumb" src="img/11.jpeg" onclick="lightbox_open(11)" alt="Florence, Italy 11">
+			<img class="thumb" src="img/12.jpeg" onclick="lightbox_open(12)" alt="Florence, Italy 12">
+			<img class="thumb" src="img/13.jpeg" onclick="lightbox_open(13)" alt="Florence, Italy 13">
+			<img class="thumb" src="img/14.jpeg" onclick="lightbox_open(14)" alt="Florence, Italy 14">
+			<img class="thumb" src="img/15.jpeg" onclick="lightbox_open(15)" alt="Florence, Italy 15">
+			<img class="thumb" src="img/16.jpeg" onclick="lightbox_open(16)" alt="Florence, Italy 16">
+			<img class="thumb" src="img/17.jpeg" onclick="lightbox_open(17)" alt="Florence, Italy 17">
+			<img class="thumb" src="img/18.jpeg" onclick="lightbox_open(18)" alt="Florence, Italy 18">
+			<img class="thumb" src="img/19.jpeg" onclick="lightbox_open(19)" alt="Florence, Italy 19">
+			<img class="thumb" src="img/20.jpeg" onclick="lightbox_open(20)" alt="Florence, Italy 20">
+			<img class="thumb" src="img/21.jpeg" onclick="lightbox_open(21)" alt="Florence, Italy 21">
+			<img class="thumb" src="img/22.jpeg" onclick="lightbox_open(22)" alt="Florence, Italy 22">
+			<img class="thumb" src="img/23.jpeg" onclick="lightbox_open(23)" alt="Florence, Italy 23">
+			<img class="thumb" src="img/24.jpeg" onclick="lightbox_open(24)" alt="Florence, Italy 24">
+			<img class="thumb" src="img/25.jpeg" onclick="lightbox_open(25)" alt="Florence, Italy 25">
+			<img class="thumb" src="img/26.jpeg" onclick="lightbox_open(26)" alt="Florence, Italy 26">
+			<img class="thumb" src="img/27.jpeg" onclick="lightbox_open(27)" alt="Florence, Italy 27">
+			<img class="thumb" src="img/28.jpeg" onclick="lightbox_open(28)" alt="Florence, Italy 28">
+			<img class="thumb" src="img/29.jpeg" onclick="lightbox_open(29)" alt="Florence, Italy 29">
+			<img class="thumb" src="img/30.jpeg" onclick="lightbox_open(30)" alt="Florence, Italy 30">
+			<img class="thumb" src="img/31.jpeg" onclick="lightbox_open(31)" alt="Florence, Italy 31">
+			<img class="thumb" src="img/32.jpeg" onclick="lightbox_open(32)" alt="Florence, Italy 32">
+			<img class="thumb" src="img/33.jpeg" onclick="lightbox_open(33)" alt="Florence, Italy 33">
+			<img class="thumb" src="img/34.jpeg" onclick="lightbox_open(34)" alt="Florence, Italy 34">
+			<img class="thumb" src="img/35.jpeg" onclick="lightbox_open(35)" alt="Florence, Italy 35">
+			<img class="thumb" src="img/36.jpeg" onclick="lightbox_open(36)" alt="Florence, Italy 36">
+			<img class="thumb" src="img/37.jpeg" onclick="lightbox_open(37)" alt="Florence, Italy 37">
+			<img class="thumb" src="img/38.jpeg" onclick="lightbox_open(38)" alt="Florence, Italy 38">
+		</div>
+	</header>
+
+	<!-- 라이트 박스 배경  -->
+	<div id="block"></div>
+
+	<div id="lightbox">
+		<div class="lightbox-header">
+			<h1>Florence, Italy</h1>
+			<p>July 2016</p>
+			<div class="photo-counter">
+				<span id="currentPhoto">1</span> / <span id="totalPhotos">38</span>
+			</div>
+		</div>
+
+		<div class="lightbox-content">
+			<!-- Navigation buttons -->
+			<button class="nav-btn prev" id="prevBtn" onclick="prevImage()">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+					<polyline points="15 18 9 12 15 6"></polyline>
+				</svg>
+			</button>
+			<button class="nav-btn next" id="nextBtn" onclick="nextImage()">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+					<polyline points="9 18 15 12 9 6"></polyline>
+				</svg>
+			</button>
+
+			<figure>
+				<img src="img/1.jpeg" class="active">
+				<img src="img/2.jpeg">
+				<img src="img/3.jpeg">
+				<img src="img/4.jpeg">
+				<img src="img/5.jpeg">
+				<img src="img/6.jpeg">
+				<img src="img/7.jpeg">
+				<img src="img/8.jpeg">
+				<img src="img/9.jpeg">
+				<img src="img/10.jpeg">
+				<img src="img/11.jpeg">
+				<img src="img/12.jpeg">
+				<img src="img/13.jpeg">
+				<img src="img/14.jpeg">
+				<img src="img/15.jpeg">
+				<img src="img/16.jpeg">
+				<img src="img/17.jpeg">
+				<img src="img/18.jpeg">
+				<img src="img/19.jpeg">
+				<img src="img/20.jpeg">
+				<img src="img/21.jpeg">
+				<img src="img/22.jpeg">
+				<img src="img/23.jpeg">
+				<img src="img/24.jpeg">
+				<img src="img/25.jpeg">
+				<img src="img/26.jpeg">
+				<img src="img/27.jpeg">
+				<img src="img/28.jpeg">
+				<img src="img/29.jpeg">
+				<img src="img/30.jpeg">
+				<img src="img/31.jpeg">
+				<img src="img/32.jpeg">
+				<img src="img/33.jpeg">
+				<img src="img/34.jpeg">
+				<img src="img/35.jpeg">
+				<img src="img/36.jpeg">
+				<img src="img/37.jpeg">
+				<img src="img/38.jpeg">
+			</figure>
+		</div>
+
+		<div class="btn-close" onclick="lightbox_close()">×</div>
+	</div>
+
+	<script src="../js/lightbox-common.js"></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>junegood - Journals</title>
+	<link rel="stylesheet" type="text/css" href="css/sub4-journals.css">
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+	<div id="wrap">
+		<header>
+			<div id="title"><a href="index.html">Junegood</a></div>
+			<nav class="journal-nav">
+				<a href="#all" class="active">All</a>
+				<a href="#travel">Travel</a>
+				<a href="#life">Life</a>
+				<a href="#work">Work</a>
+			</nav>
+		</header>
+
+		<main class="journal-container">
+			<!-- Example posts -->
+			<article class="journal-post" data-category="travel">
+				<div class="post-image">
+					<img src="images/travels/barcelona.jpg" alt="Barcelona">
+				</div>
+				<div class="post-content">
+					<span class="post-date">December 2016</span>
+					<h2>Barcelona: A City of Art and Architecture</h2>
+					<p>Exploring the masterpieces of Gaudí and the vibrant streets of Barcelona. From the Sagrada Família to Park Güell, every corner tells a story of creativity and passion.</p>
+					<a href="#" class="read-more">Read more →</a>
+				</div>
+			</article>
+
+			<article class="journal-post" data-category="travel">
+				<div class="post-image">
+					<img src="images/travels/sanFrancisco.jpg" alt="San Francisco">
+				</div>
+				<div class="post-content">
+					<span class="post-date">July 2019</span>
+					<h2>San Francisco: Innovation and Inspiration</h2>
+					<p>Five months in the Bay Area, experiencing the heart of tech innovation while discovering the natural beauty of California's coast.</p>
+					<a href="#" class="read-more">Read more →</a>
+				</div>
+			</article>
+
+			<article class="journal-post" data-category="life">
+				<div class="post-image">
+					<img src="images/aboutme01.png" alt="Life">
+				</div>
+				<div class="post-content">
+					<span class="post-date">November 2024</span>
+					<h2>The Journey of Storytelling</h2>
+					<p>From film directing to founding RAFIKI, my journey has been about telling stories that matter.</p>
+					<a href="#" class="read-more">Read more →</a>
+				</div>
+			</article>
+
+			<!-- Dynamic posts will be added here -->
+			<div class="coming-soon-message">
+				<p>More stories coming soon...</p>
+				<p style="margin-top: 20px;">
+					<a href="journals-login.html" style="background: #0066cc; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
+						Write New Post →
+					</a>
+				</p>
+			</div>
+		</main>
+	</div>
+
+	<script src="js/sub4-journals.js"></script>
+	<script src="js/journals-display-vanilla.js"></script>
+</body>
+</html>

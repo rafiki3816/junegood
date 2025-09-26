@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>travels - San Diego, USA</title>
+	<link rel="stylesheet" type="text/css" href="../css/lightbox-common.css">
+	<script src="../js/jquery-3.5.1.min.js"></script>
+</head>
+
+<body>
+	<header>
+		<p><a href="../../sub3.html">travels</a></p>
+		<p class="copy">All copyrights of photos reserved by Dongjune KIM</p>
+		<div class="thumb-grid">
+			<img class="thumb" src="img/1.jpeg" onclick="lightbox_open(1)" alt="San Diego, USA 1">
+			<img class="thumb" src="img/2.jpeg" onclick="lightbox_open(2)" alt="San Diego, USA 2">
+			<img class="thumb" src="img/3.jpeg" onclick="lightbox_open(3)" alt="San Diego, USA 3">
+			<img class="thumb" src="img/4.jpeg" onclick="lightbox_open(4)" alt="San Diego, USA 4">
+			<img class="thumb" src="img/5.jpeg" onclick="lightbox_open(5)" alt="San Diego, USA 5">
+			<img class="thumb" src="img/6.jpeg" onclick="lightbox_open(6)" alt="San Diego, USA 6">
+			<img class="thumb" src="img/7.jpeg" onclick="lightbox_open(7)" alt="San Diego, USA 7">
+			<img class="thumb" src="img/8.jpeg" onclick="lightbox_open(8)" alt="San Diego, USA 8">
+			<img class="thumb" src="img/9.jpeg" onclick="lightbox_open(9)" alt="San Diego, USA 9">
+			<img class="thumb" src="img/10.jpeg" onclick="lightbox_open(10)" alt="San Diego, USA 10">
+			<img class="thumb" src="img/11.jpeg" onclick="lightbox_open(11)" alt="San Diego, USA 11">
+			<img class="thumb" src="img/12.jpeg" onclick="lightbox_open(12)" alt="San Diego, USA 12">
+			<img class="thumb" src="img/13.jpeg" onclick="lightbox_open(13)" alt="San Diego, USA 13">
+			<img class="thumb" src="img/14.jpeg" onclick="lightbox_open(14)" alt="San Diego, USA 14">
+			<img class="thumb" src="img/15.jpeg" onclick="lightbox_open(15)" alt="San Diego, USA 15">
+			<img class="thumb" src="img/16.jpeg" onclick="lightbox_open(16)" alt="San Diego, USA 16">
+			<img class="thumb" src="img/17.jpeg" onclick="lightbox_open(17)" alt="San Diego, USA 17">
+			<img class="thumb" src="img/18.jpeg" onclick="lightbox_open(18)" alt="San Diego, USA 18">
+		</div>
+	</header>
+
+	<!-- 라이트 박스 배경  -->
+	<div id="block"></div>
+
+	<div id="lightbox">
+		<div class="lightbox-header">
+			<h1>San Diego, USA</h1>
+			<p>April 2019</p>
+			<div class="photo-counter">
+				<span id="currentPhoto">1</span> / <span id="totalPhotos">18</span>
+			</div>
+		</div>
+
+		<div class="lightbox-content">
+			<!-- Navigation buttons -->
+			<button class="nav-btn prev" id="prevBtn" onclick="prevImage()">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+					<polyline points="15 18 9 12 15 6"></polyline>
+				</svg>
+			</button>
+			<button class="nav-btn next" id="nextBtn" onclick="nextImage()">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+					<polyline points="9 18 15 12 9 6"></polyline>
+				</svg>
+			</button>
+
+			<figure>
+				<img src="img/1.jpeg" class="active">
+				<img src="img/2.jpeg">
+				<img src="img/3.jpeg">
+				<img src="img/4.jpeg">
+				<img src="img/5.jpeg">
+				<img src="img/6.jpeg">
+				<img src="img/7.jpeg">
+				<img src="img/8.jpeg">
+				<img src="img/9.jpeg">
+				<img src="img/10.jpeg">
+				<img src="img/11.jpeg">
+				<img src="img/12.jpeg">
+				<img src="img/13.jpeg">
+				<img src="img/14.jpeg">
+				<img src="img/15.jpeg">
+				<img src="img/16.jpeg">
+				<img src="img/17.jpeg">
+				<img src="img/18.jpeg">
+			</figure>
+		</div>
+
+		<div class="btn-close" onclick="lightbox_close()">×</div>
+	</div>
+
+	<script src="../js/lightbox-common.js"></script>
+</body>
+</html>

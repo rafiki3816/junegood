@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>travels - Tokyo, Japan</title>
+	<link rel="stylesheet" type="text/css" href="../css/lightbox-common.css">
+	<script src="../js/jquery-3.5.1.min.js"></script>
+</head>
+
+<body>
+	<header>
+		<p><a href="../../sub3.html">travels</a></p>
+		<p class="copy">All copyrights of photos reserved by Dongjune KIM</p>
+		<div class="thumb-grid">
+			<img class="thumb" src="img/1.jpg" onclick="lightbox_open(1)" alt="Tokyo, Japan 1">
+			<img class="thumb" src="img/2.jpg" onclick="lightbox_open(2)" alt="Tokyo, Japan 2">
+			<img class="thumb" src="img/3.jpg" onclick="lightbox_open(3)" alt="Tokyo, Japan 3">
+			<img class="thumb" src="img/4.jpg" onclick="lightbox_open(4)" alt="Tokyo, Japan 4">
+			<img class="thumb" src="img/5.jpg" onclick="lightbox_open(5)" alt="Tokyo, Japan 5">
+			<img class="thumb" src="img/6.jpg" onclick="lightbox_open(6)" alt="Tokyo, Japan 6">
+			<img class="thumb" src="img/7.jpg" onclick="lightbox_open(7)" alt="Tokyo, Japan 7">
+			<img class="thumb" src="img/8.jpg" onclick="lightbox_open(8)" alt="Tokyo, Japan 8">
+			<img class="thumb" src="img/9.jpg" onclick="lightbox_open(9)" alt="Tokyo, Japan 9">
+			<img class="thumb" src="img/10.jpg" onclick="lightbox_open(10)" alt="Tokyo, Japan 10">
+			<img class="thumb" src="img/11.jpg" onclick="lightbox_open(11)" alt="Tokyo, Japan 11">
+			<img class="thumb" src="img/12.jpg" onclick="lightbox_open(12)" alt="Tokyo, Japan 12">
+			<img class="thumb" src="img/13.jpg" onclick="lightbox_open(13)" alt="Tokyo, Japan 13">
+			<img class="thumb" src="img/14.jpg" onclick="lightbox_open(14)" alt="Tokyo, Japan 14">
+			<img class="thumb" src="img/15.jpg" onclick="lightbox_open(15)" alt="Tokyo, Japan 15">
+			<img class="thumb" src="img/16.jpg" onclick="lightbox_open(16)" alt="Tokyo, Japan 16">
+			<img class="thumb" src="img/17.jpg" onclick="lightbox_open(17)" alt="Tokyo, Japan 17">
+			<img class="thumb" src="img/18.jpg" onclick="lightbox_open(18)" alt="Tokyo, Japan 18">
+			<img class="thumb" src="img/19.jpg" onclick="lightbox_open(19)" alt="Tokyo, Japan 19">
+			<img class="thumb" src="img/20.jpg" onclick="lightbox_open(20)" alt="Tokyo, Japan 20">
+			<img class="thumb" src="img/21.jpg" onclick="lightbox_open(21)" alt="Tokyo, Japan 21">
+			<img class="thumb" src="img/22.jpg" onclick="lightbox_open(22)" alt="Tokyo, Japan 22">
+			<img class="thumb" src="img/23.jpg" onclick="lightbox_open(23)" alt="Tokyo, Japan 23">
+			<img class="thumb" src="img/24.jpg" onclick="lightbox_open(24)" alt="Tokyo, Japan 24">
+			<img class="thumb" src="img/25.jpg" onclick="lightbox_open(25)" alt="Tokyo, Japan 25">
+			<img class="thumb" src="img/26.jpg" onclick="lightbox_open(26)" alt="Tokyo, Japan 26">
+			<img class="thumb" src="img/27.jpg" onclick="lightbox_open(27)" alt="Tokyo, Japan 27">
+		</div>
+	</header>
+
+	<!-- 라이트 박스 배경  -->
+	<div id="block"></div>
+
+	<div id="lightbox">
+		<div class="lightbox-header">
+			<h1>Tokyo, Japan</h1>
+			<p>August 2015</p>
+			<div class="photo-counter">
+				<span id="currentPhoto">1</span> / <span id="totalPhotos">27</span>
+			</div>
+		</div>
+
+		<div class="lightbox-content">
+			<!-- Navigation buttons -->
+			<button class="nav-btn prev" id="prevBtn" onclick="prevImage()">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+					<polyline points="15 18 9 12 15 6"></polyline>
+				</svg>
+			</button>
+			<button class="nav-btn next" id="nextBtn" onclick="nextImage()">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+					<polyline points="9 18 15 12 9 6"></polyline>
+				</svg>
+			</button>
+
+			<figure>
+				<img src="img/1.jpg" class="active">
+				<img src="img/2.jpg">
+				<img src="img/3.jpg">
+				<img src="img/4.jpg">
+				<img src="img/5.jpg">
+				<img src="img/6.jpg">
+				<img src="img/7.jpg">
+				<img src="img/8.jpg">
+				<img src="img/9.jpg">
+				<img src="img/10.jpg">
+				<img src="img/11.jpg">
+				<img src="img/12.jpg">
+				<img src="img/13.jpg">
+				<img src="img/14.jpg">
+				<img src="img/15.jpg">
+				<img src="img/16.jpg">
+				<img src="img/17.jpg">
+				<img src="img/18.jpg">
+				<img src="img/19.jpg">
+				<img src="img/20.jpg">
+				<img src="img/21.jpg">
+				<img src="img/22.jpg">
+				<img src="img/23.jpg">
+				<img src="img/24.jpg">
+				<img src="img/25.jpg">
+				<img src="img/26.jpg">
+				<img src="img/27.jpg">
+			</figure>
+		</div>
+
+		<div class="btn-close" onclick="lightbox_close()">×</div>
+	</div>
+
+	<script src="../js/lightbox-common.js"></script>
+</body>
+</html>

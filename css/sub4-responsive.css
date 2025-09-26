@@ -1,0 +1,131 @@
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap');
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+ol, li {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+}
+
+html, body {
+	width: 100%;
+	min-height: 100vh;
+}
+
+#wrap {
+	width: 100%;
+	min-height: 100vh;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+header {
+	width: 100%;
+	margin-bottom: 50px;
+}
+
+#title {
+	font-family: Sacramento;
+	width: 100px;
+	height: 100px;
+	line-height: 100px;
+	font-weight: normal;
+	font-size: 28px;
+	border-radius: 50%;
+	background-color: rgba(0, 0, 0, 0.3);
+	text-align: center;
+	border: solid 1.3px blue;
+	margin: 0 auto;
+}
+
+#title > a {
+	color: #fff;
+	display: block;
+}
+
+#title:hover a {
+	color: blue;
+}
+
+#title:hover {
+	background-color: rgba(0, 0, 0, 0.3);
+	border: 1px solid #000;
+}
+
+.comingSoon {
+	font-family: Sunflower;
+	color: rgba(0, 0, 0, 0.7);
+	font-weight: lighter;
+	font-size: 32px;
+	text-align: center;
+	margin-top: 50px;
+	padding: 0 20px;
+}
+
+@media screen and (min-width: 768px) {
+	#wrap {
+		padding: 40px;
+		justify-content: flex-start;
+		align-items: flex-start;
+	}
+
+	header {
+		position: relative;
+		margin-bottom: 100px;
+		width: 100%;
+	}
+
+	#title {
+		width: 120px;
+		height: 120px;
+		line-height: 120px;
+		font-size: 32px;
+		position: absolute;
+		top: 0;
+		left: 0;
+		margin: 0;
+	}
+
+	.comingSoon {
+		font-size: 48px;
+		text-align: left;
+		margin-top: 150px;
+		padding: 0;
+	}
+}
+
+@media screen and (min-width: 1024px) {
+	#title {
+		width: 145px;
+		height: 145px;
+		line-height: 145px;
+		font-size: 39px;
+		left: 100px;
+		top: 30px;
+	}
+
+	.comingSoon {
+		font-size: 60px;
+		margin-left: 100px;
+		margin-top: 200px;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.comingSoon {
+		font-size: 28px;
+	}
+}

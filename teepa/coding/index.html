@@ -1,0 +1,595 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html class="no-js" lang="">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=9">
+    <meta http-equiv="X-UA-Compatible" content="IE=10">
+    <meta http-equiv="X-UA-Compatible" content="IE=11">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>TeepahapaCoding</title>
+
+    <link rel="teepahapaCording" href="">
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- build:css styles/main.css -->
+    <link rel="stylesheet" href="./styles/main.css">
+    <!-- endbuild -->
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+
+  </head>
+  <body>  
+
+    <div class="wrapper">
+      <div class="container">
+        <div class="gameView" id="map">
+            <div id="map-container">              
+              <img id="map-container-stage0" src="./images/map-step1.jpg">
+              <img id="map-container-stage1" src="./images/map-step2.jpg">
+              <img id="map-container-stage2" src="./images/map-step3.jpg">
+              <img id="map-container-stage3" src="./images/map-step4.jpg">
+            </div>
+        </div>
+        <div class="gameView" id="main">
+          <div id="main-title">
+            <img id="main-title-hoony" src="./images/main-title-hoony.png">
+            <img id="main-title-text0" src="./images/main-title-text0.png">
+            <img id="main-title-text1" src="./images/main-title-text1.png">
+            <img id="main-title-icon0" src="./images/main-title-icon0.png">
+            <img id="main-title-icon1" src="./images/main-title-icon1.png">
+          </div>
+          <div id='main-ui'>
+            <ul>
+            <li>
+              <button class="basicButton button-ui-main">
+                <img class="basicButton-default" src="./images/main-btn-info.png">
+                <img class="basicButton-active" src="./images/main-btn-info-active.png">              
+              </button>
+            </li>
+            <li>
+              <button class="startButton button-ui-main">
+                <img class="basicButton-default" src="./images/main-btn-start.png">
+                <img class="basicButton-active" src="./images/main-btn-start-active.png">
+              </button>
+            </li>
+            <li>
+              <button class="basicButton button-ui-main">
+                <img class="basicButton-default" src="./images/main-btn-movie.png">
+                <img class="basicButton-active" src="./images/main-btn-movie-active.png">
+              </button>
+            </li>
+           </ul>  
+          </div>          
+        </div>
+
+        <div class="gameView" id="game">       
+
+          <div id="game-object">
+            <div id="game-object-stage1" class="gameObjectStage">
+              <div id="game-object-stage1-line">
+                <img class="gameObjectStageLine" src="./images/game-icon-line.png">
+                <img class="gameObjectStageLine" src="./images/game-icon-line.png">
+                <img class="gameObjectStageLine" src="./images/game-icon-line.png">
+                <img class="gameObjectStageLine" src="./images/game-icon-line.png">
+                <img class="gameObjectStageLine" src="./images/game-icon-line.png">
+                <img class="gameObjectStageLine" src="./images/game-icon-line.png">
+              </div>
+
+              <div id="game-object-stage1-obj">
+                <img id="game-object-stage1-obj-0" class="gameObjectStageObj" src="./images/game-obj-icon1.png">
+              </div>
+
+              <div id="game-object-stage1-star">
+                <img id="game-object-stage1-star-icon0" class="gameObjectStagStar" src="./images/game-icon-star.png">
+                <img id="game-object-stage1-star-icon1" class="gameObjectStagStar" src="./images/game-icon-star.png">
+                <img id="game-object-stage1-star-icon2" class="gameObjectStagStar" src="./images/game-icon-star.png">
+                <img id="game-object-stage1-star-icon3" class="gameObjectStagStar" src="./images/game-icon-star.png">
+              </div>
+
+              <div id="game-object-stage1-starEffect">                
+                <div id="game-object-stage1-starEffect-icon0" class="gameObjectStarEffect"></div>
+                <div id="game-object-stage1-starEffect-icon1" class="gameObjectStarEffect"></div>
+                <div id="game-object-stage1-starEffect-icon2" class="gameObjectStarEffect"></div>
+                <div id="game-object-stage1-starEffect-icon3" class="gameObjectStarEffect"></div>
+              </div>
+
+            </div>
+
+            <div id="game-object-stage2" class="gameObjectStage">
+              <div id="game-object-stage2-line">
+                <img class="gameObjectStageLine" src="./images/game-icon-line.png">
+                <img class="gameObjectStageLine" src="./images/game-icon-line.png">
+                <img class="gameObjectStageLine" src="./images/game-icon-line.png">
+                <img class="gameObjectStageLine" src="./images/game-icon-line.png">
+                <img class="gameObjectStageLine" src="./images/game-icon-line.png">
+                <img class="gameObjectStageLine" src="./images/game-icon-line.png">
+                <img class="gameObjectStageLine" src="./images/game-icon-line.png">
+              </div>
+
+              <div id="game-object-stage2-obj">
+                <img id="game-object-stage2-obj-0" class="gameObjectStageObj" src="./images/game-obj-icon1.png">
+                <img id="game-object-stage2-obj-1" class="gameObjectStageObj" src="./images/game-obj-icon2.png">
+              </div>
+
+              <div id="game-object-stage2-star">
+                <img id="game-object-stage2-star-icon0" class="gameObjectStagStar" src="./images/game-icon-star.png">
+                <img id="game-object-stage2-star-icon1" class="gameObjectStagStar" src="./images/game-icon-star.png">
+                <img id="game-object-stage2-star-icon2" class="gameObjectStagStar" src="./images/game-icon-star.png">
+                <img id="game-object-stage2-star-icon3" class="gameObjectStagStar" src="./images/game-icon-star.png">
+                <img id="game-object-stage2-star-icon4" class="gameObjectStagStar" src="./images/game-icon-star.png">
+              </div>
+
+              <div id="game-object-stage2-starEffect">                
+                <div id="game-object-stage2-starEffect-icon0" class="gameObjectStarEffect"></div>
+                <div id="game-object-stage2-starEffect-icon1" class="gameObjectStarEffect"></div>
+                <div id="game-object-stage2-starEffect-icon2" class="gameObjectStarEffect"></div>
+                <div id="game-object-stage2-starEffect-icon3" class="gameObjectStarEffect"></div>
+                <div id="game-object-stage2-starEffect-icon4" class="gameObjectStarEffect"></div>
+              </div>
+
+            </div>
+
+            <div id="game-object-stage3" class="gameObjectStage">
+              <div id="game-object-stage3-line">
+                <img class="gameObjectStageLine" src="./images/game-icon-line.png">
+                <img class="gameObjectStageLine" src="./images/game-icon-line.png">
+                <img class="gameObjectStageLine" src="./images/game-icon-line.png">
+                <img class="gameObjectStageLine" src="./images/game-icon-line.png">
+                <img class="gameObjectStageLine" src="./images/game-icon-line.png">
+                <img class="gameObjectStageLine" src="./images/game-icon-line.png">
+                <img class="gameObjectStageLine" src="./images/game-icon-line.png">
+                <img class="gameObjectStageLine" src="./images/game-icon-line.png">
+              </div>
+
+              <div id="game-object-stage3-obj">
+                <img id="game-object-stage3-obj-0" class="gameObjectStageObj" src="./images/game-obj-icon10.png">
+                <img id="game-object-stage3-obj-1" class="gameObjectStageObj" src="./images/game-obj-icon1.png">
+                <img id="game-object-stage3-obj-2" class="gameObjectStageObj" src="./images/game-obj-icon3.png">
+              </div>
+
+              <div id="game-object-stage3-star">
+                <img id="game-object-stage3-star-icon0" class="gameObjectStagStar" src="./images/game-icon-star.png">
+                <img id="game-object-stage3-star-icon1" class="gameObjectStagStar" src="./images/game-icon-star.png">
+                <img id="game-object-stage3-star-icon2" class="gameObjectStagStar" src="./images/game-icon-star.png">
+                <img id="game-object-stage3-star-icon3" class="gameObjectStagStar" src="./images/game-icon-star.png">
+                <img id="game-object-stage3-star-icon4" class="gameObjectStagStar" src="./images/game-icon-star.png">
+                <img id="game-object-stage3-star-icon5" class="gameObjectStagStar" src="./images/game-icon-star.png">
+              </div>
+
+              <div id="game-object-stage3-starEffect">                
+                <div id="game-object-stage3-starEffect-icon0" class="gameObjectStarEffect"></div>
+                <div id="game-object-stage3-starEffect-icon1" class="gameObjectStarEffect"></div>
+                <div id="game-object-stage3-starEffect-icon2" class="gameObjectStarEffect"></div>
+                <div id="game-object-stage3-starEffect-icon3" class="gameObjectStarEffect"></div>
+                <div id="game-object-stage3-starEffect-icon4" class="gameObjectStarEffect"></div>
+                <div id="game-object-stage3-starEffect-icon5" class="gameObjectStarEffect"></div>
+                <div id="game-object-stage3-starEffect-icon6" class="gameObjectStarEffect"></div>
+              </div>
+            </div>
+
+            <div id="game-object-stage4" class="gameObjectStage">
+              <div id="game-object-stage4-line">
+                <img class="gameObjectStageLine" src="./images/game-icon-line.png">
+                <img class="gameObjectStageLine" src="./images/game-icon-line.png">
+                <img class="gameObjectStageLine" src="./images/game-icon-line.png">
+                <img class="gameObjectStageLine" src="./images/game-icon-line.png">
+                <img class="gameObjectStageLine" src="./images/game-icon-line.png">
+                <img class="gameObjectStageLine" src="./images/game-icon-line.png">
+                <img class="gameObjectStageLine" src="./images/game-icon-line.png">
+                <img class="gameObjectStageLine" src="./images/game-icon-line.png">
+                <img class="gameObjectStageLine" src="./images/game-icon-line.png">
+              </div>
+
+              <div id="game-object-stage4-obj">
+                <img id="game-object-stage4-obj-0" class="gameObjectStageObj" src="./images/game-obj-icon3.png">
+                <img id="game-object-stage4-obj-1" class="gameObjectStageObj" src="./images/game-obj-icon1.png">
+                <img id="game-object-stage4-obj-2" class="gameObjectStageObj" src="./images/game-obj-icon4.png">
+                <img id="game-object-stage4-obj-3" class="gameObjectStageObj" src="./images/game-obj-icon5.png">
+              </div>
+
+              <div id="game-object-stage4-star">
+                <img id="game-object-stage4-star-icon0" class="gameObjectStagStar" src="./images/game-icon-star.png">
+                <img id="game-object-stage4-star-icon1" class="gameObjectStagStar" src="./images/game-icon-star.png">
+                <img id="game-object-stage4-star-icon2" class="gameObjectStagStar" src="./images/game-icon-star.png">
+                <img id="game-object-stage4-star-icon3" class="gameObjectStagStar" src="./images/game-icon-star.png">
+                <img id="game-object-stage4-star-icon4" class="gameObjectStagStar" src="./images/game-icon-star.png">
+                <img id="game-object-stage4-star-icon5" class="gameObjectStagStar" src="./images/game-icon-star.png">
+                <img id="game-object-stage4-star-icon6" class="gameObjectStagStar" src="./images/game-icon-star.png">                
+              </div>
+
+              <div id="game-object-stage4-starEffect">                
+                <div id="game-object-stage4-starEffect-icon0" class="gameObjectStarEffect"></div>
+                <div id="game-object-stage4-starEffect-icon1" class="gameObjectStarEffect"></div>
+                <div id="game-object-stage4-starEffect-icon2" class="gameObjectStarEffect"></div>
+                <div id="game-object-stage4-starEffect-icon3" class="gameObjectStarEffect"></div>
+                <div id="game-object-stage4-starEffect-icon4" class="gameObjectStarEffect"></div>
+                <div id="game-object-stage4-starEffect-icon5" class="gameObjectStarEffect"></div>
+                <div id="game-object-stage4-starEffect-icon6" class="gameObjectStarEffect"></div>                
+              </div>
+            </div>
+
+          </div>
+
+          <div id="game-butterfly">
+            <div id="game-butterfly-move">
+              <div id="game-butterfly-move-vertical"></div>
+            </div>
+          </div>
+
+          <div id="game-play"> 
+
+            <div id='hoonyResult'>
+              <div id='hoony-result-walk'></div>
+              <div id='hoony-result-succes'></div>
+            </div>
+
+            <div id='hoony'>
+              <div id='hoony-walk-init'></div>
+              <div id='hoony-walk'></div>
+              <div id='hoony-jump'></div>
+              <div id='hoony-doh'></div>
+              <div id='hoony-catch'></div>
+              <div id='hoony-catchFail'></div>
+              <div id='hoony-catch-after'></div>
+            </div>
+            
+          </div>
+
+          <div id="game-ui">      
+
+            <div id="game-ui-map">
+              <button id="game-ui-map-button">
+                <img id="game-ui-map-button-default" src="./images/game-ui-btnMap-default.png">
+                <img id="game-ui-map-button-active" src="./images/game-ui-btnMap-active.png">
+              </button> 
+            </div>
+
+            <div id="game-ui-guideButton">
+              <img id="game-ui-guideButton-img" src="./images/game-button-guideText.png">
+            </div>
+
+            <div id="game-ui-action">
+              <button id="game-ui-action-button">
+                <img id="game-ui-action-icon" src="./images/game-ui-select-icon0.png">
+              </button>              
+              <ul>
+                <li>
+                  <button class="gameActionButton button-game-action"> 
+                    <img class="gameActionButton-default" src="./images/game-ui-select-area-default.png">
+                    <img class="gameActionButton-active" src="./images/game-ui-select-area-active.png">
+                    <img class="gameActionButton-icon" src="./images/game-ui-select-icon-go.png">
+                  </button>       
+                </li>
+
+                <li>
+                  <button class="gameActionButton button-game-action"> 
+                    <img class="gameActionButton-default" src="./images/game-ui-select-area-default.png">
+                    <img class="gameActionButton-active" src="./images/game-ui-select-area-active.png">
+                    <img class="gameActionButton-icon" src="./images/game-ui-select-icon-up.png">
+                  </button>       
+                </li>
+
+                <li>
+                  <button class="gameActionButton button-game-action"> 
+                    <img class="gameActionButton-default" src="./images/game-ui-select-area-default.png">
+                    <img class="gameActionButton-active" src="./images/game-ui-select-area-active.png">
+                    <img class="gameActionButton-icon" src="./images/game-ui-select-icon-down.png">
+                  </button>       
+                </li>
+
+                <li>
+                  <button class="gameActionButton button-game-action"> 
+                    <img class="gameActionButton-default" src="./images/game-ui-select-area-default.png">
+                    <img class="gameActionButton-active" src="./images/game-ui-select-area-active.png">
+                    <img class="gameActionButton-icon" src="./images/game-ui-select-icon-jump.png">
+                  </button>       
+                </li>
+
+                <li>
+                  <button class="gameActionButton button-game-action"> 
+                    <img class="gameActionButton-default" src="./images/game-ui-select-area-default.png">
+                    <img class="gameActionButton-active" src="./images/game-ui-select-area-active.png">
+                    <img class="gameActionButton-icon" src="./images/game-ui-select-icon-catha.png">
+                  </button>       
+                </li>
+              </ul>
+            </div>
+
+            <div id="game-ui-choose">
+              <div  id="game-ui-choose-container">
+                <div  id="game-ui-choose-container-bg"></div>
+              </div>
+              <button class="gameStartButton button-game-start"> 
+                <img class="gameStartButton-default" src="./images/game-ui-btnStart.png">
+                <img class="gameStartButton-active" src="./images/game-ui-btnStart-active.png">
+              </button>
+              <ul id="game-ui-choose-ul">
+                <li>                            
+                  <div id="gameChooseIconItem0" class="gameChooseIcon">
+                    <img class="gameChooseIcon-default" src="./images/game-ui-choose-default.png">
+                    <img class="gameChooseIcon-active" src="./images/game-ui-choose-active.png">
+                    <img class="gameChooseIcon-num" src="./images/game-ui-choose-num1.png">
+                    <img class="gameChooseIcon-icon" src="">
+                  </div>
+
+                  <button id="chooseIconDelButtonItem0" class="chooseIconDelButton button-game-delete"> 
+                    <img class="gameDeleteButton-default" src="./images/game-btn-delete-default.png">
+                    <img class="gameDeleteButton-active" src="./images/game-btn-delete-active.png">                  
+                  </button>
+                </li>
+
+                <li>                            
+                  <div id="gameChooseIconItem1" class="gameChooseIcon">
+                    <img class="gameChooseIcon-default" src="./images/game-ui-choose-default.png">
+                    <img class="gameChooseIcon-active" src="./images/game-ui-choose-active.png">
+                    <img class="gameChooseIcon-num" src="./images/game-ui-choose-num2.png">
+                    <img class="gameChooseIcon-icon" src="">
+                  </div>
+
+                  <button id="chooseIconDelButtonItem1" class="chooseIconDelButton button-game-delete"> 
+                    <img class="gameDeleteButton-default" src="./images/game-btn-delete-default.png">
+                    <img class="gameDeleteButton-active" src="./images/game-btn-delete-active.png">                  
+                  </button>
+                </li>
+
+                <li>                            
+                  <div id="gameChooseIconItem2" class="gameChooseIcon">
+                    <img class="gameChooseIcon-default" src="./images/game-ui-choose-default.png">
+                    <img class="gameChooseIcon-active" src="./images/game-ui-choose-active.png">
+                    <img class="gameChooseIcon-num" src="./images/game-ui-choose-num3.png">
+                    <img class="gameChooseIcon-icon" src="">
+                  </div>
+
+                  <button id="chooseIconDelButtonItem2" class="chooseIconDelButton button-game-delete"> 
+                    <img class="gameDeleteButton-default" src="./images/game-btn-delete-default.png">
+                    <img class="gameDeleteButton-active" src="./images/game-btn-delete-active.png">                  
+                  </button>
+                </li>
+
+                <li>                            
+                  <div id="gameChooseIconItem3" class="gameChooseIcon">
+                    <img class="gameChooseIcon-default" src="./images/game-ui-choose-default.png">
+                    <img class="gameChooseIcon-active" src="./images/game-ui-choose-active.png">
+                    <img class="gameChooseIcon-num" src="./images/game-ui-choose-num4.png">
+                    <img class="gameChooseIcon-icon" src="">
+                  </div>
+
+                  <button id="chooseIconDelButtonItem3" class="chooseIconDelButton button-game-delete"> 
+                    <img class="gameDeleteButton-default" src="./images/game-btn-delete-default.png">
+                    <img class="gameDeleteButton-active" src="./images/game-btn-delete-active.png">                  
+                  </button>
+                </li>
+
+                <li>                            
+                  <div id="gameChooseIconItem4" class="gameChooseIcon">
+                    <img class="gameChooseIcon-default" src="./images/game-ui-choose-default.png">
+                    <img class="gameChooseIcon-active" src="./images/game-ui-choose-active.png">
+                    <img class="gameChooseIcon-num" src="./images/game-ui-choose-num5.png">
+                    <img class="gameChooseIcon-icon" src="">
+                  </div>
+
+                  <button id="chooseIconDelButtonItem4" class="chooseIconDelButton button-game-delete"> 
+                    <img class="gameDeleteButton-default" src="./images/game-btn-delete-default.png">
+                    <img class="gameDeleteButton-active" src="./images/game-btn-delete-active.png">                  
+                  </button>
+                </li>
+
+                <li>                            
+                  <div id="gameChooseIconItem5" class="gameChooseIcon">
+                    <img class="gameChooseIcon-default" src="./images/game-ui-choose-default.png">
+                    <img class="gameChooseIcon-active" src="./images/game-ui-choose-active.png">
+                    <img class="gameChooseIcon-num" src="./images/game-ui-choose-num6.png">
+                    <img class="gameChooseIcon-icon" src="">
+                  </div>
+
+                  <button id="chooseIconDelButtonItem5" class="chooseIconDelButton button-game-delete"> 
+                    <img class="gameDeleteButton-default" src="./images/game-btn-delete-default.png">
+                    <img class="gameDeleteButton-active" src="./images/game-btn-delete-active.png">                  
+                  </button>
+                </li>
+
+                <li>                            
+                  <div id="gameChooseIconItem6" class="gameChooseIcon">
+                    <img class="gameChooseIcon-default" src="./images/game-ui-choose-default.png">
+                    <img class="gameChooseIcon-active" src="./images/game-ui-choose-active.png">
+                    <img class="gameChooseIcon-num" src="./images/game-ui-choose-num7.png">
+                    <img class="gameChooseIcon-icon" src="">
+                  </div>
+
+                  <button id="chooseIconDelButtonItem6" class="chooseIconDelButton button-game-delete"> 
+                    <img class="gameDeleteButton-default" src="./images/game-btn-delete-default.png">
+                    <img class="gameDeleteButton-active" src="./images/game-btn-delete-active.png">                  
+                  </button>
+                </li>
+
+                <li>                            
+                  <div id="gameChooseIconItem7" class="gameChooseIcon">
+                    <img class="gameChooseIcon-default" src="./images/game-ui-choose-default.png">
+                    <img class="gameChooseIcon-active" src="./images/game-ui-choose-active.png">
+                    <img class="gameChooseIcon-num" src="./images/game-ui-choose-num8.png">
+                    <img class="gameChooseIcon-icon" src="">
+                  </div>
+
+                  <button id="chooseIconDelButtonItem7" class="chooseIconDelButton button-game-delete"> 
+                    <img class="gameDeleteButton-default" src="./images/game-btn-delete-default.png">
+                    <img class="gameDeleteButton-active" src="./images/game-btn-delete-active.png">                  
+                  </button>
+                </li>
+
+              </ul>
+            </div>
+
+            <div id="game-ui-guideText">
+              <img id="game-ui-guideText-img" src="./images/game-button-guide.png">
+            </div>
+
+          </div> 
+
+          <div id="game-cover" class="fullcover-black"></div>
+
+          <div id="game-popupFailed">
+            <div id="game-popupFailed-ui">
+              <ul>
+                <li>
+                  <button class="popupButton button-game-popup">
+                    <img class="popupButton-default" src="./images/game-popup-btnRetry.png">
+                    <img class="popupButton-active" src="./images/game-popup-btnRetry-active.png">
+                  </button>
+                </li>
+                <li>
+                  <button class="popupButton button-game-popup">
+                    <img class="popupButton-default" src="./images/game-popup-btnEnd.png">
+                    <img class="popupButton-active" src="./images/game-popup-btnEnd-active.png">
+                  </button>
+                </li>              
+              </ul>
+            </div>
+          </div>
+
+          <div id="game-popupDoNotStart">
+            <div id="game-popupDoNotStart-ui">
+              <button class="popupButton button-game-popupClose">
+                <img class="popupButton-default" src="./images/game-popup-close.png">
+                <img class="popupButton-active" src="./images/game-popup-close-active.png">
+              </button>
+            </div>
+          </div>
+
+          <div id="game-map">
+            <button id='game-map-closeBtn'> 
+              <img class="basicButton-default" src="./images/main-btn-videoClose.png">
+            </button>
+            <div id="game-map-list">
+              <ul>
+                <li>
+                  <button id="gameMapListIem0" class="game-map-listItem">
+                    <img class="game-map-listItem-default" src="./images/game-step-map0-default.png">
+                    <img class="game-map-listItem-active" src="./images/game-step-map0-active.png">  
+                  </button>                
+                </li>
+
+                <li>
+                  <button id="gameMapListIem1" class="game-map-listItem">
+                    <img class="game-map-listItem-default" src="./images/game-step-map1-default.png">
+                    <img class="game-map-listItem-active" src="./images/game-step-map1-active.png">  
+                  </button>
+                </li>
+
+                <li>
+                  <button id="gameMapListIem2" class="game-map-listItem">
+                    <img class="game-map-listItem-default" src="./images/game-step-map2-default.png">
+                    <img class="game-map-listItem-active" src="./images/game-step-map2-active.png">  
+                  </button>
+                </li>
+
+                <li>
+                  <button id="gameMapListIem3" class="game-map-listItem">
+                    <img class="game-map-listItem-default" src="./images/game-step-map3-default.png">
+                    <img class="game-map-listItem-active" src="./images/game-step-map3-active.png">  
+                  </button>
+                </li>
+              </ul>
+
+            </div>
+          </div>        
+
+        </div>
+
+        <div class="gameView" id="gameVideo">
+          <div class="fullcover-black"></div>
+          <div id="gameVideo-player">
+              <div id="gameVideo-player-container">                
+                <video id="videoPlayer" class="video-js vjs-default-skin" controls width="950" height="570" poster="./images/videoTumbnail.jpg" data-setup='{}'>                    
+                  <source src="rtmp://vod.kidkids.net/fy4691vol00/_definst_/&mp4:teepahapa_classic/teepahapa_classic_fairydance.mp4" type="rtmp/mp4" />
+                </video>                
+              </div>
+              <button id='gameVideo-closeBtn' class="button-ui-video"> 
+                <img class="basicButton-default" src="./images/main-btn-videoClose.png">
+              </button>
+          </div>          
+        </div>        
+
+        <div class="gameView" id="gameLogo">
+          <button>
+            <img src="./images/logo.png">
+          </button>
+        </div>
+
+        <div class="gameView" id="gameInfo">
+          <div id="gameInfo-cover" class="fullcover-black"></div>
+            <div id="gameInfo-content">
+              <div id="gameInfo-content-container">
+                
+                <ul id="gameInfo-content-container-ul">
+                  <li>
+                    <img src="./images/game-info-content0.png">
+                  </li>
+                  <li>
+                    <img src="./images/game-info-content1.png">
+                  </li>
+                  <li>
+                    <img src="./images/game-info-content2.png">
+                  </li>
+                  <li>
+                    <img src="./images/game-info-content3.png">
+                  </li>
+                </ul>
+              </div>
+              <button id='gameInfo-content-closeBtn' class="gameInfo-button"> 
+                  <img class="basicButton-default" src="./images/main-btn-videoClose.png">
+                </button>
+              <button id='gameInfo-content-leftBtn' class="gameInfo-button"> 
+                <img class="basicButton-default" src="./images/game-info-btn-left-default.png">
+              </button>
+              <button id='gameInfo-content-rightBtn' class="gameInfo-button"> 
+                <img class="basicButton-default" src="./images/game-info-btn-right-default.png">
+              </button>
+            </div>            
+        </div>
+
+        <div class="gameView" id="buttonAllView">
+          <button class="allviewButton">
+            <img class="allviewButton-default" src="./images/game-ui-allview-default.png">
+            <img class="allviewButton-active" src="./images/game-ui-allview-active.png">
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 
+    Google Analytics: change UA-XXXXX-X to be your site's ID. 
+    <script>
+      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='https://www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create','UA-XXXXX-X');ga('send','pageview');
+    </script>
+    -->    
+    
+    <!-- build:js scripts/init.js 
+    <link href="scripts/vender/video-js.css" rel="stylesheet">    
+    -->    
+    <script src="https://code.createjs.com/soundjs-0.6.2.min.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>    
+    <script src="http://code.jquery.com/jquery-1.9.0.js"></script>
+    <script type="text/javascript" src="./scripts/vender/swfobject.js"></script>
+    <script type="text/javascript" src="./scripts/util/config.js"></script>
+    <script type="text/javascript" src="./scripts/util/soundManager.js"></script>
+    <script type="text/javascript" src="./scripts/view/game.js"></script>
+    <script type="text/javascript" src="./scripts/view/main.js"></script>
+    <script type="text/javascript" src="./scripts/view/video.js"></script>
+    <script type="text/javascript" src="./scripts/view/info.js"></script>
+    <link href="./scripts/vender/video-js.css" rel="stylesheet" type="text/css">
+    <script src="./scripts/vender/video.dev.js?t=2013050108"></script>    
+    <script type="text/javascript" src="./scripts/app.js"></script>
+
+    <script>
+      videojs.options.flash.swf = "./images/video-js.swf";
+    </script>
+    
+  </body>
+</html>
