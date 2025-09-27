@@ -135,3 +135,5 @@ const DEFAULT_CREDENTIALS = {
 ---
 
 *Last Updated: 2025-09-27*
+- 하드코딩은 절대 금지
+- 소프트 코딩이 기본 원칙

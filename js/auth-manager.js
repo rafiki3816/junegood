@@ -205,6 +205,73 @@
         }
     }
 
+    // Console helper functions for easy management
+    function setupAdmin(username, password) {
+        username = username || 'admin';
+        password = password || 'junegood2024!';
+
+        // Clear all existing auth data
+        localStorage.removeItem(CREDENTIALS_KEY);
+        localStorage.removeItem(SETUP_KEY);
+        localStorage.removeItem(ATTEMPTS_KEY);
+        localStorage.removeItem(LOCKOUT_KEY);
+        sessionStorage.removeItem(AUTH_KEY);
+        sessionStorage.removeItem(AUTH_KEY + '_timeout');
+
+        // Setup new credentials
+        setupCredentials(username, password);
+
+        console.log('%c✅ Admin credentials set successfully!', 'color: green; font-weight: bold');
+        console.log(`Username: ${username}`);
+        console.log(`Password: ${password}`);
+        console.log('You can now login with these credentials.');
+
+        return true;
+    }
+
+    function showAuthStatus() {
+        const isSetupDone = isSetup();
+        const isAuth = isAuthenticated();
+        const isLocked = isAccountLocked();
+        const stored = localStorage.getItem(CREDENTIALS_KEY);
+
+        console.log('%c=== Authentication Status ===', 'color: blue; font-weight: bold');
+        console.log(`Setup Complete: ${isSetupDone ? '✅ Yes' : '❌ No'}`);
+        console.log(`Currently Logged In: ${isAuth ? '✅ Yes' : '❌ No'}`);
+        console.log(`Account Locked: ${isLocked ? '🔒 Yes' : '🔓 No'}`);
+
+        if (stored) {
+            const creds = JSON.parse(stored);
+            console.log(`Current Username: ${creds.username}`);
+            console.log(`Credentials Created: ${creds.created}`);
+            if (creds.updated) {
+                console.log(`Last Updated: ${creds.updated}`);
+            }
+        }
+
+        const attempts = localStorage.getItem(ATTEMPTS_KEY);
+        if (attempts) {
+            console.log(`Failed Login Attempts: ${attempts}/${MAX_LOGIN_ATTEMPTS}`);
+        }
+    }
+
+    function clearAllAuth() {
+        if (!confirm('⚠️ This will clear ALL authentication data. Continue?')) {
+            return false;
+        }
+
+        localStorage.removeItem(CREDENTIALS_KEY);
+        localStorage.removeItem(SETUP_KEY);
+        localStorage.removeItem(ATTEMPTS_KEY);
+        localStorage.removeItem(LOCKOUT_KEY);
+        sessionStorage.removeItem(AUTH_KEY);
+        sessionStorage.removeItem(AUTH_KEY + '_timeout');
+
+        console.log('%c✅ All authentication data cleared!', 'color: green; font-weight: bold');
+        console.log('You can now setup new credentials.');
+        return true;
+    }
+
     // Export functions
     window.AuthManager = {
         login: login,
@@ -215,10 +282,38 @@
         isSetup: isSetup,
         setupCredentials: setupCredentials,
         resetAuth: resetAuth,
-        isAccountLocked: isAccountLocked
+        isAccountLocked: isAccountLocked,
+        // Console helper functions
+        setupAdmin: setupAdmin,
+        showStatus: showAuthStatus,
+        clearAll: clearAllAuth
     };
 
     // Keep compatibility with old JournalsAuth
     window.JournalsAuth = window.AuthManager;
+
+    // Add console instructions on load
+    if (window.location.pathname.includes('login')) {
+        console.log('%c=== Admin Authentication Helper ===', 'color: purple; font-weight: bold; font-size: 16px');
+        console.log('%cAvailable console commands:', 'color: blue; font-weight: bold');
+        console.log('');
+        console.log('%c1. Setup default admin account:', 'font-weight: bold');
+        console.log('   AuthManager.setupAdmin()');
+        console.log('   // Sets: admin / junegood2024!');
+        console.log('');
+        console.log('%c2. Setup custom admin account:', 'font-weight: bold');
+        console.log('   AuthManager.setupAdmin("myusername", "mypassword")');
+        console.log('');
+        console.log('%c3. Check authentication status:', 'font-weight: bold');
+        console.log('   AuthManager.showStatus()');
+        console.log('');
+        console.log('%c4. Clear all authentication data:', 'font-weight: bold');
+        console.log('   AuthManager.clearAll()');
+        console.log('');
+        console.log('%c5. Reset authentication (with confirmation):', 'font-weight: bold');
+        console.log('   AuthManager.resetAuth()');
+        console.log('');
+        console.log('%c━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'color: purple');
+    }
 
 })();

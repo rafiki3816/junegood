@@ -137,12 +137,12 @@
         <form id="loginForm">
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" id="username" required autofocus>
+                <input type="text" id="username" name="username" autocomplete="username" required autofocus>
             </div>
 
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" required>
+                <input type="password" id="password" name="password" autocomplete="current-password" required>
             </div>
 
             <button type="submit">Login</button>
@@ -155,5 +155,41 @@
 
     <script src="js/config-static.js"></script>
     <script src="js/auth-manager.js"></script>
+    <script>
+        // Login form handler
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+
+            try {
+                const success = AuthManager.login(username, password);
+
+                if (success) {
+                    // Redirect to admin page
+                    window.location.href = '/journals-admin.html';
+                } else {
+                    // Show error message
+                    errorMessage.style.display = 'block';
+                    errorMessage.textContent = 'Invalid username or password';
+                }
+            } catch (error) {
+                // Show error message (lockout, etc.)
+                errorMessage.style.display = 'block';
+                errorMessage.textContent = error.message;
+            }
+        });
+
+        // Hide error message on input
+        document.getElementById('username').addEventListener('input', function() {
+            document.getElementById('errorMessage').style.display = 'none';
+        });
+
+        document.getElementById('password').addEventListener('input', function() {
+            document.getElementById('errorMessage').style.display = 'none';
+        });
+    </script>
 </body>
 </html>
