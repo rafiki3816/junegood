@@ -1,5 +1,32 @@
-// Migration script to convert hardcoded journals to localStorage
+// Migration script to load journals from JSON file to localStorage
 (function() {
+    // First, try to load from JSON file
+    fetch('/data/journals.json')
+        .then(response => response.json())
+        .then(data => {
+            const STORAGE_KEY = 'junegoodJournals';
+            let existingPosts = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+
+            // Add journals from JSON if they don't exist
+            data.journals.forEach(journal => {
+                const exists = existingPosts.find(p => p.id === journal.id);
+                if (!exists) {
+                    existingPosts.push(journal);
+                    console.log(`Loaded from JSON: ${journal.title}`);
+                }
+            });
+
+            // Save to localStorage
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(existingPosts));
+            console.log(`Total journals in localStorage: ${existingPosts.length}`);
+        })
+        .catch(error => {
+            console.log('Could not load journals.json, falling back to hardcoded data');
+            loadHardcodedJournals();
+        });
+
+    // Fallback function with hardcoded data
+    function loadHardcodedJournals() {
     // Define the full content for each journal
     const journalsToMigrate = [
         {
@@ -212,4 +239,5 @@ The journey of storytelling never really ends. It just finds new mediums, new au
     console.log(`Total journals in localStorage: ${existingPosts.length}`);
 
     return existingPosts;
+    }
 })();
