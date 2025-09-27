@@ -34,49 +34,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Create HTML for a single journal
     function createJournalHTML(post) {
-        const categoryColors = {
-            travel: '#ff6b6b',
-            life: '#4ecdc4',
-            work: '#45b7d1',
-            thoughts: '#96ceb4'
-        };
-
-        const categoryColor = categoryColors[post.category] || '#666';
         const formattedDate = formatDate(post.date);
+        const truncatedContent = post.excerpt || post.content.substring(0, 150) + '...';
 
         return `
             <article class="journal-post" data-category="${post.category}">
-                <div class="journal-header">
-                    <span class="journal-category" style="background: ${categoryColor}">${post.category}</span>
-                    <time class="journal-date">${formattedDate}</time>
-                </div>
-
-                ${post.image ? `<img src="${post.image}" alt="${escapeHtml(post.title)}" class="journal-image">` : ''}
-
-                <h2 class="journal-title">${escapeHtml(post.title)}</h2>
-                <p class="journal-excerpt">${escapeHtml(post.excerpt)}</p>
-
-                <div class="journal-content">${formatContent(post.content)}</div>
-
-                ${post.tags ? `
-                    <div class="journal-tags">
-                        ${post.tags.split(',').map(tag =>
-                            `<span class="tag">${escapeHtml(tag.trim())}</span>`
-                        ).join('')}
+                ${post.image ? `
+                    <div class="post-image">
+                        <img src="${post.image}" alt="${escapeHtml(post.title)}">
                     </div>
                 ` : ''}
 
-                <div class="journal-comments">
-                    <h3>Comments</h3>
-                    <div id="comments-${post.id}" class="comments-list">
-                        ${getComments(post.id)}
-                    </div>
-
-                    <div class="comment-form">
-                        <input type="text" id="commentName-${post.id}" placeholder="Your name" maxlength="50">
-                        <textarea id="commentText-${post.id}" placeholder="Leave a comment..." maxlength="500"></textarea>
-                        <button onclick="addComment('${post.id}')">Post Comment</button>
-                    </div>
+                <div class="post-content">
+                    <time class="post-date">${formattedDate}</time>
+                    <h2>${escapeHtml(post.title)}</h2>
+                    <p>${escapeHtml(truncatedContent)}</p>
+                    <a href="javascript:void(0)" class="read-more" onclick="expandPost('${post.id}')">
+                        Read More →
+                    </a>
                 </div>
             </article>
         `;
@@ -149,6 +124,16 @@ document.addEventListener('DOMContentLoaded', function() {
             commentsContainer.innerHTML = getComments(postId);
         }
     }
+
+    // Expand post to show full content
+    window.expandPost = function(postId) {
+        // Find the journal in loaded data
+        const event = new CustomEvent('expandPost', { detail: { postId: postId } });
+        window.dispatchEvent(event);
+
+        // For now, just alert
+        alert('Full post view will be implemented soon. Post ID: ' + postId);
+    };
 
     // Add a new comment
     window.addComment = function(postId) {

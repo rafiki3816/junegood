@@ -115,9 +115,16 @@
     }
 
     async function initializeJournals() {
-        // Only initialize on the journals page
-        if (!window.location.pathname.includes('sub4')) return;
+        // Only initialize if journal container exists
+        if (!document.querySelector('.journal-container')) {
+            console.log('No journal container found, skipping initialization');
+            return;
+        }
 
+        // Clear old cache on every load for now
+        clearCache();
+
+        console.log('Initializing journals...');
         const journals = await loadJournals();
 
         // Trigger custom event with loaded journals
