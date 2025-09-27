@@ -145,11 +145,11 @@ The fog rolled in one last time as my plane took off, obscuring the city below. 
             category: 'work',
             date: '2024-12-01',
             status: 'published',
-            excerpt: 'A revolutionary photography project that captures genuine emotions and spontaneous moments of joy.',
-            image: 'images/works/smileshot.jpg',
+            excerpt: '진정한 감정과 자연스러운 기쁨의 순간을 포착하는 혁신적인 사진 프로젝트.',
+            image: '',
             tags: 'work, photography, project, smile',
             referenceUrl: '',
-            content: `Smile Shot is more than just a photography project – it's a celebration of authentic human emotions captured in their purest form. This project began with a simple observation: the most beautiful smiles are the ones that happen naturally, when people forget they're being photographed.
+            content: `스마일샷은 단순한 사진 프로젝트가 아니다. 가장 순수한 형태로 포착된 진정한 인간의 감정을 기념하는 작업이다. 이 프로젝트는 간단한 관찰에서 시작되었다. 가장 아름다운 미소는 사람들이 사진 찍히는 것을 잊었을 때 자연스럽게 나타나는 미소라는 것을.
 
 ## The Concept
 
