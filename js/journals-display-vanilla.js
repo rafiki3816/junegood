@@ -55,9 +55,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const posts = getPosts();
         const container = document.querySelector('.journal-container');
 
-        // Clear existing dynamic posts
-        const dynamicPosts = container.querySelectorAll('.dynamic-post');
-        dynamicPosts.forEach(post => post.remove());
+        // Clear ALL posts (both static and dynamic)
+        container.innerHTML = '';
 
         // Filter published posts
         let publishedPosts = posts.filter(p => p.status === 'published');
@@ -144,6 +143,14 @@ document.addEventListener('DOMContentLoaded', function() {
                             ${post.tags.split(',').map(tag => `<span class="tag">${tag.trim()}</span>`).join('')}
                         </div>
                         ` : ''}
+                        ${post.referenceUrl ? `
+                        <div class="article-reference" style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
+                            <strong style="color: #666;">Reference:</strong>
+                            <a href="${post.referenceUrl}" target="_blank" style="color: #0066cc; text-decoration: none;">
+                                ${post.referenceUrl}
+                            </a>
+                        </div>
+                        ` : ''}
                     </div>
                 </article>
             </div>
@@ -197,27 +204,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Add Admin link if not exists
-    if (!document.querySelector('.admin-link')) {
-        const header = document.querySelector('header');
-        const adminLink = document.createElement('a');
-        adminLink.href = 'journals-login.html';
-        adminLink.className = 'admin-link';
-        adminLink.style.cssText = `
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #666;
-            text-decoration: none;
-            font-size: 12px;
-            padding: 5px 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        `;
-        adminLink.textContent = 'Admin';
-        header.appendChild(adminLink);
-    }
 
     // Initialize - load all journals
     loadJournals('all');

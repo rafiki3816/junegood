@@ -15,62 +15,27 @@
 			<nav class="journal-nav">
 				<a href="#all" class="active">All</a>
 				<a href="#travel">Travel</a>
-				<a href="#life">Life</a>
+				<a href="#life">Ritual life</a>
 				<a href="#work">Work</a>
 			</nav>
 		</header>
 
 		<main class="journal-container">
-			<!-- Example posts -->
-			<article class="journal-post" data-category="travel">
-				<div class="post-image">
-					<img src="images/travels/barcelona.jpg" alt="Barcelona">
-				</div>
-				<div class="post-content">
-					<span class="post-date">December 2016</span>
-					<h2>Barcelona: A City of Art and Architecture</h2>
-					<p>Exploring the masterpieces of Gaudí and the vibrant streets of Barcelona. From the Sagrada Família to Park Güell, every corner tells a story of creativity and passion.</p>
-					<a href="#" class="read-more">Read more →</a>
-				</div>
-			</article>
-
-			<article class="journal-post" data-category="travel">
-				<div class="post-image">
-					<img src="images/travels/sanFrancisco.jpg" alt="San Francisco">
-				</div>
-				<div class="post-content">
-					<span class="post-date">July 2019</span>
-					<h2>San Francisco: Innovation and Inspiration</h2>
-					<p>Five months in the Bay Area, experiencing the heart of tech innovation while discovering the natural beauty of California's coast.</p>
-					<a href="#" class="read-more">Read more →</a>
-				</div>
-			</article>
-
-			<article class="journal-post" data-category="life">
-				<div class="post-image">
-					<img src="images/aboutme01.png" alt="Life">
-				</div>
-				<div class="post-content">
-					<span class="post-date">November 2024</span>
-					<h2>The Journey of Storytelling</h2>
-					<p>From film directing to founding RAFIKI, my journey has been about telling stories that matter.</p>
-					<a href="#" class="read-more">Read more →</a>
-				</div>
-			</article>
-
-			<!-- Dynamic posts will be added here -->
-			<div class="coming-soon-message">
-				<p>More stories coming soon...</p>
-				<p style="margin-top: 20px;">
-					<a href="journals-login.html" style="background: #0066cc; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
-						Write New Post →
-					</a>
-				</p>
-			</div>
+			<!-- All posts will be loaded dynamically from localStorage -->
 		</main>
+
+		<div class="coming-soon-message" style="text-align: center; padding: 40px 20px; color: #999;">
+			<p>More stories coming soon...</p>
+		</div>
 	</div>
 
+	<footer style="text-align: center; padding: 30px 20px; margin-top: 50px; border-top: 1px solid #e0e0e0; color: #666; font-size: 14px;">
+		<p>&copy; 2025 Dongjune Kim</p>
+	</footer>
+
+	<script src="js/migrate-journals.js"></script>
 	<script src="js/sub4-journals.js"></script>
 	<script src="js/journals-display-vanilla.js"></script>
+	<script src="js/footer-admin.js"></script>
 </body>
 </html>

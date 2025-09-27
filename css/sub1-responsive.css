@@ -73,8 +73,8 @@ header {
 }
 
 .photo {
-	width: 100%;
-	max-width: 300px;
+	width: 80%;
+	max-width: 192px;
 }
 
 .photo img {
@@ -160,7 +160,7 @@ header {
 	}
 
 	.photo {
-		width: 350px;
+		width: 224px;
 		max-width: none;
 	}
 
@@ -195,7 +195,7 @@ header {
 	}
 
 	.photo {
-		width: 400px;
+		width: 256px;
 	}
 
 	.text {

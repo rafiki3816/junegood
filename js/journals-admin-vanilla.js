@@ -26,6 +26,12 @@ document.addEventListener('DOMContentLoaded', function() {
         return date.toLocaleDateString('en-US', options);
     }
 
+    // Format category display
+    function formatCategory(category) {
+        if (category === 'life') return 'Ritual life';
+        return category.charAt(0).toUpperCase() + category.slice(1);
+    }
+
     // Load posts in table
     function loadPosts() {
         const posts = getPosts();
@@ -48,11 +54,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const row = document.createElement('tr');
             row.dataset.id = post.id;
             row.innerHTML = `
-                <td>${post.title}</td>
-                <td>${post.category}</td>
-                <td>${formatDate(post.date)}</td>
-                <td><span class="status-badge ${statusClass}">${post.status}</span></td>
-                <td>
+                <td data-label="Title">${post.title}</td>
+                <td data-label="Category">${formatCategory(post.category)}</td>
+                <td data-label="Date">${formatDate(post.date)}</td>
+                <td data-label="Status"><span class="status-badge ${statusClass}">${post.status}</span></td>
+                <td data-label="Actions">
                     <div class="action-buttons">
                         <button class="btn btn-sm btn-primary edit-btn" data-id="${post.id}">Edit</button>
                         <button class="btn btn-sm btn-secondary preview-btn" data-id="${post.id}">Preview</button>
@@ -80,6 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('postContent').value = post.content;
             document.getElementById('postTags').value = post.tags;
             document.getElementById('postImage').value = post.image;
+            document.getElementById('postReferenceUrl').value = post.referenceUrl || '';
             if (post.image) {
                 document.getElementById('fileName').textContent = 'Image loaded';
                 updateImagePreview(post.image);
@@ -91,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('postDate').value = new Date().toISOString().split('T')[0];
             document.getElementById('imagePreview').style.display = 'none';
             document.getElementById('removeImageBtn').style.display = 'none';
-            document.getElementById('fileName').textContent = 'No file selected';
+            document.getElementById('fileName').textContent = 'No image selected (optional)';
             document.getElementById('postImage').value = '';
         }
     }
@@ -116,6 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
             content: document.getElementById('postContent').value,
             tags: document.getElementById('postTags').value,
             image: document.getElementById('postImage').value,
+            referenceUrl: document.getElementById('postReferenceUrl').value,
             updated: new Date().toISOString()
         };
 
@@ -123,6 +131,8 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('Please fill in all required fields (Title, Category, Date)');
             return;
         }
+
+        // Image is now optional - no validation needed
 
         let posts = getPosts();
 
@@ -161,11 +171,12 @@ document.addEventListener('DOMContentLoaded', function() {
             previewContent.innerHTML = `
                 <h1>${post.title}</h1>
                 <p style="color: #666; margin-bottom: 20px;">
-                    ${post.category} • ${formatDate(post.date)}
+                    ${formatCategory(post.category)} • ${formatDate(post.date)}
                 </p>
                 ${post.image ? `<img src="${post.image}" style="width: 100%; margin-bottom: 20px; border-radius: 8px;">` : ''}
                 <div>${html}</div>
                 ${post.tags ? `<p style="margin-top: 30px;"><strong>Tags:</strong> ${post.tags}</p>` : ''}
+                ${post.referenceUrl ? `<p style="margin-top: 20px;"><strong>Reference:</strong> <a href="${post.referenceUrl}" target="_blank" style="color: #0066cc;">${post.referenceUrl}</a></p>` : ''}
             `;
             document.getElementById('previewModal').style.display = 'flex';
         }
@@ -361,63 +372,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Export/Import functions
-    window.exportPosts = function() {
-        const posts = getPosts();
-        const dataStr = JSON.stringify(posts, null, 2);
-        const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
-
-        const exportFileDefaultName = `journals_backup_${new Date().toISOString().split('T')[0]}.json`;
-
-        const linkElement = document.createElement('a');
-        linkElement.setAttribute('href', dataUri);
-        linkElement.setAttribute('download', exportFileDefaultName);
-        linkElement.click();
-    };
-
-    window.importPosts = function() {
-        const input = document.createElement('input');
-        input.type = 'file';
-        input.accept = '.json';
-
-        input.onchange = e => {
-            const file = e.target.files[0];
-            const reader = new FileReader();
-
-            reader.onload = event => {
-                try {
-                    const posts = JSON.parse(event.target.result);
-                    if (confirm('This will replace all existing posts. Continue?')) {
-                        savePosts(posts);
-                        loadPosts();
-                        alert('Posts imported successfully!');
-                    }
-                } catch (error) {
-                    alert('Invalid JSON file');
-                }
-            };
-
-            reader.readAsText(file);
-        };
-
-        input.click();
-    };
-
     // Initialize
     loadPosts();
-
-    // Add export/import buttons to header
-    const adminNav = document.querySelector('.admin-nav');
-    const exportBtn = document.createElement('button');
-    exportBtn.className = 'btn btn-secondary';
-    exportBtn.textContent = '📥 Export';
-    exportBtn.onclick = exportPosts;
-
-    const importBtn = document.createElement('button');
-    importBtn.className = 'btn btn-secondary';
-    importBtn.textContent = '📤 Import';
-    importBtn.onclick = importPosts;
-
-    adminNav.appendChild(exportBtn);
-    adminNav.appendChild(importBtn);
 });

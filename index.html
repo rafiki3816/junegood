@@ -10,12 +10,9 @@
 	<meta name="keywords" content="portfolio, web development, design, travel photography, creative journals">
 	<meta name="author" content="Dongjune Kim">
 
-	<!-- Security Headers -->
-	<meta http-equiv="X-Content-Type-Options" content="nosniff">
-	<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
-	<meta http-equiv="X-XSS-Protection" content="1; mode=block">
-	<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-	<meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+	<!-- Security Headers are set in .htaccess for proper HTTP header delivery -->
+	<!-- Temporary CSP for local development (remove in production) -->
+	<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://fonts.googleapis.com https://code.jquery.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
 
 	<!-- Open Graph Meta Tags -->
 	<meta property="og:title" content="junegood - Personal Portfolio">
@@ -62,6 +59,11 @@
 			</ul>
 		</div>
 	</div>
+	<footer style="text-align: center; padding: 30px 20px; margin-top: 50px; color: #666; font-size: 14px; position: fixed; bottom: 0; width: 100%; background: rgba(255,255,255,0.9);">
+		<p>&copy; 2025 Dongjune Kim</p>
+	</footer>
+
 	<script src="js/main-responsive-vanilla.js"></script>
+	<script src="js/footer-admin.js"></script>
 </body>
 </html>

@@ -62,7 +62,7 @@
                             <select id="postCategory" required>
                                 <option value="">Select Category</option>
                                 <option value="travel">Travel</option>
-                                <option value="life">Life</option>
+                                <option value="life">Ritual life</option>
                                 <option value="work">Work</option>
                             </select>
                         </div>
@@ -107,15 +107,21 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="postImage">Featured Image</label>
+                        <label for="imageUpload">Featured Image <span style="color: #999; font-size: 12px;">(Optional)</span></label>
                         <div class="image-upload-container">
                             <input type="file" id="imageUpload" accept="image/*" style="display: none;">
                             <button type="button" id="uploadBtn" class="btn btn-secondary">Choose Image</button>
-                            <span id="fileName" class="file-name">No file selected</span>
+                            <span id="fileName" class="file-name">No image selected (optional)</span>
                         </div>
                         <input type="hidden" id="postImage" value="">
                         <div id="imagePreview" class="image-preview"></div>
                         <button type="button" id="removeImageBtn" class="btn btn-sm btn-danger" style="display: none; margin-top: 10px;">Remove Image</button>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="postReferenceUrl">Reference URL <span style="color: #999; font-size: 12px;">(Optional)</span></label>
+                        <input type="url" id="postReferenceUrl" placeholder="https://example.com/article">
+                        <small style="color: #666; font-size: 12px;">Add a reference link or source URL for this journal entry</small>
                     </div>
 
                     <div class="form-actions">
@@ -137,6 +143,7 @@
         </main>
     </div>
 
+    <script src="js/migrate-journals.js"></script>
     <script src="js/journals-admin-vanilla.js"></script>
 </body>
 </html>
