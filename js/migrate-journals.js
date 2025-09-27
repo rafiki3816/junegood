@@ -1,10 +1,14 @@
 // Migration script to load journals from JSON file to localStorage
 (function() {
+    // Get configuration
+    const config = window.CONFIG || {};
+    const DATA_PATH = config.DATA_JOURNALS_PATH || '/data/journals.json';
+
     // First, try to load from JSON file
-    fetch('/data/journals.json')
+    fetch(DATA_PATH)
         .then(response => response.json())
         .then(data => {
-            const STORAGE_KEY = 'junegood_journals';
+            const STORAGE_KEY = config.STORAGE_KEY_JOURNALS || 'junegood_journals';
             let existingPosts = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
 
             // Add journals from JSON if they don't exist

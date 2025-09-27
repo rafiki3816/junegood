@@ -4,14 +4,17 @@
 (function() {
     'use strict';
 
-    // Configuration
-    const AUTH_KEY = 'junegood_admin_auth';
-    const CREDENTIALS_KEY = 'junegood_admin_creds';
-    const MAX_LOGIN_ATTEMPTS = 5;
-    const LOCKOUT_TIME = 15 * 60 * 1000; // 15 minutes
-    const SESSION_TIMEOUT = 30 * 60 * 1000; // 30 minutes
-    const ATTEMPTS_KEY = 'junegood_login_attempts';
-    const LOCKOUT_KEY = 'junegood_lockout_until';
+    // Load configuration
+    const config = window.CONFIG || {};
+
+    // Configuration from environment variables or defaults
+    const AUTH_KEY = config.STORAGE_KEY_AUTH || 'junegood_admin_auth';
+    const CREDENTIALS_KEY = config.STORAGE_KEY_CREDENTIALS || 'junegood_admin_creds';
+    const MAX_LOGIN_ATTEMPTS = config.MAX_LOGIN_ATTEMPTS || 5;
+    const LOCKOUT_TIME = config.LOCKOUT_TIME || (15 * 60 * 1000); // 15 minutes
+    const SESSION_TIMEOUT = config.SESSION_TIMEOUT || (30 * 60 * 1000); // 30 minutes
+    const ATTEMPTS_KEY = config.STORAGE_KEY_ATTEMPTS || 'junegood_login_attempts';
+    const LOCKOUT_KEY = config.STORAGE_KEY_LOCKOUT || 'junegood_lockout_until';
 
     // Simple hash function (replace with bcrypt in production)
     function hashPassword(password) {
@@ -24,10 +27,10 @@
         return btoa(hash.toString() + password.length);
     }
 
-    // Default admin credentials (should be changed immediately)
+    // Admin credentials from environment variables
     const DEFAULT_CREDENTIALS = {
-        username: 'admin',
-        password: hashPassword('junegood2024!')
+        username: config.ADMIN_USERNAME || 'admin',
+        password: hashPassword(config.ADMIN_PASSWORD || 'junegood2024!')
     };
 
     // Initialize credentials if not exists

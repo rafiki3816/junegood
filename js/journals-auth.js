@@ -4,14 +4,17 @@
 (function() {
     'use strict';
 
-    // Configuration
-    const AUTH_KEY = 'junegood_admin_auth';
-    const CREDENTIALS_KEY = 'junegood_admin_creds';
+    // Load configuration
+    const config = window.CONFIG || {};
 
-    // Default admin credentials (should be changed)
+    // Configuration from environment variables or defaults
+    const AUTH_KEY = config.STORAGE_KEY_AUTH || 'junegood_admin_auth';
+    const CREDENTIALS_KEY = config.STORAGE_KEY_CREDENTIALS || 'junegood_admin_creds';
+
+    // Admin credentials from environment variables
     const DEFAULT_CREDENTIALS = {
-        username: 'admin',
-        password: 'junegood2024!' // Change this password!
+        username: config.ADMIN_USERNAME || 'admin',
+        password: config.ADMIN_PASSWORD || 'junegood2024!'
     };
 
     // Initialize credentials if not exists
