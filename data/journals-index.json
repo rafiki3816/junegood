@@ -34,6 +34,17 @@
       "file": "/data/journals/tokyo1-2018.json"
     },
     {
+      "id": "journal-brussels-2018",
+      "title": "Brussels: The Heart of Europe",
+      "category": "travel",
+      "date": "2018-07-15",
+      "status": "published",
+      "excerpt": "Exploring Belgium's capital, where European institutions meet medieval squares, and chocolate shops compete with beer bars for attention.",
+      "image": "photos/Brussels/img/1.jpeg",
+      "tags": "travel, brussels, belgium, europe, chocolate, beer, architecture",
+      "file": "/data/journals/brussels-2018.json"
+    },
+    {
       "id": "journal-tokyo2-2022",
       "title": "Tokyo Revisited: Post-Pandemic Perspectives",
       "category": "travel",
@@ -43,6 +54,28 @@
       "image": "photos/Tokyo2/img/1.jpg",
       "tags": "travel, tokyo, japan, autumn, culture, resilience",
       "file": "/data/journals/tokyo2-2022.json"
+    },
+    {
+      "id": "journal-london-2017",
+      "title": "London: Where History Meets Modernity",
+      "category": "travel",
+      "date": "2017-07-10",
+      "status": "published",
+      "excerpt": "Discovering the British capital's perfect blend of royal traditions, world-class museums, and contemporary culture along the Thames.",
+      "image": "photos/London/img/1.jpg",
+      "tags": "travel, london, uk, history, museums, culture, thames",
+      "file": "/data/journals/london-2017.json"
+    },
+    {
+      "id": "journal-edinburgh-2017",
+      "title": "Edinburgh: Scotland's Dramatic Capital",
+      "category": "travel",
+      "date": "2017-07-20",
+      "status": "published",
+      "excerpt": "From London to Scotland's capital, where medieval streets meet Georgian elegance, and every corner holds a ghost story or historical tale.",
+      "image": "photos/Edinburgh/img/1.jpg",
+      "tags": "travel, edinburgh, scotland, uk, history, castle, architecture",
+      "file": "/data/journals/edinburgh-2017.json"
     },
     {
       "id": "journal-newyork-2017",
