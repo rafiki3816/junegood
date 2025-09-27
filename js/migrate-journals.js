@@ -4,7 +4,7 @@
     fetch('/data/journals.json')
         .then(response => response.json())
         .then(data => {
-            const STORAGE_KEY = 'junegoodJournals';
+            const STORAGE_KEY = 'junegood_journals';
             let existingPosts = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
 
             // Add journals from JSON if they don't exist
@@ -215,7 +215,7 @@ The journey of storytelling never really ends. It just finds new mediums, new au
     ];
 
     // Check if posts already exist
-    const STORAGE_KEY = 'junegoodJournals';
+    const STORAGE_KEY = 'junegood_journals';
     let existingPosts = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
 
     // Check for the fourth journal (Smile Shot) if it exists
