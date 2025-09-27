@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Debug Journals</title>
+    <style>
+        .debug-output {
+            background: #f0f0f0;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 5px;
+            font-family: monospace;
+        }
+        .success { color: green; }
+        .error { color: red; }
+        .info { color: blue; }
+    </style>
+</head>
+<body>
+    <h1>Journal System Debug</h1>
+    <div class="debug-output" id="output"></div>
+
+    <h2>Journal Container Test</h2>
+    <div class="journal-container">Test Container</div>
+
+    <!-- Load actual scripts -->
+    <script src="js/journals-loader.js"></script>
+    <script src="js/journals-display-new.js"></script>
+
+    <script>
+        const output = document.getElementById('output');
+
+        function addLog(message, type = 'info') {
+            const p = document.createElement('p');
+            p.className = type;
+            p.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            output.appendChild(p);
+            console.log(message);
+        }
+
+        // Override console.log to capture all logs
+        const originalLog = console.log;
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            addLog(args.join(' '), 'info');
+        };
+
+        const originalError = console.error;
+        console.error = function(...args) {
+            originalError.apply(console, args);
+            addLog(args.join(' '), 'error');
+        };
+
+        // Check what's loaded
+        setTimeout(() => {
+            addLog('=== Debug Report ===', 'info');
+            addLog(`JournalsLoader exists: ${typeof window.JournalsLoader !== 'undefined'}`, 'info');
+            addLog(`Container exists: ${document.querySelector('.journal-container') !== null}`, 'info');
+
+            // Listen for journals loaded event
+            window.addEventListener('journalsLoaded', function(event) {
+                addLog(`Event received! Journals count: ${event.detail.journals.length}`, 'success');
+            });
+
+            // Try manual load
+            if (window.JournalsLoader) {
+                addLog('Attempting manual load...', 'info');
+                window.JournalsLoader.clearCache();
+                window.JournalsLoader.load()
+                    .then(journals => {
+                        addLog(`Manual load success! Found ${journals.length} journals`, 'success');
+                        journals.forEach(j => {
+                            addLog(`  - ${j.title}`, 'success');
+                        });
+                    })
+                    .catch(error => {
+                        addLog(`Manual load failed: ${error.message}`, 'error');
+                    });
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

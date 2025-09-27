@@ -1,10 +1,12 @@
 // Display journals from files on the public page
 document.addEventListener('DOMContentLoaded', function() {
     const COMMENTS_KEY = 'junegood_comments';
+    let loadedJournals = []; // Store journals for expand functionality
 
     // Listen for journals loaded event
     window.addEventListener('journalsLoaded', function(event) {
         const journals = event.detail.journals;
+        loadedJournals = journals; // Store for later use
         displayJournals(journals);
         setupFilters(journals);
     });
@@ -33,28 +35,58 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Create HTML for a single journal
-    function createJournalHTML(post) {
+    function createJournalHTML(post, isExpanded = false) {
         const formattedDate = formatDate(post.date);
         const truncatedContent = post.excerpt || post.content.substring(0, 150) + '...';
 
-        return `
-            <article class="journal-post" data-category="${post.category}">
-                ${post.image ? `
-                    <div class="post-image">
-                        <img src="${post.image}" alt="${escapeHtml(post.title)}">
-                    </div>
-                ` : ''}
+        if (isExpanded) {
+            return `
+                <article class="journal-post expanded" data-category="${post.category}" data-id="${post.id}">
+                    ${post.image ? `
+                        <div class="post-image">
+                            <img src="${post.image}" alt="${escapeHtml(post.title)}">
+                        </div>
+                    ` : ''}
 
-                <div class="post-content">
-                    <time class="post-date">${formattedDate}</time>
-                    <h2>${escapeHtml(post.title)}</h2>
-                    <p>${escapeHtml(truncatedContent)}</p>
-                    <a href="javascript:void(0)" class="read-more" onclick="expandPost('${post.id}')">
-                        Read More →
-                    </a>
-                </div>
-            </article>
-        `;
+                    <div class="post-content">
+                        <time class="post-date">${formattedDate}</time>
+                        <h2>${escapeHtml(post.title)}</h2>
+                        <div class="full-content">${formatContent(post.content)}</div>
+
+                        ${post.tags ? `
+                            <div class="journal-tags" style="margin-top: 20px;">
+                                ${post.tags.split(',').map(tag =>
+                                    `<span style="display: inline-block; background: #f0f0f0; padding: 5px 10px; margin: 5px; border-radius: 15px; font-size: 12px;">${escapeHtml(tag.trim())}</span>`
+                                ).join('')}
+                            </div>
+                        ` : ''}
+
+                        <a href="javascript:void(0)" class="read-more" onclick="collapsePost('${post.id}')">
+                            ← Show Less
+                        </a>
+                    </div>
+                </article>
+            `;
+        } else {
+            return `
+                <article class="journal-post" data-category="${post.category}" data-id="${post.id}">
+                    ${post.image ? `
+                        <div class="post-image">
+                            <img src="${post.image}" alt="${escapeHtml(post.title)}">
+                        </div>
+                    ` : ''}
+
+                    <div class="post-content">
+                        <time class="post-date">${formattedDate}</time>
+                        <h2>${escapeHtml(post.title)}</h2>
+                        <p>${escapeHtml(truncatedContent)}</p>
+                        <a href="javascript:void(0)" class="read-more" onclick="expandPost('${post.id}')">
+                            Read More →
+                        </a>
+                    </div>
+                </article>
+            `;
+        }
     }
 
     // Setup category filters
@@ -127,12 +159,44 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Expand post to show full content
     window.expandPost = function(postId) {
-        // Find the journal in loaded data
-        const event = new CustomEvent('expandPost', { detail: { postId: postId } });
-        window.dispatchEvent(event);
+        const post = loadedJournals.find(j => j.id === postId);
+        if (!post) return;
 
-        // For now, just alert
-        alert('Full post view will be implemented soon. Post ID: ' + postId);
+        const postElement = document.querySelector(`[data-id="${postId}"]`);
+        if (postElement) {
+            // Store scroll position
+            const scrollTop = postElement.offsetTop;
+
+            // Replace with expanded version
+            postElement.outerHTML = createJournalHTML(post, true);
+
+            // Scroll to the expanded post
+            window.scrollTo({
+                top: scrollTop - 20,
+                behavior: 'smooth'
+            });
+        }
+    };
+
+    // Collapse post back to summary
+    window.collapsePost = function(postId) {
+        const post = loadedJournals.find(j => j.id === postId);
+        if (!post) return;
+
+        const postElement = document.querySelector(`[data-id="${postId}"]`);
+        if (postElement) {
+            // Store scroll position
+            const scrollTop = postElement.offsetTop;
+
+            // Replace with collapsed version
+            postElement.outerHTML = createJournalHTML(post, false);
+
+            // Scroll to the collapsed post
+            window.scrollTo({
+                top: scrollTop - 20,
+                behavior: 'smooth'
+            });
+        }
     };
 
     // Add a new comment

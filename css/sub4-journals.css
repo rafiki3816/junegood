@@ -109,6 +109,35 @@ header {
 	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
+.journal-post.expanded {
+	grid-column: 1 / -1;
+	max-width: 900px;
+	margin: 0 auto;
+}
+
+.journal-post.expanded .full-content {
+	font-family: Merriweather;
+	font-size: 16px;
+	line-height: 1.8;
+	color: #333;
+}
+
+.journal-post.expanded .full-content h3 {
+	font-size: 20px;
+	margin: 30px 0 15px;
+	color: #222;
+}
+
+.journal-post.expanded .full-content h4 {
+	font-size: 18px;
+	margin: 25px 0 12px;
+	color: #333;
+}
+
+.journal-post.expanded .full-content p {
+	margin-bottom: 20px;
+}
+
 .post-image {
 	width: 100%;
 	height: 250px;
