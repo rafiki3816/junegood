@@ -9,7 +9,7 @@
       "excerpt": "Exploring the masterpieces of Gaudí and the vibrant streets of Barcelona. From the Sagrada Família to Park Güell, every corner tells a story of creativity and passion.",
       "image": "images/travels/barcelona.jpg",
       "tags": "travel, barcelona, architecture, gaudí, spain",
-      "file": "data/journals/barcelona-2016.json"
+      "file": "/data/journals/barcelona-2016.json"
     },
     {
       "id": "journal-sf-2019",
@@ -20,7 +20,7 @@
       "excerpt": "Five months in the Bay Area, experiencing the heart of tech innovation while discovering the natural beauty of California's coast.",
       "image": "images/travels/sanFrancisco.jpg",
       "tags": "travel, san francisco, technology, innovation, california",
-      "file": "data/journals/sf-2019.json"
+      "file": "/data/journals/sf-2019.json"
     }
   ]
 }

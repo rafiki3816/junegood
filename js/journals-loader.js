@@ -16,9 +16,11 @@
                 return cached;
             }
 
+            console.log('Loading journals index from:', JOURNALS_INDEX_PATH);
             // Load index file
             const indexResponse = await fetch(JOURNALS_INDEX_PATH);
             if (!indexResponse.ok) {
+                console.error('Failed to load journals index:', indexResponse.status, indexResponse.statusText);
                 throw new Error('Failed to load journals index');
             }
 
@@ -29,10 +31,14 @@
             for (const meta of index.journals) {
                 try {
                     if (meta.status === 'published') {
+                        console.log(`Loading journal file: ${meta.file}`);
                         const journalResponse = await fetch(meta.file);
                         if (journalResponse.ok) {
                             const journal = await journalResponse.json();
                             journals.push(journal);
+                            console.log(`Successfully loaded: ${meta.title}`);
+                        } else {
+                            console.error(`Failed to fetch journal file: ${meta.file}`, journalResponse.status);
                         }
                     }
                 } catch (error) {
