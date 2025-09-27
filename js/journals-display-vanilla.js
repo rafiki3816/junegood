@@ -1,12 +1,125 @@
 // Display journals from localStorage on the public page - Vanilla JavaScript
 document.addEventListener('DOMContentLoaded', function() {
     const STORAGE_KEY = 'junegood_journals';
+    const COMMENTS_KEY = 'junegood_comments';
 
     // Get posts from localStorage
     function getPosts() {
         const posts = localStorage.getItem(STORAGE_KEY);
         return posts ? JSON.parse(posts) : [];
     }
+
+    // Get all comments from localStorage
+    function getAllComments() {
+        const comments = localStorage.getItem(COMMENTS_KEY);
+        return comments ? JSON.parse(comments) : {};
+    }
+
+    // Save comments to localStorage
+    function saveComments(comments) {
+        localStorage.setItem(COMMENTS_KEY, JSON.stringify(comments));
+    }
+
+    // Get comments for a specific post
+    function getComments(postId) {
+        const allComments = getAllComments();
+        const postComments = allComments[postId] || [];
+
+        if (postComments.length === 0) {
+            return '<p style="color: #999; text-align: center; padding: 20px;">No comments yet. Be the first to comment!</p>';
+        }
+
+        return postComments.map(comment => `
+            <div style="background: white; padding: 15px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #e0e0e0;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <strong style="color: #333; font-size: 14px;">${escapeHtml(comment.name)}</strong>
+                    <span style="color: #999; font-size: 12px;">${formatCommentDate(comment.date)}</span>
+                </div>
+                <p style="color: #666; line-height: 1.6; margin: 0;">${escapeHtml(comment.text)}</p>
+            </div>
+        `).join('');
+    }
+
+    // Add a new comment
+    function addComment(postId) {
+        const nameInput = document.getElementById(`commentName-${postId}`);
+        const textInput = document.getElementById(`commentText-${postId}`);
+
+        if (!nameInput || !textInput) return;
+
+        const name = nameInput.value.trim();
+        const text = textInput.value.trim();
+
+        if (!name || !text) return;
+
+        const allComments = getAllComments();
+
+        if (!allComments[postId]) {
+            allComments[postId] = [];
+        }
+
+        const newComment = {
+            id: Date.now().toString(),
+            name: name,
+            text: text,
+            date: new Date().toISOString()
+        };
+
+        allComments[postId].unshift(newComment);
+        saveComments(allComments);
+
+        // Update the comments display
+        const commentsContainer = document.getElementById(`comments-${postId}`);
+        if (commentsContainer) {
+            commentsContainer.innerHTML = getComments(postId);
+        }
+
+        // Clear the form
+        nameInput.value = '';
+        textInput.value = '';
+
+        // Show success message
+        const form = document.getElementById(`commentForm-${postId}`);
+        const successMsg = document.createElement('div');
+        successMsg.style.cssText = 'background: #d4edda; color: #155724; padding: 10px; border-radius: 4px; margin-top: 10px;';
+        successMsg.textContent = 'Comment posted successfully!';
+        form.appendChild(successMsg);
+
+        setTimeout(() => successMsg.remove(), 3000);
+    }
+
+    // Escape HTML to prevent XSS
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    // Format comment date
+    function formatCommentDate(dateString) {
+        const date = new Date(dateString);
+        const now = new Date();
+        const diff = now - date;
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+        if (days === 0) {
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            if (hours === 0) {
+                const minutes = Math.floor(diff / (1000 * 60));
+                return minutes <= 1 ? 'Just now' : `${minutes} minutes ago`;
+            }
+            return hours === 1 ? '1 hour ago' : `${hours} hours ago`;
+        } else if (days === 1) {
+            return 'Yesterday';
+        } else if (days < 30) {
+            return `${days} days ago`;
+        } else {
+            return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+        }
+    }
+
+    // Make addComment function available globally for the form handler
+    window.addComment = addComment;
 
     // Format date
     function formatDate(dateString) {
@@ -151,6 +264,34 @@ document.addEventListener('DOMContentLoaded', function() {
                             </a>
                         </div>
                         ` : ''}
+
+                        <!-- Comments Section -->
+                        <div class="comments-section" style="margin-top: 50px; padding-top: 30px; border-top: 2px solid #e0e0e0;">
+                            <h3 style="font-size: 24px; margin-bottom: 25px; color: #333;">Comments</h3>
+
+                            <!-- Comment Form -->
+                            <div class="comment-form" style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 30px;">
+                                <h4 style="font-size: 16px; margin-bottom: 15px; color: #666;">Leave a comment</h4>
+                                <form id="commentForm-${postId}">
+                                    <div style="margin-bottom: 15px;">
+                                        <input type="text" id="commentName-${postId}" placeholder="Your name" required
+                                            style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
+                                    </div>
+                                    <div style="margin-bottom: 15px;">
+                                        <textarea id="commentText-${postId}" placeholder="Write your comment..." required
+                                            style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; min-height: 100px; resize: vertical;"></textarea>
+                                    </div>
+                                    <button type="submit" style="background: #0066cc; color: white; padding: 10px 25px; border: none; border-radius: 4px; font-size: 14px; cursor: pointer;">
+                                        Post Comment
+                                    </button>
+                                </form>
+                            </div>
+
+                            <!-- Comments List -->
+                            <div class="comments-list" id="comments-${postId}">
+                                ${getComments(postId)}
+                            </div>
+                        </div>
                     </div>
                 </article>
             </div>
@@ -158,6 +299,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
         document.body.appendChild(overlay);
         document.body.style.overflow = 'hidden';
+
+        // Setup comment form handler
+        const commentForm = document.getElementById(`commentForm-${postId}`);
+        if (commentForm) {
+            commentForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                addComment(postId);
+            });
+        }
 
         // Close handlers
         overlay.addEventListener('click', function(e) {
@@ -333,6 +483,56 @@ document.addEventListener('DOMContentLoaded', function() {
                 font-size: 12px;
             }
 
+            /* Comment Section Styles */
+            .comments-section {
+                margin-top: 50px;
+                padding-top: 30px;
+                border-top: 2px solid #e0e0e0;
+            }
+
+            .comment-form {
+                background: #f8f9fa;
+                padding: 20px;
+                border-radius: 8px;
+                margin-bottom: 30px;
+            }
+
+            .comment-form input,
+            .comment-form textarea {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                font-size: 14px;
+                font-family: inherit;
+            }
+
+            .comment-form input:focus,
+            .comment-form textarea:focus {
+                outline: none;
+                border-color: #0066cc;
+                box-shadow: 0 0 0 2px rgba(0,102,204,0.1);
+            }
+
+            .comment-form button {
+                background: #0066cc;
+                color: white;
+                padding: 10px 25px;
+                border: none;
+                border-radius: 4px;
+                font-size: 14px;
+                cursor: pointer;
+                transition: background 0.3s;
+            }
+
+            .comment-form button:hover {
+                background: #0052a3;
+            }
+
+            .comments-list {
+                max-height: 500px;
+                overflow-y: auto;
+            }
 
             @media screen and (max-width: 768px) {
                 .full-article-container {

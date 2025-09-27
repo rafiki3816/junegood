@@ -372,6 +372,87 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Comments Management
+    function loadComments() {
+        const COMMENTS_KEY = 'junegood_comments';
+        const allComments = JSON.parse(localStorage.getItem(COMMENTS_KEY) || '{}');
+        const posts = getPosts();
+        const container = document.getElementById('commentsAdminList');
+
+        if (!container) return;
+
+        let allCommentsArray = [];
+
+        // Flatten all comments with post info
+        Object.keys(allComments).forEach(postId => {
+            const post = posts.find(p => p.id === postId);
+            const postTitle = post ? post.title : 'Unknown Post';
+
+            allComments[postId].forEach(comment => {
+                allCommentsArray.push({
+                    ...comment,
+                    postId: postId,
+                    postTitle: postTitle
+                });
+            });
+        });
+
+        // Sort by date (newest first)
+        allCommentsArray.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        if (allCommentsArray.length === 0) {
+            container.innerHTML = '<p style="text-align: center; color: #999; padding: 20px;">No comments yet.</p>';
+            return;
+        }
+
+        // Show only recent 10 comments
+        const recentComments = allCommentsArray.slice(0, 10);
+
+        container.innerHTML = recentComments.map(comment => `
+            <div style="background: white; padding: 15px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #e0e0e0;">
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px;">
+                    <div>
+                        <strong style="color: #333;">${comment.name}</strong>
+                        <span style="color: #999; font-size: 12px; margin-left: 10px;">${formatDate(comment.date)}</span>
+                        <div style="color: #666; font-size: 12px; margin-top: 5px;">
+                            On: <a href="#" onclick="event.preventDefault(); viewPost('${comment.postId}')" style="color: #0066cc;">${comment.postTitle}</a>
+                        </div>
+                    </div>
+                    <button class="btn btn-sm btn-danger" onclick="deleteComment('${comment.postId}', '${comment.id}')">Delete</button>
+                </div>
+                <p style="color: #666; margin: 0;">${comment.text}</p>
+            </div>
+        `).join('');
+    }
+
+    // Delete comment function
+    window.deleteComment = function(postId, commentId) {
+        if (!confirm('Are you sure you want to delete this comment?')) return;
+
+        const COMMENTS_KEY = 'junegood_comments';
+        const allComments = JSON.parse(localStorage.getItem(COMMENTS_KEY) || '{}');
+
+        if (allComments[postId]) {
+            allComments[postId] = allComments[postId].filter(c => c.id !== commentId);
+
+            if (allComments[postId].length === 0) {
+                delete allComments[postId];
+            }
+
+            localStorage.setItem(COMMENTS_KEY, JSON.stringify(allComments));
+            loadComments();
+        }
+    };
+
+    // View post function
+    window.viewPost = function(postId) {
+        const post = getPosts().find(p => p.id === postId);
+        if (post) {
+            showEditor(post);
+        }
+    };
+
     // Initialize
     loadPosts();
+    loadComments();
 });

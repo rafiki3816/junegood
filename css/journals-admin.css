@@ -112,6 +112,25 @@ header {
     margin-bottom: 30px;
 }
 
+/* Comments Management */
+.comments-management {
+    background: white;
+    border-radius: 8px;
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.comments-management h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.comments-admin-list {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
 .posts-list h2 {
     margin-bottom: 20px;
     font-size: 24px;
