@@ -64,6 +64,35 @@ document.addEventListener('DOMContentLoaded', function() {
                         <a href="javascript:void(0)" class="read-more" onclick="collapsePost('${post.id}')">
                             ← Show Less
                         </a>
+
+                        <hr style="margin: 30px 0; border: none; border-top: 1px solid #e0e0e0;">
+
+                        <!-- Comments Section -->
+                        <div class="comments-section">
+                            <h3 style="font-family: Raleway; font-size: 20px; margin-bottom: 20px;">Comments</h3>
+
+                            <div id="comments-${post.id}" class="comments-list">
+                                ${getComments(post.id)}
+                            </div>
+
+                            <div class="comment-form" style="margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 8px;">
+                                <h4 style="font-family: Raleway; font-size: 16px; margin-bottom: 15px;">Leave a Comment</h4>
+                                <input type="text"
+                                       id="commentName-${post.id}"
+                                       placeholder="Your name"
+                                       maxlength="50"
+                                       style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 10px; font-family: Raleway;">
+                                <textarea id="commentText-${post.id}"
+                                          placeholder="Write your comment here..."
+                                          maxlength="500"
+                                          rows="4"
+                                          style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 10px; font-family: Raleway; resize: vertical;"></textarea>
+                                <button onclick="addComment('${post.id}')"
+                                        style="background: #0066cc; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-family: Raleway; font-weight: 600;">
+                                    Post Comment
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </article>
             `;
@@ -132,18 +161,28 @@ document.addEventListener('DOMContentLoaded', function() {
     function getComments(postId) {
         const allComments = getAllComments();
         const postComments = allComments[postId] || [];
+        const isAdmin = sessionStorage.getItem('junegood_admin_auth') === 'true';
 
         if (postComments.length === 0) {
-            return '<p style="color: #999; text-align: center; padding: 20px;">No comments yet. Be the first to comment!</p>';
+            return '<p style="color: #999; text-align: center; padding: 20px; background: #f9f9f9; border-radius: 8px;">No comments yet. Be the first to comment!</p>';
         }
 
-        return postComments.map(comment => `
-            <div style="background: white; padding: 15px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #e0e0e0;">
+        return postComments.map((comment, index) => `
+            <div style="background: white; padding: 15px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #e0e0e0; position: relative;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                    <strong style="color: #333; font-size: 14px;">${escapeHtml(comment.name)}</strong>
-                    <span style="color: #999; font-size: 12px;">${formatCommentDate(comment.date)}</span>
+                    <strong style="color: #333; font-size: 15px; font-family: Raleway;">${escapeHtml(comment.name)}</strong>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <span style="color: #999; font-size: 12px;">${formatCommentDate(comment.date)}</span>
+                        ${isAdmin ? `
+                            <button onclick="deleteComment('${postId}', ${index})"
+                                    style="background: #dc3545; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 12px;"
+                                    title="Delete comment">
+                                ✕
+                            </button>
+                        ` : ''}
+                    </div>
                 </div>
-                <p style="color: #666; line-height: 1.6; margin: 0;">${escapeHtml(comment.text)}</p>
+                <p style="color: #444; line-height: 1.6; margin: 0; font-family: Raleway;">${escapeHtml(comment.text)}</p>
             </div>
         `).join('');
     }
@@ -219,7 +258,8 @@ document.addEventListener('DOMContentLoaded', function() {
             allComments[postId] = [];
         }
 
-        allComments[postId].push({
+        // Add new comment at the beginning (newest first)
+        allComments[postId].unshift({
             name: name,
             text: text,
             date: new Date().toISOString()
@@ -230,7 +270,36 @@ document.addEventListener('DOMContentLoaded', function() {
         // Clear inputs and refresh display
         nameInput.value = '';
         textInput.value = '';
-        initializeComments(postId);
+
+        // Refresh the comments display
+        const commentsContainer = document.getElementById(`comments-${postId}`);
+        if (commentsContainer) {
+            commentsContainer.innerHTML = getComments(postId);
+        }
+
+        // Show success message
+        const successMsg = document.createElement('div');
+        successMsg.style.cssText = 'background: #d4edda; color: #155724; padding: 10px; border-radius: 5px; margin-bottom: 10px;';
+        successMsg.textContent = 'Comment posted successfully!';
+        commentsContainer.parentNode.insertBefore(successMsg, commentsContainer);
+        setTimeout(() => successMsg.remove(), 3000);
+    };
+
+    // Delete a comment (admin only)
+    window.deleteComment = function(postId, commentIndex) {
+        if (!confirm('Are you sure you want to delete this comment?')) return;
+
+        const allComments = getAllComments();
+        if (allComments[postId] && allComments[postId][commentIndex]) {
+            allComments[postId].splice(commentIndex, 1);
+            saveComments(allComments);
+
+            // Refresh the comments display
+            const commentsContainer = document.getElementById(`comments-${postId}`);
+            if (commentsContainer) {
+                commentsContainer.innerHTML = getComments(postId);
+            }
+        }
     };
 
     // Utility functions
