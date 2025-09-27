@@ -136,80 +136,98 @@ The fog rolled in one last time as my plane took off, obscuring the city below. 
             updated: new Date().toISOString()
         },
         {
-            id: 'journal-storytelling-2024',
-            title: 'The Journey of Storytelling',
-            category: 'life',
-            date: '2024-11-10',
+            id: 'journal-smileshot-2024',
+            title: 'Smile Shot 스마일샷',
+            category: 'work',
+            date: '2024-12-01',
             status: 'published',
-            excerpt: 'From film directing to founding RAFIKI, my journey has been about telling stories that matter.',
-            image: 'images/aboutme01.png',
-            tags: 'life, storytelling, film, entrepreneurship, rafiki',
+            excerpt: 'A revolutionary photography project that captures genuine emotions and spontaneous moments of joy.',
+            image: 'images/works/smileshot.jpg',
+            tags: 'work, photography, project, smile',
             referenceUrl: '',
-            content: `Every story begins with a single frame, a moment captured in time. My journey from film school to founding RAFIKI has been about discovering that the most powerful stories aren't always told through a camera lens – sometimes they're built, coded, and shared through the digital experiences we create.
+            content: `Smile Shot is more than just a photography project – it's a celebration of authentic human emotions captured in their purest form. This project began with a simple observation: the most beautiful smiles are the ones that happen naturally, when people forget they're being photographed.
 
-## The Early Days: Film School Dreams
+## The Concept
 
-I still remember the weight of the camera in my hands during my first day at film school. It wasn't just equipment; it was possibility. Every assignment was an opportunity to explore human emotion, to capture truth in 24 frames per second. We spent countless nights in editing rooms, debating the perfect cut, the right music, the exact moment to hold a shot just a second longer.
+The idea for Smile Shot came during a casual gathering with friends. I noticed how different people looked in candid moments compared to posed photographs. When the camera came out, genuine expressions would disappear, replaced by practiced smiles that never quite reached the eyes. I wanted to capture those fleeting moments of real joy, surprise, and connection that make us human.
 
-Film taught me that storytelling is about economy – saying the most with the least. A glance could convey more than dialogue. Silence could be louder than sound. These lessons would prove invaluable, though I didn't know it then, in every creative endeavor that followed.
+## The Technique
 
-## The Pivot: When Stories Meet Code
+Developing the right approach took months of experimentation. Traditional portrait photography often creates a barrier between subject and photographer. To break this down, I developed several techniques:
 
-The transition from film to digital wasn't planned. It started with a simple website for a documentary project. I needed to share the story beyond festivals, to reach audiences directly. Learning HTML felt like learning a new language – not just technically, but creatively. Code, I discovered, was another medium for storytelling.
+- **The Conversation Method**: Engaging subjects in meaningful conversations while shooting, capturing their reactions and expressions as they speak about things they're passionate about.
+- **The Surprise Element**: Setting up situations that naturally evoke genuine emotions – reuniting old friends, surprising people with good news, or capturing reactions to unexpected moments.
+- **The Long Game**: Spending extended time with subjects until they forget about the camera entirely, allowing their guard to drop and authentic expressions to emerge.
 
-Where film was linear, digital was interactive. Where movies were watched, websites were experienced. The user became part of the narrative, choosing their path, creating their own journey. This revelation changed everything. I wasn't abandoning storytelling; I was expanding its canvas.
+## Technical Challenges
 
-## Building RAFIKI: Stories That Scale
+Capturing spontaneous moments required rethinking traditional photography setups. I had to balance being ready for the perfect moment while remaining unobtrusive. This meant:
 
-RAFIKI was born from a simple observation: every business has a story, but not everyone knows how to tell it. The name itself – meaning "friend" in Swahili – reflected our philosophy. We weren't just service providers; we were collaborators in narrative construction.
+- Using smaller, less intimidating equipment
+- Mastering available light to avoid disruptive flash
+- Developing an intuitive sense for when special moments were about to happen
+- Learning to shoot from unconventional angles to remain less noticeable
 
-Our first client was a small coffee roaster. They thought they needed a website; what they really needed was to share their passion for Ethiopian coffee farming communities. We built them a digital experience that took visitors on a journey from bean to cup, making them part of a larger story about sustainability and global connection.
+## The Stories
 
-That project taught me that digital storytelling isn't about fancy animations or bleeding-edge technology. It's about understanding the emotional core of a message and finding the clearest path to convey it. Sometimes that's a simple photograph. Sometimes it's an interactive timeline. Sometimes it's just the right words in the right typeface.
+Every smile has a story. Through this project, I've captured:
 
-## The Creative Process: Film Principles in Digital Spaces
+- A grandmother seeing her grandchild for the first time via video call
+- Street musicians lost in the joy of their performance
+- Children discovering snow for the first time
+- A couple reconnecting after years apart
+- Workers celebrating the completion of a challenging project
 
-Every project at RAFIKI begins like a film – with a story. We storyboard websites like scenes. We think about user journeys like character arcs. The three-act structure that governs screenwriting helps us organize information architecture. The homepage is the opening shot – it needs to establish tone, promise value, and compel the viewer to continue.
+Each photograph is a window into a moment of genuine human emotion, a fraction of a second where joy breaks through the masks we wear daily.
 
-Film editing taught me about rhythm and pacing, concepts directly applicable to web design. How long should a user spend on each section? When do we need a visual break? Where do we place the emotional peaks? These questions guide our creative process.
+## Cultural Perspectives
 
-## Lessons in Leadership
+Working across different cultures taught me that while smiles are universal, their contexts vary greatly. In Korea, where emotional restraint is often valued, capturing genuine smiles required understanding cultural nuances and building deeper trust. In contrast, working in more expressive cultures presented different challenges – distinguishing between performative and authentic joy.
 
-Running RAFIKI has been its own education. Leading a creative team requires balancing artistic vision with business reality. I've learned that the best ideas often come from unexpected places – the junior designer who sees a fresh perspective, the developer who suggests a narrative solution to a technical problem.
+## The Impact
 
-Failure has been a patient teacher. Projects that didn't resonate taught us to listen better. Clients who challenged our ideas pushed us to articulate our vision more clearly. Every setback refined our process, our philosophy, our story.
+What started as a personal project has grown into something larger. People who see these photographs often comment on how they feel different from typical portraits. They recognize something authentic, something that reminds them of their own moments of joy. Several subjects have told me that seeing themselves genuinely happy in these photos helped them through difficult times.
 
-## The Digital Renaissance
+## Technical Evolution
 
-We're living in extraordinary times for storytellers. The barriers between disciplines are dissolving. A filmmaker can build an app. A programmer can create art. A designer can direct narratives. This convergence excites me because it means stories can take any form necessary to reach their audience.
+As the project evolved, so did my technical approach:
 
-Virtual reality promises to make viewers participants. Artificial intelligence offers personalized narratives. Blockchain might revolutionize how stories are owned and shared. But beneath all this technology, the fundamental human need remains unchanged: we want to connect, to understand, to be understood.
+- **Equipment**: Transitioned from DSLRs to mirrorless cameras for discretion
+- **Lenses**: Primarily 35mm and 50mm for natural perspective
+- **Processing**: Minimal editing to preserve authenticity
+- **Format**: Both digital and film, each bringing different qualities to the captured moments
 
-## Personal Reflections
+## Exhibitions and Response
 
-Looking back, every career pivot, every project, every success and failure has been part of a larger narrative I'm still writing. The film director in me sees life in scenes and sequences. The entrepreneur sees opportunities and challenges. The storyteller sees it all as material.
+Smile Shot has been featured in several exhibitions, each presenting a different aspect of human joy:
 
-Travel has enriched this perspective immeasurably. Each city visited, each culture experienced adds depth to the stories I can tell. Barcelona taught me about the power of unconventional beauty. San Francisco showed me how innovation and tradition can coexist. Seoul, my home, grounds me in the importance of roots while reaching for the global.
+- **"Unguarded Moments"**: Focused on spontaneous street photography
+- **"Connections"**: Explored relationships and shared joy
+- **"Cultural Smiles"**: Examined expressions of happiness across different societies
+- **"The Joy of Work"**: Captured people finding satisfaction in their crafts
 
-## The Future of Storytelling
+## Philosophical Reflections
 
-I believe we're entering a new age of storytelling where the boundaries between creator and audience, between medium and message, continue to blur. The stories that will resonate are those that acknowledge this shift – that invite participation, that adapt to their audience, that exist across multiple platforms and formats.
+This project has taught me that happiness is not a constant state but a series of moments. The camera became a tool not just for documentation but for discovery – finding joy in unexpected places, recognizing the beauty in fleeting expressions, understanding that the most powerful photographs are often the ones we don't plan.
 
-At RAFIKI, we're exploring these frontiers. We're experimenting with stories that change based on time of day, location, or user behavior. We're creating narratives that live simultaneously in physical and digital spaces. We're asking: what if a story could learn and evolve?
+## Future Directions
 
-## The Core Truth
+Smile Shot continues to evolve. Current explorations include:
 
-Through all these explorations, one truth remains constant: the best stories are honest. They acknowledge complexity without becoming complicated. They find universal themes in specific experiences. They make the audience feel seen, heard, understood.
+- **Video Integration**: Capturing the moments leading to and following genuine smiles
+- **Interactive Installations**: Creating spaces that naturally evoke joy while documenting reactions
+- **Collaborative Projects**: Working with communities to document collective joy
+- **Digital Archive**: Building an online collection of stories behind each smile
 
-This is what drives me every day – the possibility that through pixels and code, through design and interaction, we can create moments of genuine human connection. That a website can move someone. That an app can tell a story worth remembering. That digital experiences can be as emotionally resonant as any film.
+## The Philosophy
 
-## Continuing the Journey
+Ultimately, Smile Shot is about more than photography. It's about recognizing and celebrating the moments that make life worth living. In a world increasingly mediated by screens and filters, there's something revolutionary about capturing unfiltered human emotion. Each genuine smile is a small act of rebellion against the performative nature of modern life.
 
-The journey from film to digital entrepreneurship hasn't been linear, and that's what makes it interesting. Each day brings new challenges, new stories to tell, new ways to tell them. The camera I once held has transformed into keyboards and screens, but the mission remains the same: to capture truth, to share beauty, to connect humans through narrative.
+## Conclusion
 
-As I write this, I'm planning RAFIKI's next chapter. We're moving beyond client work to create our own stories – products that embody our philosophy of meaningful digital experiences. It feels like coming full circle, from wanting to make films that matter to building digital experiences that make a difference.
+Smile Shot has become my ongoing meditation on human happiness. It's taught me to be more observant, more patient, and more appreciative of the small moments that define our lives. Every photograph in this collection is a reminder that joy, however fleeting, is always worth capturing and sharing.
 
-The journey of storytelling never really ends. It just finds new mediums, new audiences, new truths to explore. And that's the beauty of it – there's always another story waiting to be told, another way to tell it, another heart to reach.`,
+The project continues because there are infinite smiles yet to be discovered, each one unique, each one a story worth telling. In the end, Smile Shot is not just about taking pictures – it's about seeing and celebrating the light in human faces when happiness breaks through.`,
             updated: new Date().toISOString()
         }
     ];
@@ -218,10 +236,7 @@ The journey of storytelling never really ends. It just finds new mediums, new au
     const STORAGE_KEY = 'junegood_journals';
     let existingPosts = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
 
-    // Check for the fourth journal (Smile Shot) if it exists
-    const smileShotExists = existingPosts.find(p => p.title && p.title.includes('Smile'));
-
-    // Migrate the three hardcoded journals
+    // Migrate the hardcoded journals
     journalsToMigrate.forEach(journal => {
         const exists = existingPosts.find(p => p.id === journal.id);
         if (!exists) {
