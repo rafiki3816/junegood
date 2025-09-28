@@ -23,6 +23,17 @@
       "file": "/data/journals/kyoto-2014.json"
     },
     {
+      "id": "journal-tokyo-2015",
+      "title": "Tokyo: My First Metropolis Adventure",
+      "category": "travel",
+      "date": "2015-08-10",
+      "status": "published",
+      "excerpt": "First encounter with the world's largest metropolis in summer heat, discovering how tradition and hypermodernity coexist in perfect chaos.",
+      "image": "photos/Tokyo1/img/1.jpg",
+      "tags": "travel, tokyo, japan, summer, culture, technology, first-visit",
+      "file": "/data/journals/tokyo-2015.json"
+    },
+    {
       "id": "journal-barcelona-2016",
       "title": "Barcelona: A City of Art and Architecture",
       "category": "travel",
@@ -43,17 +54,6 @@
       "image": "images/travels/sanFrancisco.jpg",
       "tags": "travel, san francisco, technology, innovation, california",
       "file": "/data/journals/sf-2019.json"
-    },
-    {
-      "id": "journal-tokyo1-2018",
-      "title": "Tokyo: Spring Blossoms and Neon Dreams",
-      "category": "travel",
-      "date": "2018-04-10",
-      "status": "published",
-      "excerpt": "First encounter with Tokyo during cherry blossom season - where ancient temples meet futuristic skylines, and tradition dances with innovation.",
-      "image": "photos/Tokyo1/img/1.jpg",
-      "tags": "travel, tokyo, japan, cherry blossoms, culture, technology",
-      "file": "/data/journals/tokyo1-2018.json"
     },
     {
       "id": "journal-brussels-2018",
