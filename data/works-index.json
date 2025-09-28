@@ -1,0 +1,20 @@
+{
+  "works": [
+    {
+      "id": "work-smileshot-2024",
+      "title": "SmileShot - 하루 1분, 나를 위한 미소",
+      "category": "app",
+      "type": "Mobile/Web Application",
+      "date": "2024-11-01",
+      "status": "published",
+      "excerpt": "미소 연습을 통해 자신감을 키우고 기분까지 좋아지는 AI 기반 개인 미소 코칭 앱",
+      "image": "images/works/smileshot.jpg",
+      "tags": "app, ai, wellness, self-improvement, mobile, web",
+      "technologies": ["React", "TensorFlow.js", "Progressive Web App", "Face-Mesh API"],
+      "projectUrl": "https://smile-shot.vercel.app/",
+      "githubUrl": "",
+      "role": "Full Stack Developer & Designer",
+      "file": "/data/works/smileshot-2024.json"
+    }
+  ]
+}
