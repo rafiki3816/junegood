@@ -1,0 +1,15 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Sacramento&amp;display=swap');
+    </style>
+  </defs>
+
+  <!-- Background circle -->
+  <circle cx="256" cy="256" r="240" fill="#000000"/>
+
+  <!-- Text with Sacramento font -->
+  <text x="256" y="280" font-family="'Sacramento', cursive" font-size="90" text-anchor="middle" fill="#ffffff">
+    junegood
+  </text>
+</svg>

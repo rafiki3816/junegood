@@ -112,7 +112,12 @@ header {
 .journal-post.expanded {
 	grid-column: 1 / -1;
 	max-width: 900px;
+	width: 100%;
 	margin: 0 auto;
+}
+
+.journal-post.expanded .post-content {
+	padding: 30px;
 }
 
 .journal-post.expanded .full-content {
