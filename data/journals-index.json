@@ -1,6 +1,28 @@
 {
   "journals": [
     {
+      "id": "journal-okinawa-2014",
+      "title": "Okinawa: Japan's Tropical Paradise",
+      "category": "travel",
+      "date": "2014-05-15",
+      "status": "published",
+      "excerpt": "Discovering Japan's southernmost prefecture, where Ryukyu culture meets tropical beaches, and the pace of life slows to island time.",
+      "image": "photos/Okinawa/img/1.jpg",
+      "tags": "travel, okinawa, japan, beach, ryukyu, island, tropical",
+      "file": "/data/journals/okinawa-2014.json"
+    },
+    {
+      "id": "journal-kyoto-2014",
+      "title": "Kyoto: First Glimpse of Ancient Japan",
+      "category": "travel",
+      "date": "2014-07-20",
+      "status": "published",
+      "excerpt": "My first journey to Japan's cultural heart, where centuries-old temples coexist with modern life along the Kamo River.",
+      "image": "photos/Kyoto1/img/1.jpg",
+      "tags": "travel, kyoto, japan, temples, tradition, culture, summer",
+      "file": "/data/journals/kyoto-2014.json"
+    },
+    {
       "id": "journal-barcelona-2016",
       "title": "Barcelona: A City of Art and Architecture",
       "category": "travel",
