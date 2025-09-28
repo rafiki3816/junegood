@@ -189,7 +189,7 @@ header {
 .read-more {
 	font-family: Raleway;
 	font-size: 14px;
-	color: blue;
+	color: #10b981;
 	font-weight: 600;
 	display: inline-flex;
 	align-items: center;
@@ -197,7 +197,7 @@ header {
 }
 
 .read-more:hover {
-	color: #000;
+	color: #059669;
 	transform: translateX(5px);
 }
 

@@ -132,19 +132,19 @@ document.addEventListener('DOMContentLoaded', function() {
     function convertMarkdownToHtml(markdown) {
         let html = markdown;
 
+        // Links - Process before italic to avoid conflicts
+        html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" style="color: #0066cc; text-decoration: none;">$1</a>');
+
         // Headers
         html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
         html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
         html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
 
-        // Bold
-        html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+        // Bold - More specific pattern
+        html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
 
-        // Italic
-        html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
-
-        // Links
-        html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+        // Italic - More specific pattern to avoid conflicts
+        html = html.replace(/(?<!\*)\*(?!\*)([^*]+)\*(?!\*)/g, '<em>$1</em>');
 
         // Quotes
         html = html.replace(/^> (.*$)/gim, '<blockquote>$1</blockquote>');

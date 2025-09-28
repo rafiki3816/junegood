@@ -62,15 +62,15 @@ document.addEventListener('DOMContentLoaded', function() {
                         ` : ''}
 
                         ${post.referenceUrl ? `
-                            <div style="margin-top: 20px; padding: 15px; background: #f0f8ff; border-left: 4px solid #0066cc; border-radius: 4px;">
-                                <strong style="font-family: Raleway; color: #333;">Reference:</strong>
+                            <div style="margin-top: 20px; padding-top: 15px;">
+                                <strong style="font-family: Raleway; color: #666;">Reference:</strong>
                                 <a href="${post.referenceUrl}" target="_blank" style="color: #0066cc; text-decoration: none; margin-left: 10px;">
                                     ${post.referenceUrl}
                                 </a>
                             </div>
                         ` : ''}
 
-                        <a href="javascript:void(0)" class="read-more" onclick="collapsePost('${post.id}')">
+                        <a href="javascript:void(0)" class="read-more" onclick="collapsePost('${post.id}')" style="padding-top: 45px; display: inline-block; color: #10b981;">
                             ← Show Less
                         </a>
 
@@ -338,11 +338,33 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function formatContent(content) {
         // Convert markdown-style headers and formatting to HTML
-        let formatted = escapeHtml(content)
-            .replace(/## (.*?)(\n|$)/g, '<h3>$1</h3>')
-            .replace(/### (.*?)(\n|$)/g, '<h4>$1</h4>')
-            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')  // Bold text
-            .replace(/\*(.*?)\*/g, '<em>$1</em>')  // Italic text
+        let formatted = content;
+
+        // Process markdown links - use placeholder to protect from escaping
+        const linkPlaceholders = [];
+        formatted = formatted.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(match, text, url) {
+            const placeholder = `__LINK_PLACEHOLDER_${linkPlaceholders.length}__`;
+            linkPlaceholders.push(`<a href="${escapeHtml(url)}" target="_blank" style="color: #0066cc; text-decoration: none;">${escapeHtml(text)}</a>`);
+            return placeholder;
+        });
+
+        // Escape HTML
+        formatted = escapeHtml(formatted);
+
+        // Process other markdown elements
+        formatted = formatted
+            .replace(/^### (.*?)$/gm, '<h4>$1</h4>')
+            .replace(/^## (.*?)$/gm, '<h3>$1</h3>')
+            .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')  // Bold text
+            .replace(/(?<!\*)\*(?!\*)([^*]+)\*(?!\*)/g, '<em>$1</em>');  // Italic text
+
+        // Restore links from placeholders
+        linkPlaceholders.forEach((link, index) => {
+            formatted = formatted.replace(`__LINK_PLACEHOLDER_${index}__`, link);
+        });
+
+        // Process paragraphs and line breaks
+        formatted = formatted
             .replace(/\n\n/g, '</p><p>')
             .replace(/\n/g, '<br>');
 
