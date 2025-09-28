@@ -45,6 +45,17 @@
       "file": "/data/journals/barcelona-2016.json"
     },
     {
+      "id": "journal-paris-2015",
+      "title": "Paris: The Eternal City of Light",
+      "category": "travel",
+      "date": "2015-09-27",
+      "status": "published",
+      "excerpt": "Six days in September discovering Paris - from the grandeur of the Louvre to intimate café moments, experiencing the city that has inspired artists, writers, and dreamers for centuries.",
+      "image": "photos/Paris/img/1.jpg",
+      "tags": "travel, paris, france, art, culture, architecture, louvre, eiffel, seine",
+      "file": "/data/journals/paris-2015.json"
+    },
+    {
       "id": "journal-napa-2019",
       "title": "Napa Valley: California Wine Country",
       "category": "travel",
