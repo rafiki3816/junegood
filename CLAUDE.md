@@ -140,3 +140,5 @@ const DEFAULT_CREDENTIALS = {
 - 사진이 없으면 jpeg 와 jpg 모두 체크 할것.
 - 사진의 날짜는 갤러리 폴더명을 확인해 볼 것
 - jpeg 우선적으로 이미지 파악하기
+- 정형적인 이모티콘 사용 금지
+- Ux 30년차마스터 전문가로 User Frinedly 를 최우선하여 작업

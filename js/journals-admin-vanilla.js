@@ -3,10 +3,34 @@ document.addEventListener('DOMContentLoaded', function() {
     // LocalStorage key
     const STORAGE_KEY = 'junegood_journals';
 
-    // Get posts from localStorage
-    function getPosts() {
-        const posts = localStorage.getItem(STORAGE_KEY);
-        return posts ? JSON.parse(posts) : [];
+    // Get posts from localStorage and JSON files
+    async function getPosts() {
+        // Get localStorage posts
+        const localPosts = localStorage.getItem(STORAGE_KEY);
+        const storedPosts = localPosts ? JSON.parse(localPosts) : [];
+
+        // Get JSON file posts
+        try {
+            const response = await fetch('/data/journals-index.json');
+            if (response.ok) {
+                const data = await response.json();
+                const jsonPosts = data.journals || [];
+
+                // Merge posts (avoid duplicates based on ID)
+                const allPosts = [...storedPosts];
+                jsonPosts.forEach(jsonPost => {
+                    if (!allPosts.find(p => p.id === jsonPost.id)) {
+                        allPosts.push(jsonPost);
+                    }
+                });
+
+                return allPosts;
+            }
+        } catch (error) {
+            console.log('Could not load JSON journals:', error);
+        }
+
+        return storedPosts;
     }
 
     // Save posts to localStorage
@@ -33,8 +57,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Load posts in table
-    function loadPosts() {
-        const posts = getPosts();
+    async function loadPosts() {
+        const posts = await getPosts();
         const tbody = document.getElementById('postsTableBody');
         tbody.innerHTML = '';
 
@@ -71,21 +95,34 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Show editor
-    function showEditor(post = null) {
+    async function showEditor(post = null) {
         document.getElementById('postsList').style.display = 'none';
         document.getElementById('postEditor').style.display = 'block';
 
         if (post) {
+            // If post has a file property, load content from JSON file
+            if (post.file && !post.content) {
+                try {
+                    const response = await fetch(post.file);
+                    if (response.ok) {
+                        const fullPost = await response.json();
+                        post = { ...post, ...fullPost };
+                    }
+                } catch (error) {
+                    console.error('Could not load full post data:', error);
+                }
+            }
+
             document.getElementById('editorTitle').textContent = 'Edit Post';
             document.getElementById('postId').value = post.id;
             document.getElementById('postTitle').value = post.title;
             document.getElementById('postCategory').value = post.category;
             document.getElementById('postDate').value = post.date;
             document.getElementById('postStatus').value = post.status;
-            document.getElementById('postExcerpt').value = post.excerpt;
-            document.getElementById('postContent').value = post.content;
-            document.getElementById('postTags').value = post.tags;
-            document.getElementById('postImage').value = post.image;
+            document.getElementById('postExcerpt').value = post.excerpt || '';
+            document.getElementById('postContent').value = post.content || '';
+            document.getElementById('postTags').value = post.tags || '';
+            document.getElementById('postImage').value = post.image || '';
             document.getElementById('postReferenceUrl').value = post.referenceUrl || '';
             if (post.image) {
                 document.getElementById('fileName').textContent = 'Image loaded';
@@ -111,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Save post
-    function savePost(status = 'draft') {
+    async function savePost(status = 'draft') {
         const postId = document.getElementById('postId').value;
         const postData = {
             id: postId || generateId(),
@@ -132,19 +169,34 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // Image is now optional - no validation needed
+        // Check if this is a JSON-based journal
+        const posts = await getPosts();
+        const existingPost = posts.find(p => p.id === postId);
 
-        let posts = getPosts();
-
-        if (postId) {
-            // Update existing post
-            posts = posts.map(p => p.id === postId ? postData : p);
-        } else {
-            // Add new post
-            posts.push(postData);
+        if (existingPost && existingPost.file) {
+            // This is a JSON-based journal - save to file
+            const fileName = existingPost.file.replace('/data/journals/', '');
+            alert(`Note: "${postData.title}" is a file-based journal. To fully update it, you need to modify the JSON file: ${fileName}\n\nChanges are temporarily saved in browser storage.`);
         }
 
-        savePosts(posts);
+        // Save to localStorage (for both new and existing posts)
+        let localPosts = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+
+        if (postId) {
+            // Check if it's already in localStorage
+            const localIndex = localPosts.findIndex(p => p.id === postId);
+            if (localIndex !== -1) {
+                localPosts[localIndex] = postData;
+            } else {
+                // Add to localStorage even if it's from JSON file
+                localPosts.push(postData);
+            }
+        } else {
+            // Add new post
+            localPosts.push(postData);
+        }
+
+        savePosts(localPosts);
         hideEditor();
         alert(`Post ${status === 'published' ? 'published' : 'saved'} successfully!`);
     }
@@ -161,12 +213,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Preview post
-    function previewPost(id) {
-        const posts = getPosts();
-        const post = posts.find(p => p.id === id);
-
+    function previewPost(post) {
         if (post) {
-            const html = convertMarkdownToHtml(post.content);
+            const html = convertMarkdownToHtml(post.content || '');
             const previewContent = document.getElementById('previewContent');
             previewContent.innerHTML = `
                 <h1>${post.title}</h1>
@@ -242,8 +291,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Event handlers
-    document.getElementById('newPostBtn').addEventListener('click', function() {
-        showEditor();
+    document.getElementById('newPostBtn').addEventListener('click', async function() {
+        await showEditor();
     });
 
     document.getElementById('cancelBtn').addEventListener('click', function() {
@@ -252,21 +301,21 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    document.getElementById('saveBtn').addEventListener('click', function() {
-        savePost('draft');
+    document.getElementById('saveBtn').addEventListener('click', async function() {
+        await savePost('draft');
     });
 
-    document.getElementById('publishBtn').addEventListener('click', function() {
-        savePost('published');
+    document.getElementById('publishBtn').addEventListener('click', async function() {
+        await savePost('published');
     });
 
     // Event delegation for dynamic buttons
-    document.addEventListener('click', function(e) {
+    document.addEventListener('click', async function(e) {
         if (e.target.classList.contains('edit-btn')) {
             const id = e.target.dataset.id;
-            const posts = getPosts();
+            const posts = await getPosts();
             const post = posts.find(p => p.id === id);
-            showEditor(post);
+            await showEditor(post);
         }
 
         if (e.target.classList.contains('delete-btn')) {
@@ -276,7 +325,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (e.target.classList.contains('preview-btn')) {
             const id = e.target.dataset.id;
-            previewPost(id);
+            const posts = await getPosts();
+            const post = posts.find(p => p.id === id);
+
+            if (post) {
+                // Load full content if it's a JSON file
+                let fullPost = post;
+                if (post.file && !post.content) {
+                    try {
+                        const response = await fetch(post.file);
+                        if (response.ok) {
+                            const fullData = await response.json();
+                            fullPost = { ...post, ...fullData };
+                        }
+                    } catch (error) {
+                        console.error('Could not load full post for preview:', error);
+                    }
+                }
+                previewPost(fullPost);
+            }
         }
 
         if (e.target.classList.contains('close-preview') || e.target.id === 'previewModal') {

@@ -61,6 +61,15 @@ document.addEventListener('DOMContentLoaded', function() {
                             </div>
                         ` : ''}
 
+                        ${post.referenceUrl ? `
+                            <div style="margin-top: 20px; padding: 15px; background: #f0f8ff; border-left: 4px solid #0066cc; border-radius: 4px;">
+                                <strong style="font-family: Raleway; color: #333;">Reference:</strong>
+                                <a href="${post.referenceUrl}" target="_blank" style="color: #0066cc; text-decoration: none; margin-left: 10px;">
+                                    ${post.referenceUrl}
+                                </a>
+                            </div>
+                        ` : ''}
+
                         <a href="javascript:void(0)" class="read-more" onclick="collapsePost('${post.id}')">
                             ← Show Less
                         </a>
@@ -197,9 +206,27 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Expand post to show full content
-    window.expandPost = function(postId) {
-        const post = loadedJournals.find(j => j.id === postId);
+    window.expandPost = async function(postId) {
+        let post = loadedJournals.find(j => j.id === postId);
         if (!post) return;
+
+        // If post has a file property, load full content from JSON
+        if (post.file && !post.content) {
+            try {
+                const response = await fetch(post.file);
+                if (response.ok) {
+                    const fullPost = await response.json();
+                    post = { ...post, ...fullPost };
+                    // Update in loadedJournals for future use
+                    const index = loadedJournals.findIndex(j => j.id === postId);
+                    if (index !== -1) {
+                        loadedJournals[index] = post;
+                    }
+                }
+            } catch (error) {
+                console.error('Could not load full post data:', error);
+            }
+        }
 
         const postElement = document.querySelector(`[data-id="${postId}"]`);
         if (postElement) {
