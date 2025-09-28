@@ -156,6 +156,11 @@
     <script src="js/config-static.js"></script>
     <script src="js/auth-manager.js"></script>
     <script>
+        // Check if initial setup is needed
+        if (!AuthManager.isSetup()) {
+            window.location.href = '/admin-setup.html';
+        }
+
         // Login form handler
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();

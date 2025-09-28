@@ -23,7 +23,7 @@
             hash = ((hash << 5) + hash) + password.charCodeAt(i);
         }
         // Add salt and encode
-        const salt = 'junegood2024';
+        const salt = 'jg' + Date.now().toString(36);
         const salted = password + salt;
         return btoa(hash.toString() + '|' + salted.length + '|' + btoa(salted));
     }
@@ -208,7 +208,9 @@
     // Console helper functions for easy management
     function setupAdmin(username, password) {
         username = username || 'admin';
-        password = password || 'junegood2024!';
+        if (!password) {
+            throw new Error('Password is required for initial setup');
+        }
 
         // Clear all existing auth data
         localStorage.removeItem(CREDENTIALS_KEY);
@@ -272,6 +274,20 @@
         return true;
     }
 
+    // First time setup function (for setup page)
+    function firstTimeSetup(username, password) {
+        if (isSetup()) {
+            throw new Error('Setup already completed');
+        }
+
+        if (!username || !password) {
+            throw new Error('Username and password are required');
+        }
+
+        setupCredentials(username, password);
+        return true;
+    }
+
     // Export functions
     window.AuthManager = {
         login: login,
@@ -281,6 +297,7 @@
         changePassword: changePassword,
         isSetup: isSetup,
         setupCredentials: setupCredentials,
+        firstTimeSetup: firstTimeSetup,
         resetAuth: resetAuth,
         isAccountLocked: isAccountLocked,
         // Console helper functions
@@ -299,7 +316,7 @@
         console.log('');
         console.log('%c1. Setup default admin account:', 'font-weight: bold');
         console.log('   AuthManager.setupAdmin()');
-        console.log('   // Sets: admin / junegood2024!');
+        console.log('   // You will be prompted to set a new password');
         console.log('');
         console.log('%c2. Setup custom admin account:', 'font-weight: bold');
         console.log('   AuthManager.setupAdmin("myusername", "mypassword")');

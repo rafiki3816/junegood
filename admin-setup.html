@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 초기 설정 - junegood</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .setup-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 450px;
+            padding: 40px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .password-requirements {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 5px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .password-requirements li {
+            margin-left: 20px;
+            margin-top: 5px;
+        }
+
+        .btn-setup {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 20px;
+        }
+
+        .btn-setup:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-setup:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .error-message {
+            background: #fee;
+            color: #c33;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .success-message {
+            background: #efe;
+            color: #3c3;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            color: #856404;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .warning-box strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="setup-container">
+        <h1>관리자 초기 설정</h1>
+        <p class="subtitle">처음 방문하셨군요! 관리자 계정을 설정해주세요.</p>
+
+        <div class="warning-box">
+            <strong>⚠️ 중요 안내</strong>
+            이 설정은 한 번만 진행됩니다. 비밀번호를 안전하게 보관해주세요.
+        </div>
+
+        <div id="errorMessage" class="error-message"></div>
+        <div id="successMessage" class="success-message"></div>
+
+        <form id="setupForm">
+            <div class="form-group">
+                <label for="username">관리자 아이디</label>
+                <input type="text" id="username" name="username" value="admin" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">새 비밀번호</label>
+                <input type="password" id="password" name="password" required minlength="8" placeholder="최소 8자 이상">
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">비밀번호 확인</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required minlength="8" placeholder="비밀번호를 다시 입력하세요">
+            </div>
+
+            <div class="password-requirements">
+                <strong>비밀번호 요구사항:</strong>
+                <ul>
+                    <li>최소 8자 이상</li>
+                    <li>영문, 숫자, 특수문자 조합 권장</li>
+                    <li>이전 기본 비밀번호와 다르게 설정</li>
+                </ul>
+            </div>
+
+            <button type="submit" class="btn-setup" id="setupBtn">
+                <span id="btnText">관리자 설정 완료</span>
+                <div class="spinner" id="spinner"></div>
+            </button>
+        </form>
+    </div>
+
+    <script src="js/config-static.js"></script>
+    <script src="js/auth-manager.js"></script>
+    <script>
+        // Check if already set up
+        if (AuthManager.isSetup()) {
+            window.location.href = '/journals-login.html';
+        }
+
+        const setupForm = document.getElementById('setupForm');
+        const errorMessage = document.getElementById('errorMessage');
+        const successMessage = document.getElementById('successMessage');
+        const setupBtn = document.getElementById('setupBtn');
+        const btnText = document.getElementById('btnText');
+        const spinner = document.getElementById('spinner');
+
+        function showError(msg) {
+            errorMessage.textContent = msg;
+            errorMessage.style.display = 'block';
+            successMessage.style.display = 'none';
+        }
+
+        function showSuccess(msg) {
+            successMessage.textContent = msg;
+            successMessage.style.display = 'block';
+            errorMessage.style.display = 'none';
+        }
+
+        function setLoading(loading) {
+            setupBtn.disabled = loading;
+            btnText.style.display = loading ? 'none' : 'inline';
+            spinner.style.display = loading ? 'block' : 'none';
+        }
+
+        setupForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Validation
+            if (!username || !password) {
+                showError('아이디와 비밀번호를 입력해주세요.');
+                return;
+            }
+
+            if (password.length < 8) {
+                showError('비밀번호는 최소 8자 이상이어야 합니다.');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                showError('비밀번호가 일치하지 않습니다.');
+                return;
+            }
+
+            // Check if using default password
+            if (password === 'junegood2024!' || password === 'admin' || password === '12345678') {
+                showError('보안을 위해 더 강력한 비밀번호를 사용해주세요.');
+                return;
+            }
+
+            setLoading(true);
+
+            try {
+                // Setup credentials
+                AuthManager.firstTimeSetup(username, password);
+
+                showSuccess('설정이 완료되었습니다! 로그인 페이지로 이동합니다...');
+
+                setTimeout(() => {
+                    window.location.href = '/journals-login.html';
+                }, 2000);
+            } catch (error) {
+                showError('설정 중 오류가 발생했습니다: ' + error.message);
+                setLoading(false);
+            }
+        });
+
+        // Password strength indicator
+        document.getElementById('password').addEventListener('input', function(e) {
+            const password = e.target.value;
+            const hasLetter = /[a-zA-Z]/.test(password);
+            const hasNumber = /[0-9]/.test(password);
+            const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+            const isLong = password.length >= 12;
+
+            let strength = 0;
+            if (hasLetter) strength++;
+            if (hasNumber) strength++;
+            if (hasSpecial) strength++;
+            if (isLong) strength++;
+
+            // You can add visual feedback here based on strength
+        });
+    </script>
+</body>
+</html>

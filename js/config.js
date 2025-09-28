@@ -8,7 +8,7 @@
     window.CONFIG = {
         // Default values (will be overridden by .env if available)
         ADMIN_USERNAME: 'admin',
-        ADMIN_PASSWORD: 'junegood2024!',
+        // Password must be set during initial setup for security
         SESSION_TIMEOUT: 1800000,  // 30 minutes
         MAX_LOGIN_ATTEMPTS: 5,
         LOCKOUT_TIME: 900000,  // 15 minutes
