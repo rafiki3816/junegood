@@ -15,7 +15,7 @@
   </text>
 
   <!-- Subtitle -->
-  <text x="400" y="280" font-family="Arial, sans-serif" font-size="24" font-weight="400" text-anchor="middle" fill="white" opacity="0.95">
-    하루 1분, 나를 위한 미소
+  <text x="400" y="280" font-family="Arial, sans-serif" font-size="24" font-weight="400" text-anchor="middle" fill="#111111">
+    One minute a day, a smile for yourself
   </text>
 </svg>
