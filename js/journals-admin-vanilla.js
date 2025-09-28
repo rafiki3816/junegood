@@ -53,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Format category display
     function formatCategory(category) {
         if (category === 'life') return 'Ritual life';
+        if (category === 'work') return 'Monthly Apps';
         return category.charAt(0).toUpperCase() + category.slice(1);
     }
 
