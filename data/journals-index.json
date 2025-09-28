@@ -122,6 +122,17 @@
       "file": "/data/journals/amsterdam-2018.json"
     },
     {
+      "id": "journal-rotterdam-2018",
+      "title": "Rotterdam: Netherlands' Bold Modern Metropolis",
+      "category": "travel",
+      "date": "2018-07-25",
+      "status": "published",
+      "excerpt": "Exploring Europe's largest port city, where post-war reconstruction created architectural innovation, and maritime heritage meets cutting-edge design.",
+      "image": "photos/Rotterdam/img/1.jpeg",
+      "tags": "travel, rotterdam, netherlands, architecture, port, modern, maritime",
+      "file": "/data/journals/rotterdam-2018.json"
+    },
+    {
       "id": "journal-kyushu-2018",
       "title": "Kyushu: Japan's Southern Soul",
       "category": "travel",
@@ -175,6 +186,17 @@
       "image": "photos/Edinburgh/img/1.jpg",
       "tags": "travel, edinburgh, scotland, uk, history, castle, architecture",
       "file": "/data/journals/edinburgh-2017.json"
+    },
+    {
+      "id": "journal-phiphi-2017",
+      "title": "Phi Phi Islands: Thailand's Tropical Paradise and Party",
+      "category": "travel",
+      "date": "2017-09-10",
+      "status": "published",
+      "excerpt": "Island hopping in the Andaman Sea, where limestone cliffs meet turquoise waters, and backpacker culture thrives despite paradise becoming increasingly discovered.",
+      "image": "photos/Phiphi/img/1.jpeg",
+      "tags": "travel, phiphi, thailand, island, beach, tropical, andaman",
+      "file": "/data/journals/phiphi-2017.json"
     },
     {
       "id": "journal-newyork-2017",
