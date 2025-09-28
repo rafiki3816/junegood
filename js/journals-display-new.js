@@ -310,10 +310,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function formatContent(content) {
-        // Convert markdown-style headers to HTML
+        // Convert markdown-style headers and formatting to HTML
         let formatted = escapeHtml(content)
             .replace(/## (.*?)(\n|$)/g, '<h3>$1</h3>')
             .replace(/### (.*?)(\n|$)/g, '<h4>$1</h4>')
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')  // Bold text
+            .replace(/\*(.*?)\*/g, '<em>$1</em>')  // Italic text
             .replace(/\n\n/g, '</p><p>')
             .replace(/\n/g, '<br>');
 
