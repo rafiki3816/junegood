@@ -1,6 +1,17 @@
 {
   "journals": [
     {
+      "id": "journal-smileshot-2024",
+      "title": "SmileShot: Building an AI-Powered Smile Coach",
+      "category": "work",
+      "date": "2024-11-01",
+      "status": "published",
+      "excerpt": "The journey of creating an AI-powered app that helps people practice their smile and boost confidence through facial feedback therapy.",
+      "image": "images/works/smileshot-hero.jpg",
+      "tags": "work, app, ai, wellness, self-improvement, tensorflow, react, pwa",
+      "file": "/data/journals/smileshot-2024.json"
+    },
+    {
       "id": "journal-okinawa-2014",
       "title": "Okinawa: Japan's Tropical Paradise",
       "category": "travel",
