@@ -10,12 +10,12 @@
   <rect width="800" height="450" rx="16" ry="16" fill="#10b981"/>
 
   <!-- Title - 160% of 48 = 77 -->
-  <text x="400" y="210" font-family="Arial, sans-serif" font-size="77" font-weight="700" text-anchor="middle" fill="#111111" letter-spacing="-1">
+  <text x="400" y="210" font-family="Arial, sans-serif" font-size="77" font-weight="700" text-anchor="middle" fill="white" letter-spacing="-1">
     SmileShot
   </text>
 
   <!-- Subtitle -->
-  <text x="400" y="280" font-family="Arial, sans-serif" font-size="24" font-weight="400" text-anchor="middle" fill="#f0f0f0">
+  <text x="400" y="280" font-family="Arial, sans-serif" font-size="24" font-weight="400" text-anchor="middle" fill="#111111">
     One minute a day, a smile for yourself
   </text>
 </svg>
