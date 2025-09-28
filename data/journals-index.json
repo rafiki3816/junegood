@@ -199,6 +199,17 @@
       "file": "/data/journals/phiphi-2017.json"
     },
     {
+      "id": "journal-hongkong-2017",
+      "title": "Hong Kong: Where East Meets West in Vertical Splendor",
+      "category": "travel",
+      "date": "2017-09-15",
+      "status": "published",
+      "excerpt": "Experiencing Asia's world city, where colonial heritage meets Chinese tradition, skyscrapers touch the clouds, and the harbor never sleeps.",
+      "image": "photos/Hongkong/img/1.jpeg",
+      "tags": "travel, hongkong, china, asia, urban, harbor, culture",
+      "file": "/data/journals/hongkong-2017.json"
+    },
+    {
       "id": "journal-newyork-2017",
       "title": "New York: The City That Never Sleeps",
       "category": "travel",
@@ -208,6 +219,17 @@
       "image": "photos/NewYork/img/1.jpeg",
       "tags": "travel, new york, manhattan, culture, art, architecture",
       "file": "/data/journals/newyork-2017.json"
+    },
+    {
+      "id": "journal-taipei-2017",
+      "title": "Taipei: Taiwan's Vibrant Democracy in Action",
+      "category": "travel",
+      "date": "2017-12-10",
+      "status": "published",
+      "excerpt": "Discovering Taiwan's capital, where night markets thrive, democracy flourishes, and Chinese culture evolved independently for decades.",
+      "image": "photos/Taipei/img/1.jpeg",
+      "tags": "travel, taipei, taiwan, asia, night-market, food, culture",
+      "file": "/data/journals/taipei-2017.json"
     }
   ]
 }

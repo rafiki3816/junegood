@@ -139,3 +139,4 @@ const DEFAULT_CREDENTIALS = {
 - 소프트 코딩이 기본 원칙
 - 사진이 없으면 jpeg 와 jpg 모두 체크 할것.
 - 사진의 날짜는 갤러리 폴더명을 확인해 볼 것
+- jpeg 우선적으로 이미지 파악하기
