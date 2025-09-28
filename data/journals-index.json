@@ -2,11 +2,11 @@
   "journals": [
     {
       "id": "journal-smileshot-2024",
-      "title": "SmileShot: Building an AI-Powered Smile Coach",
+      "title": "SmileShot - 하루 1분, 나를 위한 미소",
       "category": "work",
-      "date": "2024-11-01",
+      "date": "2024-08-06",
       "status": "published",
-      "excerpt": "The journey of creating an AI-powered app that helps people practice their smile and boost confidence through facial feedback therapy.",
+      "excerpt": "미소 연습을 통해 자신감을 키우고 기분까지 좋아지는 AI 기반 개인 미소 코칭 앱",
       "image": "images/works/smileshot-hero.jpg",
       "tags": "work, app, ai, wellness, self-improvement, tensorflow, react, pwa",
       "file": "/data/journals/smileshot-2024.json"
