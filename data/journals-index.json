@@ -45,6 +45,61 @@
       "file": "/data/journals/barcelona-2016.json"
     },
     {
+      "id": "journal-napa-2019",
+      "title": "Napa Valley: California Wine Country",
+      "category": "travel",
+      "date": "2019-02-15",
+      "status": "published",
+      "excerpt": "Exploring America's premier wine region in late winter, when mustard flowers bloom between dormant vines and the valley shows its quieter, more intimate side.",
+      "image": "photos/Napa/img/1.jpeg",
+      "tags": "travel, napa, california, wine, vineyard, nature",
+      "file": "/data/journals/napa-2019.json"
+    },
+    {
+      "id": "journal-laketahoe-2019",
+      "title": "Lake Tahoe: Alpine Paradise on the California-Nevada Border",
+      "category": "travel",
+      "date": "2019-04-10",
+      "status": "published",
+      "excerpt": "Discovering America's most beautiful alpine lake in spring, where snow-capped mountains meet impossibly blue waters, creating a playground for both winter and summer activities.",
+      "image": "photos/LakeTahoe/img/1.jpeg",
+      "tags": "travel, lake-tahoe, california, nevada, mountains, nature, snow",
+      "file": "/data/journals/laketahoe-2019.json"
+    },
+    {
+      "id": "journal-sacramento-2019",
+      "title": "Sacramento: California's Understated Capital",
+      "category": "travel",
+      "date": "2019-04-12",
+      "status": "published",
+      "excerpt": "Discovering California's capital city, where Gold Rush history meets modern governance, and the farm-to-fork movement thrives in the Central Valley's agricultural heartland.",
+      "image": "photos/Sacramento/img/1.jpeg",
+      "tags": "travel, sacramento, california, capital, history, architecture",
+      "file": "/data/journals/sacramento-2019.json"
+    },
+    {
+      "id": "journal-losangeles-2019",
+      "title": "Los Angeles: City of Dreams and Contradictions",
+      "category": "travel",
+      "date": "2019-04-14",
+      "status": "published",
+      "excerpt": "Experiencing the sprawling metropolis of angels, where Hollywood glamour meets urban grit, and endless freeways connect diverse neighborhoods that feel like different worlds.",
+      "image": "photos/LosAngeles/img/1.jpeg",
+      "tags": "travel, los-angeles, california, hollywood, urban, culture",
+      "file": "/data/journals/losangeles-2019.json"
+    },
+    {
+      "id": "journal-sandiego-2019",
+      "title": "San Diego: America's Finest City",
+      "category": "travel",
+      "date": "2019-04-16",
+      "status": "published",
+      "excerpt": "Discovering Southern California's perfect climate paradise, where military history meets beach culture, and the Mexican border creates unique bicultural dynamics.",
+      "image": "photos/SanDiego/img/1.jpeg",
+      "tags": "travel, san-diego, california, beach, military, border, culture",
+      "file": "/data/journals/sandiego-2019.json"
+    },
+    {
       "id": "journal-sf-2019",
       "title": "San Francisco: Innovation and Inspiration",
       "category": "travel",
@@ -54,6 +109,17 @@
       "image": "images/travels/sanFrancisco.jpg",
       "tags": "travel, san francisco, technology, innovation, california",
       "file": "/data/journals/sf-2019.json"
+    },
+    {
+      "id": "journal-kyushu-2018",
+      "title": "Kyushu: Japan's Southern Soul",
+      "category": "travel",
+      "date": "2018-12-10",
+      "status": "published",
+      "excerpt": "Exploring Japan's third-largest island in winter, from Fukuoka's urban energy to Yufuin's mountain onsen, discovering a more relaxed rhythm of Japanese life.",
+      "image": "photos/Kyushu/img/1.jpeg",
+      "tags": "travel, kyushu, japan, fukuoka, onsen, winter, culture",
+      "file": "/data/journals/kyushu-2018.json"
     },
     {
       "id": "journal-brussels-2018",
@@ -67,15 +133,15 @@
       "file": "/data/journals/brussels-2018.json"
     },
     {
-      "id": "journal-tokyo2-2022",
-      "title": "Tokyo Revisited: Post-Pandemic Perspectives",
+      "id": "journal-tokyo2-2017",
+      "title": "Tokyo Revisited: Spring Return",
       "category": "travel",
-      "date": "2022-11-15",
+      "date": "2017-04-15",
       "status": "published",
-      "excerpt": "Returning to Tokyo after four years, finding a city both transformed and timeless, quieter yet more profound in its resilience.",
+      "excerpt": "Returning to Tokyo after two years, experiencing cherry blossoms and discovering new neighborhoods in spring perfection.",
       "image": "photos/Tokyo2/img/1.jpg",
-      "tags": "travel, tokyo, japan, autumn, culture, resilience",
-      "file": "/data/journals/tokyo2-2022.json"
+      "tags": "travel, tokyo, japan, spring, sakura, return-visit",
+      "file": "/data/journals/tokyo2-2017.json"
     },
     {
       "id": "journal-london-2017",
