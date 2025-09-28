@@ -186,17 +186,6 @@
       "image": "photos/NewYork/img/1.jpeg",
       "tags": "travel, new york, manhattan, culture, art, architecture",
       "file": "/data/journals/newyork-2017.json"
-    },
-    {
-      "id": "journal-kyoto-2019",
-      "title": "Kyoto: Where Time Stands Still",
-      "category": "travel",
-      "date": "2019-11-25",
-      "status": "published",
-      "excerpt": "In Japan's ancient capital, discovering a city where thousand-year-old temples coexist with modern life, and every garden is a meditation.",
-      "image": "photos/Kyoto1/img/1.jpg",
-      "tags": "travel, kyoto, japan, temples, tradition, zen, autumn",
-      "file": "/data/journals/kyoto-2019.json"
     }
   ]
 }
