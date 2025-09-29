@@ -142,3 +142,10 @@ const DEFAULT_CREDENTIALS = {
 - jpeg 우선적으로 이미지 파악하기
 - 정형적인 이모티콘 사용 금지
 - Ux 30년차마스터 전문가로 User Frinedly 를 최우선하여 작업
+- ✅ photos/Florence/img/ - 빈 이미지 폴더
+  - ✅ photos/Kyoto2/img/ - 빈 이미지 폴더
+  - ✅ photos/Kyoto3/img/ - 빈 이미지 폴더
+  - ✅ photos/Tokyo3/img/ - 빈 이미지 폴더
+  - ✅ photos/Rome/img/ - 빈 이미지 폴더
+  - ✅ photos/Nagoya/img/ - 빈 이미지 폴더\
+여기는 추후 사진이 업데이트 될거야
