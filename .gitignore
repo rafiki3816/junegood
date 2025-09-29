@@ -50,3 +50,9 @@ node_modules/
 # Build directories
 dist/
 build/
+*.DS_Store
+*.swp
+*.swo
+*~
+*.tmp
+*.bak
