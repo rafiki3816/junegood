@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Gallery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .loading {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            color: #fff;
+        }
+
+        .gallery-container {
+            display: none;
+            position: relative;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .gallery-container.loaded {
+            display: block;
+        }
+
+        .main-image {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 80vh;
+            object-fit: contain;
+        }
+
+        .thumbnails {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            max-width: 90%;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 5px;
+        }
+
+        .thumbnails img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .thumbnails img.active {
+            opacity: 1;
+            border-color: #fff;
+        }
+
+        .thumbnails img:hover {
+            opacity: 1;
+        }
+
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            border: none;
+            font-size: 30px;
+            padding: 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+            z-index: 10;
+        }
+
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .prev {
+            left: 20px;
+        }
+
+        .next {
+            right: 20px;
+        }
+
+        .photo-counter {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            border: none;
+            font-size: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s;
+            z-index: 10;
+        }
+
+        .close-button:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .nav-button {
+                padding: 15px;
+                font-size: 24px;
+            }
+
+            .thumbnails {
+                bottom: 10px;
+                padding: 5px;
+            }
+
+            .thumbnails img {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading">Loading photos...</div>
+
+    <div class="gallery-container">
+        <button class="close-button" onclick="window.history.back()">×</button>
+        <div class="photo-counter">
+            <span id="current-photo">1</span> / <span id="total-photos">0</span>
+        </div>
+
+        <button class="nav-button prev" onclick="gallery.prevPhoto()">‹</button>
+        <img id="main-image" class="main-image" src="" alt="Gallery Photo">
+        <button class="nav-button next" onclick="gallery.nextPhoto()">›</button>
+
+        <div class="thumbnails" id="thumbnails"></div>
+    </div>
+
+    <script>
+        class UnifiedGallery {
+            constructor() {
+                this.photos = [];
+                this.currentIndex = 0;
+                this.city = '';
+                this.init();
+            }
+
+            async init() {
+                // Get city from URL parameter
+                const urlParams = new URLSearchParams(window.location.search);
+                this.city = urlParams.get('city');
+
+                if (!this.city) {
+                    document.querySelector('.loading').textContent = 'Error: No city specified';
+                    return;
+                }
+
+                // Set page title
+                document.title = `${this.city} - Photo Gallery`;
+
+                // Load photos
+                await this.loadPhotos();
+
+                if (this.photos.length > 0) {
+                    this.setupGallery();
+                    this.showPhoto(0);
+                    document.querySelector('.loading').style.display = 'none';
+                    document.querySelector('.gallery-container').classList.add('loaded');
+                } else {
+                    document.querySelector('.loading').textContent = 'No photos found';
+                }
+            }
+
+            async loadPhotos() {
+                const basePath = `photos/${this.city}/img/`;
+                const maxPhotos = 500; // Maximum photos to check
+                const checkBatch = 20; // Check in batches for performance
+
+                // First, try to check if photos exist
+                for (let i = 1; i <= maxPhotos; i++) {
+                    // Check both .jpg and .jpeg extensions
+                    for (const ext of ['jpg', 'jpeg']) {
+                        const imgPath = `${basePath}${i}.${ext}`;
+
+                        // Use a simple approach: try to load the image
+                        const exists = await this.checkImageExists(imgPath);
+                        if (exists) {
+                            this.photos.push({
+                                src: imgPath,
+                                index: i
+                            });
+                            break; // Found this number, move to next
+                        }
+                    }
+
+                    // If we've gone through 10 consecutive missing photos, assume we're done
+                    if (i > 10 && this.photos.length > 0) {
+                        const lastFound = this.photos[this.photos.length - 1].index;
+                        if (i - lastFound > 10) {
+                            break;
+                        }
+                    }
+                }
+
+                // Update total photos counter
+                document.getElementById('total-photos').textContent = this.photos.length;
+            }
+
+            checkImageExists(url) {
+                return new Promise((resolve) => {
+                    const img = new Image();
+                    img.onload = () => resolve(true);
+                    img.onerror = () => resolve(false);
+                    img.src = url;
+                });
+            }
+
+            setupGallery() {
+                const thumbnailsContainer = document.getElementById('thumbnails');
+
+                // Create thumbnails
+                this.photos.forEach((photo, index) => {
+                    const thumb = document.createElement('img');
+                    thumb.src = photo.src;
+                    thumb.alt = `Photo ${index + 1}`;
+                    thumb.onclick = () => this.showPhoto(index);
+                    thumbnailsContainer.appendChild(thumb);
+                });
+
+                // Keyboard navigation
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowLeft') this.prevPhoto();
+                    if (e.key === 'ArrowRight') this.nextPhoto();
+                    if (e.key === 'Escape') window.history.back();
+                });
+
+                // Touch/swipe support for mobile
+                let touchStartX = 0;
+                const mainImage = document.getElementById('main-image');
+
+                mainImage.addEventListener('touchstart', (e) => {
+                    touchStartX = e.changedTouches[0].screenX;
+                });
+
+                mainImage.addEventListener('touchend', (e) => {
+                    const touchEndX = e.changedTouches[0].screenX;
+                    const diff = touchStartX - touchEndX;
+
+                    if (Math.abs(diff) > 50) { // Minimum swipe distance
+                        if (diff > 0) {
+                            this.nextPhoto();
+                        } else {
+                            this.prevPhoto();
+                        }
+                    }
+                });
+            }
+
+            showPhoto(index) {
+                if (index < 0 || index >= this.photos.length) return;
+
+                this.currentIndex = index;
+                const photo = this.photos[index];
+
+                // Update main image
+                document.getElementById('main-image').src = photo.src;
+
+                // Update counter
+                document.getElementById('current-photo').textContent = index + 1;
+
+                // Update active thumbnail
+                const thumbnails = document.querySelectorAll('.thumbnails img');
+                thumbnails.forEach((thumb, i) => {
+                    thumb.classList.toggle('active', i === index);
+                });
+
+                // Scroll thumbnail into view
+                if (thumbnails[index]) {
+                    thumbnails[index].scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'nearest',
+                        inline: 'center'
+                    });
+                }
+            }
+
+            nextPhoto() {
+                this.showPhoto((this.currentIndex + 1) % this.photos.length);
+            }
+
+            prevPhoto() {
+                this.showPhoto((this.currentIndex - 1 + this.photos.length) % this.photos.length);
+            }
+        }
+
+        // Initialize gallery
+        const gallery = new UnifiedGallery();
+    </script>
+</body>
+</html>

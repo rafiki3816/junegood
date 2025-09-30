@@ -25,6 +25,22 @@
             transform: translate(-50%, -50%);
             font-size: 24px;
             color: #fff;
+            text-align: center;
+        }
+
+        .loading-spinner {
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 3px solid white;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .gallery-container {
@@ -46,6 +62,16 @@
             max-width: 90%;
             max-height: 80vh;
             object-fit: contain;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .main-image.loaded {
+            opacity: 1;
+        }
+
+        .image-preloader {
+            display: none;
         }
 
         .thumbnails {
@@ -79,6 +105,10 @@
 
         .thumbnails img:hover {
             opacity: 1;
+        }
+
+        .thumbnails img.lazy {
+            background: rgba(255, 255, 255, 0.1);
         }
 
         .nav-button {
@@ -150,14 +180,18 @@
             }
 
             .thumbnails img {
-                width: 40px;
-                height: 40px;
+                width: 50px;
+                height: 50px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="loading">Loading photos...</div>
+    <div class="loading">
+        <div>Loading Gallery...</div>
+        <div class="loading-spinner"></div>
+        <div id="loading-progress" style="font-size: 14px; margin-top: 10px;"></div>
+    </div>
 
     <div class="gallery-container">
         <button class="close-button" onclick="window.history.back()">×</button>
@@ -166,87 +200,133 @@
         </div>
 
         <button class="nav-button prev" onclick="gallery.prevPhoto()">‹</button>
-        <img id="main-image" class="main-image" src="" alt="Gallery Photo">
         <button class="nav-button next" onclick="gallery.nextPhoto()">›</button>
+
+        <img id="main-image" class="main-image" alt="Gallery photo">
 
         <div class="thumbnails" id="thumbnails"></div>
     </div>
 
+    <!-- Hidden image for preloading -->
+    <img class="image-preloader" id="preloader">
+
     <script>
-        class UnifiedGallery {
+        class OptimizedGallery {
             constructor() {
                 this.photos = [];
                 this.currentIndex = 0;
                 this.city = '';
+                this.imageCache = new Map();
+                this.loadedThumbnails = new Set();
+                this.photoListCache = {};
                 this.init();
             }
 
             async init() {
-                // Get city from URL parameter
                 const urlParams = new URLSearchParams(window.location.search);
                 this.city = urlParams.get('city');
 
                 if (!this.city) {
-                    document.querySelector('.loading').textContent = 'Error: No city specified';
+                    document.querySelector('.loading').innerHTML = '<div>Error: No city specified</div>';
                     return;
                 }
 
-                // Set page title
                 document.title = `${this.city} - Photo Gallery`;
 
-                // Load photos
-                await this.loadPhotos();
+                // Try to get photo list from cache or scan
+                await this.loadPhotosOptimized();
 
                 if (this.photos.length > 0) {
                     this.setupGallery();
-                    this.showPhoto(0);
+                    await this.showPhoto(0);
+
+                    // Start preloading adjacent images
+                    this.preloadAdjacentImages();
+
+                    // Start lazy loading thumbnails
+                    this.lazyLoadThumbnails();
+
                     document.querySelector('.loading').style.display = 'none';
                     document.querySelector('.gallery-container').classList.add('loaded');
                 } else {
-                    document.querySelector('.loading').textContent = 'No photos found';
+                    document.querySelector('.loading').innerHTML = '<div>No photos found</div>';
                 }
             }
 
-            async loadPhotos() {
+            async loadPhotosOptimized() {
                 const basePath = `photos/${this.city}/img/`;
-                const maxPhotos = 500; // Maximum photos to check
-                const checkBatch = 20; // Check in batches for performance
+                const cacheKey = `gallery_${this.city}`;
 
-                // First, try to check if photos exist
-                for (let i = 1; i <= maxPhotos; i++) {
-                    // Check both .jpg and .jpeg extensions
-                    for (const ext of ['jpg', 'jpeg']) {
-                        const imgPath = `${basePath}${i}.${ext}`;
+                // Try to load from sessionStorage cache
+                const cached = sessionStorage.getItem(cacheKey);
+                if (cached) {
+                    this.photos = JSON.parse(cached);
+                    document.getElementById('total-photos').textContent = this.photos.length;
+                    return;
+                }
 
-                        // Use a simple approach: try to load the image
-                        const exists = await this.checkImageExists(imgPath);
-                        if (exists) {
-                            this.photos.push({
-                                src: imgPath,
-                                index: i
-                            });
-                            break; // Found this number, move to next
+                // Parallel checking with limited concurrent requests
+                const checkLimit = 10; // Check 10 images at once
+                const maxPhotos = 200; // Reduced from 500 for faster initial load
+                let foundPhotos = [];
+                let consecutiveMisses = 0;
+
+                document.getElementById('loading-progress').textContent = 'Scanning photos...';
+
+                // Use binary search approach to find the range
+                const extensions = ['jpg', 'jpeg'];
+
+                for (let i = 1; i <= maxPhotos; i += checkLimit) {
+                    const batch = [];
+
+                    for (let j = i; j < i + checkLimit && j <= maxPhotos; j++) {
+                        for (const ext of extensions) {
+                            batch.push(this.checkImageExistsFast(`${basePath}${j}.${ext}`, j, ext));
                         }
                     }
 
-                    // If we've gone through 10 consecutive missing photos, assume we're done
-                    if (i > 10 && this.photos.length > 0) {
-                        const lastFound = this.photos[this.photos.length - 1].index;
-                        if (i - lastFound > 10) {
+                    const results = await Promise.all(batch);
+                    const validResults = results.filter(r => r !== null);
+
+                    if (validResults.length > 0) {
+                        foundPhotos.push(...validResults);
+                        consecutiveMisses = 0;
+                        document.getElementById('loading-progress').textContent = `Found ${foundPhotos.length} photos...`;
+                    } else {
+                        consecutiveMisses++;
+                        // If we have photos and haven't found any in 3 batches, stop
+                        if (foundPhotos.length > 0 && consecutiveMisses >= 3) {
                             break;
                         }
                     }
                 }
 
-                // Update total photos counter
+                // Sort by index
+                foundPhotos.sort((a, b) => a.index - b.index);
+                this.photos = foundPhotos;
+
+                // Cache the result
+                sessionStorage.setItem(cacheKey, JSON.stringify(this.photos));
+
                 document.getElementById('total-photos').textContent = this.photos.length;
             }
 
-            checkImageExists(url) {
+            checkImageExistsFast(url, index, ext) {
                 return new Promise((resolve) => {
                     const img = new Image();
-                    img.onload = () => resolve(true);
-                    img.onerror = () => resolve(false);
+                    const timeout = setTimeout(() => {
+                        img.src = '';
+                        resolve(null);
+                    }, 3000); // 3 second timeout
+
+                    img.onload = () => {
+                        clearTimeout(timeout);
+                        resolve({ src: url, index: index, ext: ext });
+                    };
+                    img.onerror = () => {
+                        clearTimeout(timeout);
+                        resolve(null);
+                    };
                     img.src = url;
                 });
             }
@@ -254,10 +334,12 @@
             setupGallery() {
                 const thumbnailsContainer = document.getElementById('thumbnails');
 
-                // Create thumbnails
+                // Create placeholder thumbnails
                 this.photos.forEach((photo, index) => {
                     const thumb = document.createElement('img');
-                    thumb.src = photo.src;
+                    thumb.className = 'lazy';
+                    thumb.dataset.src = photo.src;
+                    thumb.dataset.index = index;
                     thumb.alt = `Photo ${index + 1}`;
                     thumb.onclick = () => this.showPhoto(index);
                     thumbnailsContainer.appendChild(thumb);
@@ -270,7 +352,7 @@
                     if (e.key === 'Escape') window.history.back();
                 });
 
-                // Touch/swipe support for mobile
+                // Touch support
                 let touchStartX = 0;
                 const mainImage = document.getElementById('main-image');
 
@@ -282,7 +364,7 @@
                     const touchEndX = e.changedTouches[0].screenX;
                     const diff = touchStartX - touchEndX;
 
-                    if (Math.abs(diff) > 50) { // Minimum swipe distance
+                    if (Math.abs(diff) > 50) {
                         if (diff > 0) {
                             this.nextPhoto();
                         } else {
@@ -292,45 +374,140 @@
                 });
             }
 
-            showPhoto(index) {
+            lazyLoadThumbnails() {
+                const thumbnails = document.querySelectorAll('.thumbnails img');
+                const container = document.getElementById('thumbnails');
+
+                // Load visible thumbnails first
+                const loadVisibleThumbnails = () => {
+                    const containerRect = container.getBoundingClientRect();
+
+                    thumbnails.forEach(thumb => {
+                        const rect = thumb.getBoundingClientRect();
+                        const index = parseInt(thumb.dataset.index);
+
+                        // Check if thumbnail is in or near viewport
+                        if (rect.left < containerRect.right + 100 &&
+                            rect.right > containerRect.left - 100 &&
+                            !this.loadedThumbnails.has(index)) {
+
+                            thumb.src = thumb.dataset.src;
+                            thumb.classList.remove('lazy');
+                            this.loadedThumbnails.add(index);
+                        }
+                    });
+                };
+
+                // Initial load
+                loadVisibleThumbnails();
+
+                // Load on scroll
+                container.addEventListener('scroll', loadVisibleThumbnails);
+
+                // Load thumbnails around current image
+                this.loadNearbyThumbnails();
+            }
+
+            loadNearbyThumbnails() {
+                const range = 5; // Load 5 thumbnails on each side
+                const thumbnails = document.querySelectorAll('.thumbnails img');
+
+                for (let i = Math.max(0, this.currentIndex - range);
+                     i <= Math.min(this.photos.length - 1, this.currentIndex + range);
+                     i++) {
+
+                    const thumb = thumbnails[i];
+                    if (thumb && !this.loadedThumbnails.has(i)) {
+                        thumb.src = thumb.dataset.src;
+                        thumb.classList.remove('lazy');
+                        this.loadedThumbnails.add(i);
+                    }
+                }
+            }
+
+            async showPhoto(index) {
                 if (index < 0 || index >= this.photos.length) return;
 
                 this.currentIndex = index;
                 const photo = this.photos[index];
+                const mainImage = document.getElementById('main-image');
 
-                // Update main image
-                document.getElementById('main-image').src = photo.src;
-
-                // Update counter
+                // Update UI
                 document.getElementById('current-photo').textContent = index + 1;
 
                 // Update active thumbnail
-                const thumbnails = document.querySelectorAll('.thumbnails img');
-                thumbnails.forEach((thumb, i) => {
+                document.querySelectorAll('.thumbnails img').forEach((thumb, i) => {
                     thumb.classList.toggle('active', i === index);
                 });
 
                 // Scroll thumbnail into view
-                if (thumbnails[index]) {
-                    thumbnails[index].scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'nearest',
-                        inline: 'center'
-                    });
+                const activeThumbnail = document.querySelectorAll('.thumbnails img')[index];
+                if (activeThumbnail) {
+                    activeThumbnail.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                }
+
+                // Show loading state
+                mainImage.classList.remove('loaded');
+
+                // Load from cache or fetch
+                if (this.imageCache.has(photo.src)) {
+                    mainImage.src = this.imageCache.get(photo.src);
+                    mainImage.classList.add('loaded');
+                } else {
+                    // Load the image
+                    const img = new Image();
+                    img.onload = () => {
+                        this.imageCache.set(photo.src, img.src);
+                        mainImage.src = img.src;
+                        mainImage.classList.add('loaded');
+                    };
+                    img.src = photo.src;
+                }
+
+                // Preload adjacent images
+                this.preloadAdjacentImages();
+
+                // Load nearby thumbnails
+                this.loadNearbyThumbnails();
+            }
+
+            preloadAdjacentImages() {
+                const preloadRange = 2; // Preload 2 images in each direction
+                const preloader = document.getElementById('preloader');
+
+                for (let i = -preloadRange; i <= preloadRange; i++) {
+                    if (i === 0) continue; // Skip current image
+
+                    const index = this.currentIndex + i;
+                    if (index >= 0 && index < this.photos.length) {
+                        const photo = this.photos[index];
+
+                        if (!this.imageCache.has(photo.src)) {
+                            const img = new Image();
+                            img.onload = () => {
+                                this.imageCache.set(photo.src, img.src);
+                            };
+                            img.src = photo.src;
+                        }
+                    }
+                }
+            }
+
+            prevPhoto() {
+                if (this.currentIndex > 0) {
+                    this.showPhoto(this.currentIndex - 1);
                 }
             }
 
             nextPhoto() {
-                this.showPhoto((this.currentIndex + 1) % this.photos.length);
-            }
-
-            prevPhoto() {
-                this.showPhoto((this.currentIndex - 1 + this.photos.length) % this.photos.length);
+                if (this.currentIndex < this.photos.length - 1) {
+                    this.showPhoto(this.currentIndex + 1);
+                }
             }
         }
 
         // Initialize gallery
-        const gallery = new UnifiedGallery();
+        const gallery = new OptimizedGallery();
     </script>
 </body>
 </html>
