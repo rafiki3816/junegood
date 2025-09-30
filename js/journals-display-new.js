@@ -11,6 +11,54 @@ document.addEventListener('DOMContentLoaded', function() {
         setupFilters(journals);
     });
 
+    // Create mini gallery with 6 thumbnails
+    function createMiniGallery(cityName, imageList) {
+        if (!cityName) return '';
+
+        // Determine file extension
+        const jpegCities = [
+            'Amsterdam', 'Brussels', 'Hongkong', 'Kyushu', 'LakeTahoe',
+            'LosAngeles', 'Napa', 'NewYork', 'Phiphi', 'Rotterdam',
+            'Sacramento', 'SanDiego', 'SanFrancisco', 'Taipei'
+        ];
+        const extension = jpegCities.includes(cityName) ? 'jpeg' : 'jpg';
+
+        // Use provided images or default to first 6
+        let images = [];
+        if (imageList && imageList.length > 0) {
+            images = imageList.slice(0, 6);
+        } else {
+            // Default: show images 1, 5, 10, 15, 20, 25 for variety
+            const defaultNumbers = [1, 5, 10, 15, 20, 25];
+            images = defaultNumbers.map(num => `${num}.${extension}`);
+        }
+
+        return `
+            <div class="mini-gallery" style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e0e0e0;">
+                <h3 style="font-family: Raleway; font-size: 16px; margin-bottom: 15px; color: #666;">Photo Gallery</h3>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; max-width: 400px;">
+                    ${images.map(img => `
+                        <a href="lightbox-unified.html?city=${cityName}"
+                           style="display: block; aspect-ratio: 1; overflow: hidden; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                            <img src="photos/${cityName}/img/${img}"
+                                 alt="${cityName} photo"
+                                 style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.2s;"
+                                 onmouseover="this.style.transform='scale(1.05)'"
+                                 onmouseout="this.style.transform='scale(1)'"
+                                 loading="lazy">
+                        </a>
+                    `).join('')}
+                </div>
+                <div style="margin-top: 12px;">
+                    <a href="lightbox-unified.html?city=${cityName}"
+                       style="color: #10b981; text-decoration: none; font-size: 14px; font-weight: 500;">
+                        View Full Gallery →
+                    </a>
+                </div>
+            </div>
+        `;
+    }
+
     // Display journals
     function displayJournals(journals) {
         const container = document.querySelector('.journal-container');
@@ -60,6 +108,8 @@ document.addEventListener('DOMContentLoaded', function() {
                                 ).join('')}
                             </div>
                         ` : ''}
+
+                        ${post.galleryCity ? createMiniGallery(post.galleryCity, post.galleryImages) : ''}
 
                         ${post.referenceUrl ? `
                             <div style="margin-top: 20px; padding-top: 15px;">
