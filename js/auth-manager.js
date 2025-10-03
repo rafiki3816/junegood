@@ -16,16 +16,15 @@
     const ATTEMPTS_KEY = config.STORAGE_KEY_ATTEMPTS || 'junegood_login_attempts';
     const LOCKOUT_KEY = config.STORAGE_KEY_LOCKOUT || 'junegood_lockout_until';
 
-    // Enhanced hash function
+    // Consistent hash function (no dynamic salt)
     function hashPassword(password) {
-        let hash = 5381;
+        let hash = 0;
         for (let i = 0; i < password.length; i++) {
-            hash = ((hash << 5) + hash) + password.charCodeAt(i);
+            const char = password.charCodeAt(i);
+            hash = ((hash << 5) - hash) + char;
+            hash = hash & hash;
         }
-        // Add salt and encode
-        const salt = 'jg' + Date.now().toString(36);
-        const salted = password + salt;
-        return btoa(hash.toString() + '|' + salted.length + '|' + btoa(salted));
+        return btoa(hash.toString() + password.length);
     }
 
     // Check if credentials are set up

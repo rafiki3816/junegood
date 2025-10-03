@@ -1,7 +1,8 @@
 // Display journals from files on the public page
+let loadedJournals = []; // Store journals for expand functionality - moved to global scope
+
 document.addEventListener('DOMContentLoaded', function() {
     const COMMENTS_KEY = 'junegood_comments';
-    let loadedJournals = []; // Store journals for expand functionality
 
     // Listen for journals loaded event
     window.addEventListener('journalsLoaded', function(event) {
@@ -11,8 +12,8 @@ document.addEventListener('DOMContentLoaded', function() {
         setupFilters(journals);
     });
 
-    // Create mini gallery with 6 thumbnails
-    function createMiniGallery(cityName, imageList) {
+    // Create mini gallery with 6 thumbnails - expose globally for expandPost
+    window.createMiniGallery = function(cityName, imageList) {
         if (!cityName) return '';
 
         // Determine file extension
@@ -109,7 +110,10 @@ document.addEventListener('DOMContentLoaded', function() {
                             </div>
                         ` : ''}
 
-                        ${post.galleryCity ? createMiniGallery(post.galleryCity, post.galleryImages) : ''}
+                        ${(() => {
+                            console.log('Gallery check for post:', post.title, 'galleryCity:', post.galleryCity);
+                            return post.galleryCity ? window.createMiniGallery(post.galleryCity, post.galleryImages) : '';
+                        })()}
 
                         ${post.referenceUrl ? `
                             <div style="margin-top: 20px; padding-top: 15px;">

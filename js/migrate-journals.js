@@ -43,7 +43,9 @@
             date: '2016-12-15',
             status: 'published',
             excerpt: 'Exploring the masterpieces of Gaudí and the vibrant streets of Barcelona. From the Sagrada Família to Park Güell, every corner tells a story of creativity and passion.',
-            image: 'images/travels/barcelona.jpg',
+            image: 'photos/Barcelona/img/36.jpg',
+            galleryCity: 'Barcelona',
+            galleryImages: ['36.jpg', '1.jpg', '10.jpg', '20.jpg', '45.jpg', '50.jpg'],
             tags: 'travel, barcelona, architecture, gaudí, spain',
             referenceUrl: '',
             content: `Barcelona captured my heart from the moment I stepped onto Las Ramblas. This city, where Gaudí's imagination meets Mediterranean charm, offers a perfect blend of artistic heritage and modern vibrancy.
@@ -86,7 +88,9 @@ As I left Barcelona, I carried with me not just photographs and souvenirs, but a
             date: '2019-07-20',
             status: 'published',
             excerpt: 'Five months in the Bay Area, experiencing the heart of tech innovation while discovering the natural beauty of California\'s coast.',
-            image: 'images/travels/sanFrancisco.jpg',
+            image: 'photos/SanFrancisco/img/1.jpg',
+            galleryCity: 'SanFrancisco',
+            galleryImages: ['1.jpg', '5.jpg', '10.jpg', '15.jpg', '20.jpg', '25.jpg'],
             tags: 'travel, san francisco, technology, innovation, california',
             referenceUrl: '',
             content: `Five months in San Francisco wasn't just a visit – it was an immersion into the heart of innovation, where technology meets counterculture, and where the Pacific fog rolls in like clockwork to blanket a city of dreamers and doers.
